@@ -1,3 +1,25 @@
+### NEW APPROACH
+
+The code within the generator branch is work in progress. The approach is now to provide a webpage to allow user configuration of a custom importable json.
+
+This will allow a single structure, per crypto to be held
+```
+{
+ "name": "Bitcoin",
+ "Ticker": "BTC",
+ "Icon": "..."
+}
+```
+The webpage can then be generated from this config.
+
+The user will then be able to select which coins they wish and which FIAT currency to compare to.
+
+They can then export a JSON file compatible for import to BetterTouchTool
+
+
+### OLD README BELOW
+
+
 The files hosted within this repo are the raw scripts used behind the scenes within [BetterTouchTool](https://www.boastr.net/). 
 
 If you are looking for only the importable version please check the [releases tab](https://github.com/chrislennon/Crypto-Toolbar/releases).
