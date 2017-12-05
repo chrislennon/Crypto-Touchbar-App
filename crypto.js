@@ -14,21 +14,31 @@ function generateJSON(el) {
 	selection = getSelectedChbox(document.getElementById('form'))
 	console.log(selection);
 
-	console.log(mainStruct.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions);
+	//console.log(mainStruct.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions);
+  var output = mainStruct;
+  var coinArray = [];
 
-	for (i = 0; i < selection.length; i++) { 
+	for (var i = 0; i < selection.length; i++) { 
 
-		var crypto = cryptoElement;
-    console.log(selection[i]);
-		crypto.BTTWidgetName = selection[i];
-    console.log(crypto.BTTWidgetName);
+    function addCoin(ticker) {
+      var coin = cryptoElement;
+      coin.BTTWidgetName = ticker;
+      console.log(coin);
+      coinArray.push(coin);
+    }
 
-		mainStruct.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions.push(crypto);
-
+    addCoin(selection[i]);
+		
 	}
-	mainStruct.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions.push(closeGroupElement);
-	console.log(mainStruct);
-	var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(mainStruct));
+
+  console.log(coinArray);
+
+  //coinArray.push(closeGroupElement);
+
+  output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
+	
+	console.log(output);
+	var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(output));
   el.setAttribute("href", "data:"+data);
   el.setAttribute("download", "data.json");
 }
