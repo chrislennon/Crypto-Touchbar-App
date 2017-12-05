@@ -61,7 +61,17 @@ function loadData(){
     document.getElementById('coins').appendChild(text);
     document.getElementById('coins').appendChild(br);
 
-  }  
+  }
+
+  for(var i=0; i<fiat.length; i++) {
+
+    var option = document.createElement("option");
+    option.value = fiat[i].ticker;
+    option.innerHTML = fiat[i].name;
+
+    document.getElementById('fiat').appendChild(option);
+
+  }
 
 }
 
