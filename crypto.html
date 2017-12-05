@@ -1,9 +1,11 @@
 <html>
 <head>
+	<script src="coins.js"></script>
+	<script src="BTTSchema.js"></script>
 	<script src="crypto.js"></script>
 </head>
 
-<body>
+<body onload="loadData()">
 
 Select Comparison Currency<br>
 <form id="form">
@@ -15,11 +17,13 @@ Select Comparison Currency<br>
 	<br>
 
 	Select Crypto Currencies<br>
+	<div id="coins">
 
-	Bitcoin <input id="BTC" type="checkbox" value="BTC"> <br>
+	</div>
+
 </form>
 
-<a id="exportJSON" onclick="generateJSON(this);" class="btn"><i class="icon-download"></i> export json</a>
+<a id="exportJSON" onclick="generateJSON(this);" class="btn"><i class="icon-download"></i> export json</a><br>
 
 </body>
 

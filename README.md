@@ -16,6 +16,8 @@ The user will then be able to select which coins they wish and which FIAT curren
 
 They can then export a JSON file compatible for import to BetterTouchTool
 
+Icons used within this tool are the work of [AllienWorks](https://www.iconfinder.com/martin.allien) on iconfinder in the [Cryptocoins](https://www.iconfinder.com/iconsets/cryptocoins) collection under the [Creative Commons 3.0 License](https://creativecommons.org/licenses/by/3.0/)
+
 
 ### OLD README BELOW
 
