@@ -11,6 +11,18 @@ function getSelectedChbox(frm) {
 }   
 
 function generateJSON(el) {
+
+  // Get selected FIAT
+
+  var e = document.getElementById("fiat");
+  var selectedOp = e.options[e.selectedIndex].value;
+  var selectedFiat = fiat.filter(function( obj ) {
+    return obj.ticker == selectedOp;
+  });
+  var selectedFiatObj = selectedFiat[0];
+  console.log(selectedFiat);
+
+  // Get selected cryptos
 	selection = getSelectedChbox(document.getElementById('form'))
 	console.log(selection);
 
@@ -23,6 +35,9 @@ function generateJSON(el) {
     function addCoin(ticker) {
       var coin = cryptoElement;
       coin.BTTWidgetName = ticker;
+      coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**CRYPTO**", ticker);
+      coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**FIAT**", selectedFiatObj.ticker);
+      coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**FIATSYMB**", selectedFiatObj.symbol);
       console.log(coin);
       coinArray.push(coin);
     }
