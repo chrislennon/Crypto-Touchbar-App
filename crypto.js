@@ -32,27 +32,29 @@ function generateJSON(el) {
 
 	for (var i = 0; i < selection.length; i++) { 
 
-    function addCoin(ticker) {
-      var coin = cryptoElement;
-      coin.BTTWidgetName = ticker;
-      coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**CRYPTO**", ticker);
+      let coin = cryptoElement;
+      coin.BTTWidgetName = selection[i];
+      coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**CRYPTO**", selection[i]);
       coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**FIAT**", selectedFiatObj.ticker);
       coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**FIATSYMB**", selectedFiatObj.symbol);
-      console.log(coin);
+      coin.BTTOrder = i;
       coinArray.push(coin);
-    }
-
-    addCoin(selection[i]);
-		
+      // log the temporary output
+		  console.log(coin);
 	}
 
+  // log the resulting total output
   console.log(coinArray);
 
-  //coinArray.push(closeGroupElement);
+  // add the closing group element
+  closeGroupElement.BTTOrder = selection.length;
+  coinArray.push(closeGroupElement);
 
   output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
 	
+  // output the end result object to console
 	console.log(output);
+  // trigger download of end result object
 	var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(output));
   el.setAttribute("href", "data:"+data);
   el.setAttribute("download", "data.json");
