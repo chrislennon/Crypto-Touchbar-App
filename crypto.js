@@ -1,14 +1,14 @@
 
 function getSelectedChbox(frm) {
-  var selchbox = []; 
+  var selchbox = [];
   var inpfields = frm.getElementsByTagName('input');
   var nr_inpfields = inpfields.length;
-  
+
   for(var i=0; i<nr_inpfields; i++) {
     if(inpfields[i].type == 'checkbox' && inpfields[i].checked == true) selchbox.push(inpfields[i].value);
   }
   return selchbox;
-}   
+}
 
 function generateJSON(el) {
 
@@ -23,35 +23,33 @@ function generateJSON(el) {
   console.log(selectedFiat);
 
   // Get selected cryptos
-	selection = getSelectedChbox(document.getElementById('form'))
+	var selection = getSelectedChbox(document.getElementById('form'));
 	console.log(selection);
 
 	//console.log(mainStruct.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions);
   var output = mainStruct;
   var coinArray = [];
 
-	for (var i = 0; i < selection.length; i++) { 
+	for (var i = 0; i < selection.length; i++) {
 
-      let coin = cryptoElement;
+	  // Duplicate the cryptoElement and assign it to the coin
+      let coin = Object.assign({}, cryptoElement);
+
       coin.BTTWidgetName = selection[i];
       coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**CRYPTO**", selection[i]);
       coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**FIAT**", selectedFiatObj.ticker);
       coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**FIATSYMB**", selectedFiatObj.symbol);
       coin.BTTOrder = i;
-      coinArray.push(coin);
-      // log the temporary output
-		  console.log(coin);
-	}
 
-  // log the resulting total output
-  console.log(coinArray);
+      coinArray.push(coin);
+	}
 
   // add the closing group element
   closeGroupElement.BTTOrder = selection.length;
   coinArray.push(closeGroupElement);
 
   output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
-	
+
   // output the end result object to console
 	console.log(output);
   // trigger download of end result object
