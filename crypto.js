@@ -34,12 +34,22 @@ function generateJSON(el) {
 
 	  // Duplicate the cryptoElement and assign it to the coin
       let coin = Object.assign({}, cryptoElement);
+      
+      coin.BTTTriggerConfig = Object.assign({}, cryptoElement.BTTTriggerConfig);
 
       coin.BTTWidgetName = selection[i];
-      coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**CRYPTO**", selection[i]);
-      coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**FIAT**", selectedFiatObj.ticker);
-      coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**FIATSYMB**", selectedFiatObj.symbol);
+
+      //coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**CRYPTO**", selection[i]);
+      //coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**FIAT**", selectedFiatObj.ticker);
+      //coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**FIATSYMB**", selectedFiatObj.symbol);
+      
       coin.BTTOrder = i;
+      
+      // Enabling the below line induces overwriting reference so only the last iteration of the loop's string is produced
+      coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**CRYPTO**", coin.BTTWidgetName).replace("**FIAT**", selectedFiatObj.ticker).replace("**FIATSYMB**", selectedFiatObj.symbol);
+
+      console.log(coin.BTTTriggerConfig.BTTTouchBarAppleScriptString);
+      
 
       coinArray.push(coin);
 	}
@@ -70,9 +80,13 @@ function loadData(){
     text.setAttribute("for", coinJSON[i].Name);
     text.innerHTML = coinJSON[i].Name;
 
+    var icon = document.createElement("img");
+    icon.setAttribute("src", "data:image/png;base64, " + coinJSON[i].Icon);
+
     var br = document.createElement("br");
 
     document.getElementById('coins').appendChild(element);
+    document.getElementById('coins').appendChild(icon);
     document.getElementById('coins').appendChild(text);
     document.getElementById('coins').appendChild(br);
 
