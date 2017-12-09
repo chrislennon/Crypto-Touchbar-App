@@ -10,6 +10,18 @@ function getSelectedChbox(frm) {
   return selchbox;
 }
 
+function addCrypto(elm)
+{
+  if (elm.checked) 
+  {
+      console.log('attempting to add element to the bar');
+      console.log(elm);
+  } else {
+      console.log('attempting to remove element from bar');
+      console.log(elm);
+  }
+}
+
 function generateJSON(el) {
 
   // Get selected FIAT
@@ -70,6 +82,7 @@ function loadData(){
     element.id = coinJSON[i].Name;
     element.type = "checkbox";
     element.value = coinJSON[i].Ticker;
+    element.setAttribute("onChange", "addCrypto(this);");
 
     var text = document.createElement("label");
     text.setAttribute("for", coinJSON[i].Name);
