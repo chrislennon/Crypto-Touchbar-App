@@ -1,24 +1,102 @@
 <html>
 <head>
-	<script src="coins.js"></script>
-	<script src="fiat.js"></script>
-	<script src="BTTSchema.js"></script>
-	<script src="crypto.js"></script>
+    <script src="coins.js"></script>
+    <script src="fiat.js"></script>
+    <script src="BTTSchema.js"></script>
+    <script src="crypto.js"></script>
+
+    <style>
+    div.touchbar-base {
+        background-color: black;
+        width: 100%;
+        height: 50px;
+        border-radius: 5px;
+    }
+
+    div.touchbar-element-left {
+        display: inline-block;
+        width: 100px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 5px;
+        border-radius: 10px;
+    }
+
+    div.touchbar-element-right {
+        display: inline-block;
+        width: 350px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 600px;
+        border-radius: 10px;
+    }
+
+    div.touchbar-element-middle {
+        display: inline-block;
+        width: 100px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 50px;
+        border-radius: 10px;
+    }
+
+    div.touchbar-element {
+        background-color: #373737;
+        width: 90px;
+        height: 30px;
+        display: inline-block;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 5px;
+        border-radius: 10px;
+
+    }
+
+    p.touchbar-text {
+        display: inline-block;
+        margin-top: 5px;
+        margin-bottom: 0px;
+        margin-left: 30px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #e7ebfd;
+    }
+
+    img.touchbar-icon {
+        display: inline-block;
+        margin-top: 5px;
+        margin-left: 30px;
+    }
+    </style>
+
 </head>
 
 <body onload="loadData()">
+<img src="./touchbar-temp.png"><br>
+<div class="touchbar-base">
+    <div class="touchbar-element-left">
+        <div class="touchbar-element"><p class="touchbar-text">esc</p></div>
+    </div>
+    <div class="touchbar-element-middle">
+        <!-- Generated Crypto Elements to go here -->
+    </div>
+    <div class="touchbar-element-right">
+        <div class="touchbar-element"><img class="touchbar-icon" src="./img/volume-high.png"></div>
+        <div class="touchbar-element"><img class="touchbar-icon" src="./img/volume-mute.png"></div>
+        <div class="touchbar-element"><img class="touchbar-icon" src="./img/siri.png"></div>
+    </div>
+</div>
 
 Select Comparison Currency<br>
 <form id="form">
-	<select id="fiat">
-	</select>
+    <select id="fiat">
+    </select>
 
-	<br>
+    <br>
 
-	Select Crypto Currencies<br>
-	<div id="coins">
+    Select Crypto Currencies<br>
+    <div id="coins">
 
-	</div>
+    </div>
 
 </form>
 
