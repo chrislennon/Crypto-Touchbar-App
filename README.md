@@ -2,6 +2,8 @@
 
 The code within the generator branch is work in progress. The approach is now to provide a webpage to allow user configuration of a custom importable json.
 
+Currently the usage of the output code (within BetterTouchTool) requires [jq](https://stedolan.github.io/jq/) to parse the response from the API. The location of the jq binary is hardcoded to `/usr/local/bin/jq`. Futher work will be done to parse this with OS native tools.
+
 This will allow a single structure, per crypto to be held
 ```
 {
