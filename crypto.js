@@ -23,36 +23,31 @@ function generateJSON(el) {
   console.log(selectedFiat);
 
   // Get selected cryptos
-	var selection = getSelectedChbox(document.getElementById('form'));
-	console.log(selection);
+  var selection = getSelectedChbox(document.getElementById('form'));
+  console.log(selection);
 
-	//console.log(mainStruct.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions);
   var output = mainStruct;
   var coinArray = [];
 
-	for (var i = 0; i < selection.length; i++) {
+  for (var i = 0; i < selection.length; i++) {
 
-	  // Duplicate the cryptoElement and assign it to the coin
+    // Duplicate the cryptoElement and assign it to the coin
       let coin = Object.assign({}, cryptoElement);
       
       coin.BTTTriggerConfig = Object.assign({}, cryptoElement.BTTTriggerConfig);
 
       coin.BTTWidgetName = selection[i];
 
-      //coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**CRYPTO**", selection[i]);
-      //coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**FIAT**", selectedFiatObj.ticker);
-      //coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**FIATSYMB**", selectedFiatObj.symbol);
-      
       coin.BTTOrder = i;
       
-      // Enabling the below line induces overwriting reference so only the last iteration of the loop's string is produced
-      coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString.replace("**CRYPTO**", coin.BTTWidgetName).replace("**FIAT**", selectedFiatObj.ticker).replace("**FIATSYMB**", selectedFiatObj.symbol);
+      coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
+      .replace("**CRYPTO**", coin.BTTWidgetName).replace("**FIAT**", selectedFiatObj.ticker).replace("**FIATSYMB**", selectedFiatObj.symbol);
 
       console.log(coin.BTTTriggerConfig.BTTTouchBarAppleScriptString);
       
 
       coinArray.push(coin);
-	}
+  }
 
   // add the closing group element
   closeGroupElement.BTTOrder = selection.length;
@@ -61,9 +56,9 @@ function generateJSON(el) {
   output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
 
   // output the end result object to console
-	console.log(output);
+  console.log(output);
   // trigger download of end result object
-	var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(output));
+  var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(output));
   el.setAttribute("href", "data:"+data);
   el.setAttribute("download", "data.json");
 }
