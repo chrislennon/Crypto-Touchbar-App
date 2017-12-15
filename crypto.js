@@ -31,7 +31,7 @@ function addCrypto(elm)
     var touchArea = document.getElementById('crypto-touchbar-area');
     var cryptoTouch = document.createElement("div");
     cryptoTouch.setAttribute("id", elm.value + "-touch");
-    cryptoTouch.className = "touchbar-element";
+    cryptoTouch.className = "touchbar-element-crypto";
     touchArea.appendChild(cryptoTouch);
 
     var imgTouch = document.createElement("img");
