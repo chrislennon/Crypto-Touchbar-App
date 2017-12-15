@@ -75,6 +75,11 @@ function generateJSON(el) {
 
   for (var i = 0; i < selection.length; i++) {
 
+    let selectedCrypto = coinJSON.filter(function( obj ) {
+      return obj.Ticker == selection[i];
+    });
+    let selectedCryptoObj = selectedCrypto[0];
+
     // Duplicate the cryptoElement and assign it to the coin
       let coin = Object.assign({}, cryptoElement);
       
@@ -83,12 +88,11 @@ function generateJSON(el) {
       coin.BTTWidgetName = selection[i];
 
       coin.BTTOrder = i;
-      
+
+      coin.BTTIconData = selectedCryptoObj.Icon;
+
       coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
       .replace("**CRYPTO**", coin.BTTWidgetName).replace("**FIAT**", selectedFiatObj.ticker).replace("**FIATSYMB**", selectedFiatObj.symbol);
-
-      console.log(coin.BTTTriggerConfig.BTTTouchBarAppleScriptString);
-      
 
       coinArray.push(coin);
   }
@@ -98,6 +102,7 @@ function generateJSON(el) {
   coinArray.push(closeGroupElement);
 
   output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
+  output.BTTPresetContent[0].BTTTriggers[0].BTTIconData = selectedFiatObj.icon;
 
   // output the end result object to console
   console.log(output);
