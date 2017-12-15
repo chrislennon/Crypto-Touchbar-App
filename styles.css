@@ -1,0 +1,79 @@
+div.touchbar-base {
+    background-color: black;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 0;
+}
+
+div.touchbar-base > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+div.touchbar-base .touchbar-element {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #373737;
+    width: 90px;
+    height: 35px;
+    line-height: 35px;
+    margin-right: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #e7ebfd;
+}
+
+div.touchbar-base .touchbar-element.crypto {
+    padding: 0 10px;
+    width: auto;
+}
+
+div.touchbar-element-right {
+    float: right;
+}
+
+div.touchbar-element-right .touchbar-element {
+    float: left;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    margin-right: 1px;
+}
+
+div.touchbar-element-right .touchbar-element:first-of-type {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+div.touchbar-element-right .touchbar-element:last-of-type {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-right: 0;
+}
+
+div.touchbar-element-right .icon {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+div.touchbar-element-right .volume .icon {
+    background: url('img/volume-high.png') no-repeat center;
+}
+
+div.touchbar-element-right .mute .icon {
+    background: url('img/volume-mute.png') no-repeat center;
+}
+
+div.touchbar-element-right .siri .icon {
+    background: url('img/siri.png') no-repeat center;
+}
+
+img.touchbar-crypto-icon {
+    display: inline-block;
+    margin-top: -3px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
