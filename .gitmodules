@@ -1,0 +1,3 @@
+[submodule "img/cryptocoins"]
+	path = img/cryptocoins
+	url = git@github.com:allienworks/cryptocoins.git

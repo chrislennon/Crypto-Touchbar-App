@@ -125,8 +125,9 @@ function loadData(){
     text.innerHTML = coinJSON[i].Name;
 
     var icon = document.createElement("img");
-    icon.setAttribute("src", "data:image/png;base64, " + coinJSON[i].Icon);
-
+    icon.setAttribute("src", "img/cryptocoins/SVG/" + coinJSON[i].Icon + ".svg");
+    icon.width = '22';
+    icon.height = '22';
     var br = document.createElement("br");
 
     document.getElementById('coins').appendChild(element);
