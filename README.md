@@ -20,6 +20,7 @@ They can then export a JSON file compatible for import to BetterTouchTool
 
 Icons used within this tool are the work of [AllienWorks](https://www.iconfinder.com/martin.allien) on iconfinder in the [Cryptocoins](https://www.iconfinder.com/iconsets/cryptocoins) collection under the [Creative Commons 3.0 License](https://creativecommons.org/licenses/by/3.0/)
 
+The work in this repo was originally inspired by another project by [Ryan-Gordon](https://github.com/Ryan-Gordon/Crypto-Touchbar), but I got sick of changing the configuration within BTT and thought a dynamic webtool would bring further value.
 
 ### OLD README BELOW
 
