@@ -14,11 +14,43 @@ function addCrypto(elm)
 {
   if (elm.checked) 
   {
-      console.log('attempting to add element to the bar');
-      console.log(elm);
+    var selectedCrypto = coinJSON.filter(function( obj ) {
+      return obj.Ticker == elm.value;
+    });
+    var selectedCryptoObj = selectedCrypto[0];
+
+    var e = document.getElementById("fiat");
+    var selectedOp = e.options[e.selectedIndex].value;
+    var selectedFiat = fiat.filter(function( obj ) {
+      return obj.ticker == selectedOp;
+    });
+    var selectedFiatObj = selectedFiat[0];
+
+    console.log(selectedCrypto);
+    console.log('attempting to add element to the bar');
+    var touchArea = document.getElementById('crypto-touchbar-area');
+    var cryptoTouch = document.createElement("div");
+    cryptoTouch.setAttribute("id", elm.value + "-touch");
+    cryptoTouch.className = "touchbar-element";
+    touchArea.appendChild(cryptoTouch);
+
+    var imgTouch = document.createElement("img");
+    imgTouch.className = "touchbar-crypto-icon";
+    imgTouch.setAttribute("id", elm.value + "-touch-icon");
+    imgTouch.setAttribute("src", "data:image/png;base64, " + selectedCryptoObj.Icon);
+    cryptoTouch.appendChild(imgTouch);
+
+    var text = document.createElement("p");
+    text.className = "touchbar-crypto-text";
+    text.innerHTML = selectedFiatObj.symbol + " 000.00";
+    cryptoTouch.appendChild(text);
+
+    console.log(elm);
   } else {
       console.log('attempting to remove element from bar');
       console.log(elm);
+      var cryptoTouch = document.getElementById(elm.value + "-touch");
+      cryptoTouch.parentNode.removeChild(cryptoTouch);
   }
 }
 
@@ -111,4 +143,3 @@ function loadData(){
   }
 
 }
-
