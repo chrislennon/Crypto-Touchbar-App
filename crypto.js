@@ -31,7 +31,7 @@ function addCrypto(elm)
     var touchArea = document.getElementById('crypto-touchbar-area');
     var cryptoTouch = document.createElement("div");
     cryptoTouch.setAttribute("id", elm.value + "-touch");
-    cryptoTouch.className = "touchbar-element-crypto";
+    cryptoTouch.className = "touchbar-element crypto";
     touchArea.appendChild(cryptoTouch);
 
     var imgTouch = document.createElement("img");
@@ -40,8 +40,7 @@ function addCrypto(elm)
     imgTouch.setAttribute("src", "data:image/png;base64, " + selectedCryptoObj.Icon);
     cryptoTouch.appendChild(imgTouch);
 
-    var text = document.createElement("p");
-    text.className = "touchbar-crypto-text";
+    var text = document.createElement("span");
     text.innerHTML = selectedFiatObj.symbol + " 000.00";
     cryptoTouch.appendChild(text);
 
