@@ -1,0 +1,28 @@
+{
+  "name": "crypto-touchbar-app",
+  "version": "1.0.0",
+  "description": "A web app to build Apple touch bar elements for crytpo currencies",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node node_modules/watch-http-server/bin/http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrislennon/Crypto-Touchbar-App.git"
+  },
+  "keywords": [
+    "cryptocurrency",
+    "touchbar",
+    "bettertouchtool"
+  ],
+  "author": "chrislennon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrislennon/Crypto-Touchbar-App/issues"
+  },
+  "homepage": "https://github.com/chrislennon/Crypto-Touchbar-App#readme",
+  "dependencies": {
+    "watch-http-server": "^0.7.6"
+  }
+}
