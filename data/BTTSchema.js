@@ -1,5 +1,5 @@
 const mainStruct = {
-  "BTTPresetName" : "Test",
+  "BTTPresetName" : "Crypto-Touchbar-App",
   "BTTPresetUUID" : "7214C346-BD91-41F6-9E46-C300E0959DC3",
   "BTTPresetContent" : [
     {
