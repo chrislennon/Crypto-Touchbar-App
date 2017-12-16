@@ -106,6 +106,8 @@ function generateJSON(el) {
 function loadData(){
 
   for(var i=0; i<coinJSON.length; i++) {
+
+    var cryptoSelector = document.createElement("div");
     var element = document.createElement("input");
     element.id = coinJSON[i].Name;
     element.type = "checkbox";
@@ -121,12 +123,10 @@ function loadData(){
     icon.width = '22';
     icon.height = '22';
     
-    var br = document.createElement("br");
-
-    document.getElementById('coins').appendChild(element);
-    document.getElementById('coins').appendChild(icon);
-    document.getElementById('coins').appendChild(text);
-    document.getElementById('coins').appendChild(br);
+    cryptoSelector.appendChild(element)
+    cryptoSelector.appendChild(icon)
+    cryptoSelector.appendChild(text);
+    document.getElementById('coins').appendChild(cryptoSelector);
 
     // add svgs to hidden canvas so they can be exported to base64 png for BTT
     var iconCanv = document.createElement("canvas");
