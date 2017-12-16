@@ -12,7 +12,7 @@ const coinJSON = [
 	{
 		"Name": "Bitcoin Cash",
 		"Ticker": "BCH",
-		"Icon": "BCH"
+		"Icon": "BCH-alt"
 	},
 	{
 		"Name": "Ripple",
@@ -32,17 +32,17 @@ const coinJSON = [
 	{
 		"Name": "Bitcoin Gold",
 		"Ticker": "BTG",
-		"Icon": "..."
+		"Icon": "TODO"
 	},
 	{
 		"Name": "IOTA",
 		"Ticker": "MIOTA",
-		"Icon": "..."
+		"Icon": "IOTA-alt"
 	},
 	{
 		"Name": "Cardano",
 		"Ticker": "ADA",
-		"Icon": "..."
+		"Icon": "ADA-alt"
 	},
 	{
 		"Name": "Monero",
@@ -52,51 +52,51 @@ const coinJSON = [
 	{
 		"Name": "Ethereum Classic",
 		"Ticker": "ETC",
-		"Icon": "..."
+		"Icon": "ETC-alt"
 	},
 	{
 		"Name": "NEM",
 		"Ticker": "XEM",
-		"Icon": "..."
+		"Icon": "XEM"
 	},
 	{
 		"Name": "NEO",
 		"Ticker": "NEO",
-		"Icon": "..."
+		"Icon": "NEO-alt"
 	},
 	{
 		"Name": "EOS",
 		"Ticker": "EOS",
-		"Icon": "..."
+		"Icon": "EOS-alt"
 	},
 	{
 		"Name": "Stellas Lumens",
 		"Ticker": "XLM",
-		"Icon": "..."
+		"Icon": "STR"
 	},
 	{
 		"Name": "Bitconnect",
 		"Ticker": "BCC",
-		"Icon": "..."
+		"Icon": "TODO"
 	},
 	{
 		"Name": "OmiseGO",
 		"Ticker": "OMG",
-		"Icon": "..."
+		"Icon": "OMG-alt"
 	},
 	{
 		"Name": "Qtum",
 		"Ticker": "QTUM",
-		"Icon": "..."
+		"Icon": "QTUM-alt"
 	},
 	{
 		"Name": "ZCash",
 		"Ticker": "ZEC",
-		"Icon": "..."
+		"Icon": "ZEC-alt"
 	},
 	{
 		"Name": "Lisk",
 		"Ticker": "LSK",
-		"Icon": "LSK"
+		"Icon": "LSK-alt"
 	}
 ]

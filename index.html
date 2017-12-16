@@ -9,6 +9,9 @@
     <script src="BTTSchema.js"></script>
     <script src="crypto.js"></script>
 
+    <script type="text/javascript" src="http://canvg.github.io/canvg/rgbcolor.js"></script> 
+    <script type="text/javascript" src="http://canvg.github.io/canvg/StackBlur.js"></script>
+    <script type="text/javascript" src="http://canvg.github.io/canvg/canvg.js"></script> 
 </head>
 
 <body onload="loadData()">
@@ -41,6 +44,8 @@ Select Comparison Currency<br>
 </form>
 
 <a id="exportJSON" onclick="generateJSON(this);" class="btn"><i class="icon-download"></i> export json</a><br>
+
+<div id="canvas-area" style="display: none;"></div>
 
 </body>
 
