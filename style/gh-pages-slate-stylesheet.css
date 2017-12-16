@@ -102,7 +102,7 @@ strong {
   font-weight: bold;
 }
 
-img {
+/* img {
   position: relative;
   margin: 0 auto;
   max-width: 739px;
@@ -114,7 +114,7 @@ img {
   -moz-box-shadow: 0 0 5px #ebebeb;
   -o-box-shadow: 0 0 5px #ebebeb;
   -ms-box-shadow: 0 0 5px #ebebeb;
-}
+} */
 
 p img {
   display: inline;
@@ -292,7 +292,7 @@ header {
 
 #main_content.inner {
   background-color: #fff;
-  padding: 70px 100px;
+  /* padding: 70px 100px; */
   box-shadow: 0 0 5px #ebebeb;
   -webkit-box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
   -moz-box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
