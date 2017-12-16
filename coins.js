@@ -30,11 +30,6 @@ const coinJSON = [
 		"Icon": "LTC"
 	},
 	{
-		"Name": "Bitcoin Gold",
-		"Ticker": "BTG",
-		"Icon": "../../TODO"
-	},
-	{
 		"Name": "IOTA",
 		"Ticker": "MIOTA",
 		"Icon": "IOTA-alt"
@@ -73,11 +68,6 @@ const coinJSON = [
 		"Name": "Stellas Lumens",
 		"Ticker": "XLM",
 		"Icon": "STR"
-	},
-	{
-		"Name": "Bitconnect",
-		"Ticker": "BCC",
-		"Icon": "../../TODO"
 	},
 	{
 		"Name": "OmiseGO",
