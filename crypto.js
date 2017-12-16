@@ -78,9 +78,8 @@ function generateJSON(el) {
       coin.BTTOrder = i;
 
       // get canvas svg and convert it to png base64 for output to BTT
-
-      var base64PNG = document.getElementById(selection[i]).toDataURL('image/png');      
-      base64PNG = base64PNG.replace("data:image/png;base64,","");
+      let base64PNG = document.getElementById(selection[i]).toDataURL('image/png');      
+      base64PNG = base64PNG.replace("data:image/png;base64,", "");
 
       coin.BTTIconData = base64PNG;
 
@@ -109,7 +108,6 @@ function loadData(){
 
     var cryptoSelector = document.createElement("div");
     var element = document.createElement("input");
-    element.id = coinJSON[i].Name;
     element.type = "checkbox";
     element.value = coinJSON[i].Ticker;
     element.setAttribute("onChange", "addCrypto(this);");
