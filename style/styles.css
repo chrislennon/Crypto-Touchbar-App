@@ -1,4 +1,8 @@
 div.touchbar-base {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
     background-color: black;
     border-radius: 5px;
     padding: 5px;
@@ -30,8 +34,30 @@ div.touchbar-base .touchbar-element.crypto {
     width: auto;
 }
 
+div.touchbar-element-middle {
+    width: auto;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
 div.touchbar-element-right {
-    float: right;
+    position: relative;
+    min-width: 272px;
+    margin-left: auto;
+}
+
+div.touchbar-element-right:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -30px;
+    width: 30px;
+    height: 35px;
+    background: -moz-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
+    background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
 }
 
 div.touchbar-element-right .touchbar-element {
@@ -60,15 +86,15 @@ div.touchbar-element-right .icon {
 }
 
 div.touchbar-element-right .volume .icon {
-    background: url('img/volume-high.png') no-repeat center;
+    background: url('../img/volume-high.png') no-repeat center;
 }
 
 div.touchbar-element-right .mute .icon {
-    background: url('img/volume-mute.png') no-repeat center;
+    background: url('../img/volume-mute.png') no-repeat center;
 }
 
 div.touchbar-element-right .siri .icon {
-    background: url('img/siri.png') no-repeat center;
+    background: url('../img/siri.png') no-repeat center;
 }
 
 img.touchbar-crypto-icon {
