@@ -32,7 +32,7 @@ const coinJSON = [
 	{
 		"Name": "Bitcoin Gold",
 		"Ticker": "BTG",
-		"Icon": "TODO"
+		"Icon": "../../TODO"
 	},
 	{
 		"Name": "IOTA",
@@ -77,7 +77,7 @@ const coinJSON = [
 	{
 		"Name": "Bitconnect",
 		"Ticker": "BCC",
-		"Icon": "TODO"
+		"Icon": "../../TODO"
 	},
 	{
 		"Name": "OmiseGO",
