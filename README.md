@@ -5,6 +5,8 @@ This repository provides a web application to allow users to build crypto curren
 
 Currently scripts within BTT require [jq](https://stedolan.github.io/jq/) to parse the response from the API. The location of the jq binary is hardcoded to `/usr/local/bin/jq`. Future work will be done to parse this with OS native tools.
 
+
+## Acknowledgements
 The prices are received from [CryptoCompare's](https://www.cryptocompare.com/) API - documentation available [here](https://www.cryptocompare.com/api/#)
 
 Icons used within this tool are the work of [AllienWorks](https://github.com/allienworks/cryptocoins).
