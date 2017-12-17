@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node node_modules/watch-http-server/bin/http-server",
-    "deploy": "touch .nojekyll && node_modules/gh-pages/bin/gh-pages -d ."
+    "deploy": "node ./deploy.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   "homepage": "https://github.com/chrislennon/Crypto-Touchbar-App#readme",
   "dependencies": {
     "cryptocoins-icons": "^2.7.0",
+    "font-awesome-svg-png": "^1.2.2",
     "watch-http-server": "^0.7.6"
   },
   "devDependencies": {
