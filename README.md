@@ -29,3 +29,4 @@ Other notes:
 
 - SVG (crypto icons) are pulled in via an [npm package](https://www.npmjs.com/package/cryptocoins-icons) and consumed from `node_modules/cryptocoins-icons/` directory.
 - Currency fonts are currently hardcoded png (base64) for output to BTT.
+- You can publish to your own fork's `gh-pages` branch by running `npm run deploy`
