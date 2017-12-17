@@ -136,14 +136,7 @@ img.touchbar-crypto-icon {
     margin-left: 10px;
 }
 
-.button {
-    display: block;
-    width: 200px;
-    height: 50px;
-    background: #373737;
-    padding: 10px;
-    text-align: center;
+.jscolor {
+    margin-left: 10px; 
     border-radius: 5px;
-    color: white;
-    font-weight: bold;
 }
