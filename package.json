@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node node_modules/watch-http-server/bin/http-server"
+    "start": "node node_modules/watch-http-server/bin/http-server",
+    "deploy": "node ./deploy.js"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
   "homepage": "https://github.com/chrislennon/Crypto-Touchbar-App#readme",
   "dependencies": {
     "watch-http-server": "^0.7.6"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.1.0"
   }
 }
