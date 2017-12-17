@@ -29,6 +29,9 @@ function addCrypto(elm)
     var cryptoTouch = document.createElement("div");
     cryptoTouch.setAttribute("id", elm.value + "-touch");
     cryptoTouch.className = "touchbar-element crypto";
+
+    var elmColour = document.getElementById(elm.value + '-colour');
+    cryptoTouch.style.backgroundColor = elmColour.style.backgroundColor;
     touchArea.appendChild(cryptoTouch);
 
     var imgTouch = document.createElement("img");
@@ -68,7 +71,7 @@ function generateJSON(el) {
 
   for (var i = 0; i < selection.length; i++) {
 
-    // Duplicate the cryptoElement and assign it to the coin
+      // Duplicate the cryptoElement and assign it to the coin
       let coin = Object.assign({}, cryptoElement);
       
       coin.BTTTriggerConfig = Object.assign({}, cryptoElement.BTTTriggerConfig);
@@ -76,6 +79,17 @@ function generateJSON(el) {
       coin.BTTWidgetName = selection[i];
 
       coin.BTTOrder = i;
+
+      // Get and set element colour
+      let coinColour = document.getElementById(selection[i] + '-colour').style.backgroundColor;
+      let rgbVals = coinColour.match(/\d+/g);
+
+      let cryptoRGBA = '';
+      for(var k=0; k<rgbVals.length; k++) {
+        cryptoRGBA = cryptoRGBA + rgbVals[k] + ', ';
+      }
+      cryptoRGBA = cryptoRGBA + '255';
+      coin.BTTTriggerConfig.BTTTouchBarButtonColor = cryptoRGBA;
 
       // get canvas svg and convert it to png base64 for output to BTT
       let base64PNG = document.getElementById(selection[i]).toDataURL('image/png');      
@@ -116,6 +130,11 @@ function loadData(){
     text.setAttribute("for", coinJSON[i].Name);
     text.innerHTML = coinJSON[i].Name;
 
+    var colour = document.createElement("button");
+    colour.className = "jscolor {valueElement:null,value:'f38208'}";
+    colour.style = "height: 20px; width: 20px;";
+    colour.id = coinJSON[i].Ticker + "-colour";
+
     var icon = document.createElement("img");
     icon.setAttribute("src", "node_modules/cryptocoins-icons/SVG/" + coinJSON[i].Icon + ".svg");
     icon.width = '22';
@@ -124,6 +143,7 @@ function loadData(){
     cryptoSelector.appendChild(element)
     cryptoSelector.appendChild(icon)
     cryptoSelector.appendChild(text);
+    cryptoSelector.appendChild(colour);
     document.getElementById('coins').appendChild(cryptoSelector);
 
     // add svgs to hidden canvas so they can be exported to base64 png for BTT
@@ -143,5 +163,8 @@ function loadData(){
     document.getElementById('fiat').appendChild(option);
 
   }
+
+  // enable colour picker on dynamically generated inputs
+  jscolor.installByClassName("jscolor");
 
 }
