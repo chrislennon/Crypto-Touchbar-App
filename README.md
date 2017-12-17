@@ -19,7 +19,13 @@ Currently handles the top 20 currencies taken from [coinmarketcap](https://coinm
 
 This is a standalone web application which is published already via [GitHub Pages](https://chrislennon.github.io/Crypto-Touchbar-App/).
 
-There are some small caveats running this locally for development:
+To run this application locally:
 
-- SVG (crypto icons) are pulled in via a submodule to the `img/cryptocoins/` directory, depending on your client you may need to force this download to happen using `git submodule update --init --recursive`
-- After cloning (including submodules) run `npm install` to install a http-web-server you can then run `npm start` the application should then be available at http://127.0.0.1:8080
+- run `npm install`
+- run `npm start`
+- browse to `http://127.0.0.1:8080`
+
+Other notes:
+
+- SVG (crypto icons) are pulled in via an [npm package](https://www.npmjs.com/package/cryptocoins-icons) and consumed from `node_modules/cryptocoins-icons/` directory.
+- Currency fonts are currently hardcoded png (base64) for output to BTT.
