@@ -34,7 +34,7 @@ function addCrypto(elm)
     var imgTouch = document.createElement("img");
     imgTouch.className = "touchbar-crypto-icon";
     imgTouch.setAttribute("id", elm.value + "-touch-icon");
-    imgTouch.setAttribute("src", "img/cryptocoins/SVG/" + selectedCryptoObj.Icon + ".svg");
+    imgTouch.setAttribute("src", "node_modules/cryptocoins-icons/SVG/" + selectedCryptoObj.Icon + ".svg");
     imgTouch.width = '22';
     imgTouch.height = '22';
     cryptoTouch.appendChild(imgTouch);
@@ -117,7 +117,7 @@ function loadData(){
     text.innerHTML = coinJSON[i].Name;
 
     var icon = document.createElement("img");
-    icon.setAttribute("src", "img/cryptocoins/SVG/" + coinJSON[i].Icon + ".svg");
+    icon.setAttribute("src", "node_modules/cryptocoins-icons/SVG/" + coinJSON[i].Icon + ".svg");
     icon.width = '22';
     icon.height = '22';
     
@@ -128,17 +128,17 @@ function loadData(){
 
     // add svgs to hidden canvas so they can be exported to base64 png for BTT
     var iconCanv = document.createElement("canvas");
-    canvg(iconCanv, "img/cryptocoins/SVG/" + coinJSON[i].Icon + ".svg", { ignoreMouse: true, ignoreAnimation: true});
+    canvg(iconCanv, "node_modules/cryptocoins-icons/SVG/" + coinJSON[i].Icon + ".svg", { ignoreMouse: true, ignoreAnimation: true});
     iconCanv.id = coinJSON[i].Ticker;
     document.getElementById('canvas-area').appendChild(iconCanv);
 
   }
 
-  for(var i=0; i<fiat.length; i++) {
+  for(var j=0; j<fiat.length; j++) {
 
     var option = document.createElement("option");
-    option.value = fiat[i].ticker;
-    option.innerHTML = fiat[i].name;
+    option.value = fiat[j].ticker;
+    option.innerHTML = fiat[j].name;
 
     document.getElementById('fiat').appendChild(option);
 

@@ -1,4 +1,0 @@
-[submodule "img/cryptocoins"]
-	path = img/cryptocoins
-	url = https://github.com/allienworks/cryptocoins.git
-	ignore = dirty
