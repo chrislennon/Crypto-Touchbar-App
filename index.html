@@ -1,0 +1,89 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="style/normalize.css">
+    <link rel="stylesheet" type="text/css" href="style/styles.css">
+    <link rel="stylesheet" type="text/css" href="style/gh-pages-slate-stylesheet.css">
+
+    <script src="data/coins.js"></script>
+    <script src="data/fiat.js"></script>
+    <script src="data/BTTSchema.js"></script>
+    <script src="js/crypto.js"></script>
+
+    <script type="text/javascript" src="https://canvg.github.io/canvg/rgbcolor.js"></script>
+    <script type="text/javascript" src="https://canvg.github.io/canvg/StackBlur.js"></script>
+    <script type="text/javascript" src="https://canvg.github.io/canvg/canvg.js"></script>
+
+    <title>Crypto-Touchbar-App</title>
+</head>
+
+<body onload="loadData()">
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+            <header class="inner">
+              <a id="forkme_banner" href="https://github.com/chrislennon/Crypto-Touchbar-App">View on GitHub</a>
+    
+              <h1 id="project_title">Crypto Touchbar App</h1>
+              <h2 id="project_tagline">A tool to build crytpo currency widgets for Apple's touchbar</h2>
+            </header>
+        </div>
+    
+        <section class="outer">
+            <!-- Nothing to see here -->
+        </section>
+
+<!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+        <section id="main_content" class="inner">
+            <div class="touchbar-base">
+                <div class="touchbar-element-left">
+                    <div class="touchbar-element"><span>esc</span></div>
+                </div>
+                <div id="crypto-touchbar-area" class="touchbar-element-middle">
+                    <!-- Generated Crypto Elements to go here -->
+                </div>
+                <div class="touchbar-element-right">
+                    <div class="touchbar-element volume"><span class="icon"></span></div>
+                    <div class="touchbar-element mute"><span class="icon"></span></div>
+                    <div class="touchbar-element siri"><span class="icon"></span></div>
+                </div>
+            </div>
+
+            
+            <form id="form">
+                FIAT Currency
+                <select id="fiat">
+                </select>
+
+                <br>
+                <br>
+
+                Crypto Currencies<br>
+                <div id="coins">
+
+                </div>
+
+            </form>
+
+            <a id="exportJSON" onclick="generateJSON(this);" class="button"><i class="icon-download"></i> export json</a><br>
+
+            <div id="canvas-area" style="display: none;"></div>
+
+        </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+            <footer class="inner">
+              <p class="copyright">Application maintained by <a href="https://github.com/chrislennon">Chris Lennon</a></p>
+              <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+            </footer>
+          </div>
+
+</body>
+
+</html>
