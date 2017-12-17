@@ -4,5 +4,5 @@ ghpages.publish('.', {
     src: ["**/*",".nojekyll"],
     message: 'Auto-generated commit'
 }, function(err) {
-    console.log(err);
+    if (err) console.log(err);
 });

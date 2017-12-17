@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node node_modules/watch-http-server/bin/http-server",
-    "deploy": "touch .nojekyll && node_modules/gh-pages/bin/gh-pages -d ."
+    "deploy": "node ./deploy.js"
   },
   "repository": {
     "type": "git",
