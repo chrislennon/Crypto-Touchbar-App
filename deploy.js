@@ -1,5 +1,8 @@
 var ghpages = require('gh-pages');
 
 ghpages.publish('.', {
-    src: ["**/*",".nojekyll"]
-}, function(err) {});
+    src: ["**/*",".nojekyll"],
+    message: 'Auto-generated commit'
+}, function(err) {
+    console.log(err);
+});
