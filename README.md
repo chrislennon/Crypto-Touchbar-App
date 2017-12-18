@@ -13,7 +13,7 @@ Icons used within this tool are the work of [AllienWorks](https://github.com/all
 
 This application was originally inspired by another project by [Ryan-Gordon](https://github.com/Ryan-Gordon/Crypto-Touchbar) - I used it for a while but got tired of manually configuring each element, I seen benefit in providing an application to offload this work.
 
-Currently handles the top 20 currencies taken from [coinmarketcap](https://coinmarketcap.com/all/views/all/) on 03/12/2017.
+Currently handles the top 40 currencies taken from [coinmarketcap](https://www.cryptocompare.com/coins/#/usd) on 18/12/2017.
 
 # Contribution & Development
 
