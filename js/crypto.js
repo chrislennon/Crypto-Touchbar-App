@@ -1,9 +1,8 @@
 function getSelectedChbox(frm) {
   var selchbox = [];
   var inpfields = frm.getElementsByTagName('input');
-  var nr_inpfields = inpfields.length;
 
-  for(var i=0; i<nr_inpfields; i++) {
+  for(var i=0; i<inpfields.length; i++) {
     if(inpfields[i].type == 'checkbox' && inpfields[i].checked == true) selchbox.push(inpfields[i].value);
   }
   return selchbox;
@@ -14,6 +13,20 @@ function updatePreviewColour(elm) {
   var cryptoColour = document.getElementById(cryptoId);
   var cryptoTouch = document.getElementById(cryptoId.replace("-colour", "-touch"));
   if (cryptoTouch) cryptoTouch.style.backgroundColor = cryptoColour.style.backgroundColor;
+}
+
+function updatePreviewFiat(elm) {
+  var selectedValue = elm.options[elm.selectedIndex].value;
+  var selectedFiat = fiat.filter(function( obj ) {
+    return obj.ticker == selectedValue;
+  });
+  var selectedFiatObj = selectedFiat[0];
+  var previewCryptos = document.getElementsByClassName("crypto");
+  for(var l=0; l<previewCryptos.length; l++) {
+    var touchText = previewCryptos[l].getElementsByTagName('span')[0].innerHTML;
+    touchText = selectedFiatObj.symbol + " " + touchText.substring(touchText.indexOf(" ") + 1);
+    previewCryptos[l].getElementsByTagName('span')[0].innerHTML = touchText;
+  }
 }
 
 function addCrypto(elm)
@@ -161,14 +174,14 @@ function loadData(){
 
   }
 
-  for(var j=0; j<fiat.length; j++) {
+  var dropdown = document.getElementById('fiat');
+  dropdown.setAttribute("onChange", "updatePreviewFiat(this);");
 
+  for(var j=0; j<fiat.length; j++) {
     var option = document.createElement("option");
     option.value = fiat[j].ticker;
     option.innerHTML = fiat[j].name;
-
-    document.getElementById('fiat').appendChild(option);
-
+    dropdown.appendChild(option);
   }
 
   // enable colour picker on dynamically generated inputs
