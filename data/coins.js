@@ -20,7 +20,7 @@ const coinJSON = [
 		"Icon": "XRP"
 	},
 	{
-		"Name": "Digital Cash",
+		"Name": "Dash",
 		"Ticker": "DASH",
 		"Icon": "DASH"
 	},
@@ -32,11 +32,11 @@ const coinJSON = [
 	{
 		"Name": "Bitcoin Gold",
 		"Ticker": "BTG",
-		"Icon": "../../../img/temp/btg"
+		"Icon": "../../../img/TODO"
 	},
 	{
 		"Name": "IOTA",
-		"Ticker": "IOT",
+		"Ticker": "MIOTA",
 		"Icon": "IOTA-alt"
 	},
 	{
@@ -77,7 +77,7 @@ const coinJSON = [
 	{
 		"Name": "Bitconnect",
 		"Ticker": "BCC",
-		"Icon": "../../../img/temp/bcc"
+		"Icon": "../../../img/TODO"
 	},
 	{
 		"Name": "OmiseGO",
@@ -98,110 +98,5 @@ const coinJSON = [
 		"Name": "Lisk",
 		"Ticker": "LSK",
 		"Icon": "LSK-alt"
-	},
-	{
-		"Name": "Nxt",
-		"Ticker": "NXT",
-		"Icon": "NXT"
-	},
-	{
-		"Name": "Metaverse",
-		"Ticker": "ETP",
-		"Icon": "../../../img/TODO"
-	},
-	{
-		"Name": "Quoine Liquid",
-		"Ticker": "QASH",
-		"Icon": "../../../img/TODO"
-	},
-	{
-		"Name": "Streamr DATAcoin",
-		"Ticker": "DATA",
-		"Icon": "../../../img/TODO"
-	},
-	{
-		"Name": "Santiment",
-		"Ticker": "SAN",
-		"Icon": "../../../img/TODO"
-	},
-	{
-		"Name": "Eido",
-		"Ticker": "EDO",
-		"Icon": "../../../img/TODO"
-	},
-	{
-		"Name": "Tether",
-		"Ticker": "USDT",
-		"Icon": "USDT-alt"
-	},
-	{
-		"Name": "Augur",
-		"Ticker": "REP",
-		"Icon": "REP-alt"
-	},
-	{
-		"Name": "Dogecoin",
-		"Ticker": "DOGE",
-		"Icon": "DOGE"
-	},
-	{
-		"Name": "AventCoin",
-		"Ticker": "AVT",
-		"Icon": "../../../img/TODO"
-	},
-	{
-		"Name": "DigitalNote",
-		"Ticker": "XDN",
-		"Icon": "../../../img/TODO"
-	},
-	{
-		"Name": "ByteCoin",
-		"Ticker": "BCN",
-		"Icon": "BCN"
-	},
-	{
-		"Name": "Tronix",
-		"Ticker": "TRX",
-		"Icon": "../../../img/TODO"
-	},
-	{
-		"Name": "Stratis",
-		"Ticker": "STRAT",
-		"Icon": "STRAT-alt"
-	},
-	{
-		"Name": "Viberate",
-		"Ticker": "VIB",
-		"Icon": "../../../img/TODO"
-	},
-	{
-		"Name": "Stox",
-		"Ticker": "STX",
-		"Icon": "../../../img/TODO"
-	},
-	{
-		"Name": "Tezos",
-		"Ticker": "XTZ",
-		"Icon": "../../../img/TODO"
-	},
-	{
-		"Name": "Verge",
-		"Ticker": "XVG",
-		"Icon": "../../../img/TODO"
-	},
-	{
-		"Name": "SkullBuzz",
-		"Ticker": "SKB",
-		"Icon": "../../../img/TODO"
-	},
-	{
-		"Name": "Vechain",
-		"Ticker": "XVG",
-		"Icon": "XVG-alt"
-	},
-	{
-		"Name": "Waves",
-		"Ticker": "WAVES",
-		"Icon": "WAVES-alt"
 	}
 ]

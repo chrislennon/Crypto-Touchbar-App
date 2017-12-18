@@ -86,9 +86,6 @@ function generateJSON(el) {
   // Get selected cryptos
   var selection = getSelectedChbox(document.getElementById('form'));
 
-  // Get script refresh interval
-  var refreshTimer = document.getElementById("refreshInterval").innerHTML;
-
   var output = mainStruct;
   var coinArray = [];
 
@@ -122,8 +119,6 @@ function generateJSON(el) {
 
       coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
       .replace("**CRYPTO**", coin.BTTWidgetName).replace("**FIAT**", selectedFiatObj.ticker).replace("**FIATSYMB**", selectedFiatObj.symbol);
-
-      coin.BTTTriggerConfig.BTTTouchBarScriptUpdateInterval = refreshTimer;
 
       coinArray.push(coin);
   }
@@ -191,15 +186,5 @@ function loadData(){
 
   // enable colour picker on dynamically generated inputs
   jscolor.installByClassName("jscolor");
-
-
-  // set up slider for refresh value
-  var slider = document.getElementById("refreshSlider");
-  var output = document.getElementById("refreshInterval");
-  output.innerHTML = slider.value;
-  
-  slider.oninput = function() {
-      output.innerHTML = this.value;
-  }
 
 }
