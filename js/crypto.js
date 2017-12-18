@@ -9,6 +9,13 @@ function getSelectedChbox(frm) {
   return selchbox;
 }
 
+function updatePreviewColour(elm) {
+  var cryptoId = elm.styleElement.id;
+  var cryptoColour = document.getElementById(cryptoId);
+  var cryptoTouch = document.getElementById(cryptoId.replace("-colour", "-touch"));
+  if (cryptoTouch) cryptoTouch.style.backgroundColor = cryptoColour.style.backgroundColor;
+}
+
 function addCrypto(elm)
 {
   if (elm.checked) 
@@ -30,7 +37,7 @@ function addCrypto(elm)
     cryptoTouch.setAttribute("id", elm.value + "-touch");
     cryptoTouch.className = "touchbar-element crypto";
 
-    var elmColour = document.getElementById(elm.value + '-colour');
+    let elmColour = document.getElementById(elm.value + '-colour');
     cryptoTouch.style.backgroundColor = elmColour.style.backgroundColor;
     touchArea.appendChild(cryptoTouch);
 
@@ -131,7 +138,7 @@ function loadData(){
     text.innerHTML = coinJSON[i].Name;
 
     var colour = document.createElement("button");
-    colour.className = "jscolor {valueElement:null,value:'f38208'}";
+    colour.className = "jscolor {onFineChange:'updatePreviewColour(this)',valueElement:null,value:'f38208'}";
     colour.style = "height: 20px; width: 20px;";
     colour.id = coinJSON[i].Ticker + "-colour";
 
