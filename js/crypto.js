@@ -89,6 +89,9 @@ function generateJSON(el) {
   // Get script refresh interval
   var refreshTimer = document.getElementById("refreshInterval").innerHTML;
 
+  // Get value of group toggle box
+  var groupBool = document.getElementById("groupcheckbox").checked;
+  
   var output = mainStruct;
   var coinArray = [];
 
@@ -130,11 +133,16 @@ function generateJSON(el) {
 
   // add the closing group element
   closeGroupElement.BTTOrder = selection.length;
-  coinArray.push(closeGroupElement);
 
-  output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
-  output.BTTPresetContent[0].BTTTriggers[0].BTTIconData = selectedFiatObj.icon;
-
+  console.log("groupbool", groupBool);
+  if (groupBool) {
+    coinArray.push(closeGroupElement);
+    output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
+    output.BTTPresetContent[0].BTTTriggers[0].BTTIconData = selectedFiatObj.icon;
+  }
+  else {
+    output.BTTPresetContent[0].BTTTriggers = coinArray;
+  }
   // trigger download of end result object
   var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(output));
   el.setAttribute("href", "data:"+data);
