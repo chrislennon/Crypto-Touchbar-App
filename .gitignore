@@ -1,6 +1,9 @@
 # Mac
 .DS_Store
 
+# Editor
+.vscode/*
+
 # Logs
 logs
 *.log
