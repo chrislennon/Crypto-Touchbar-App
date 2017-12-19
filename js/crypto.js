@@ -123,7 +123,7 @@ function generateJSON(el) {
       coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
       .replace("**CRYPTO**", coin.BTTWidgetName).replace("**FIAT**", selectedFiatObj.ticker).replace("**FIATSYMB**", selectedFiatObj.symbol);
 
-      coin.BTTTriggerConfig.BTTTouchBarScriptUpdateInterval = refreshTimer;
+      coin.BTTTriggerConfig.BTTTouchBarScriptUpdateInterval = parseInt(refreshTimer);
 
       coinArray.push(coin);
   }
