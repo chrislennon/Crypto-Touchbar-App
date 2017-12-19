@@ -134,7 +134,6 @@ function generateJSON(el) {
   // add the closing group element
   closeGroupElement.BTTOrder = selection.length;
 
-  console.log("groupbool", groupBool);
   if (groupBool) {
     coinArray.push(closeGroupElement);
     output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
