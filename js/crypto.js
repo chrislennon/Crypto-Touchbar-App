@@ -202,4 +202,7 @@ function loadData(){
       output.innerHTML = this.value;
   }
 
+  // Hide loading text
+  document.getElementById("loading").style.display = "none";
+
 }

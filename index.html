@@ -32,7 +32,7 @@
               <a id="forkme_banner" href="https://github.com/chrislennon/Crypto-Touchbar-App">View on GitHub</a>
     
               <h1 id="project_title">Crypto Touchbar App</h1>
-              <h2 id="project_tagline">A tool to build crytpo currency widgets for Apple's touchbar</h2>
+              <h2 id="project_tagline">A tool to build crytpo currency widgets for Apple's touchbar. Exports compatible with <a href="https://www.boastr.net/">BetterTouchTool</a>.</h2>
             </header>
         </div>
     
@@ -70,6 +70,7 @@
                 <div id="coins">
 
                 </div>
+                <div id="loading">Loading coins...</div>
 
             </form>
 
@@ -77,9 +78,11 @@
                 <input type="range" min="1" max="120" value="60" class="slider" id="refreshSlider">
                 <span>Refresh Interval:</span>
                 <span id="refreshInterval"></span>
+                <span> Seconds</span>
             </div>
 
-            <a id="exportJSON" onclick="generateJSON(this);" class="button"><i class="icon-download"></i> export json</a><br>
+            <br>
+            <a id="exportJSON" onclick="generateJSON(this);" class="button"><i class="icon-download"></i> export BTT json</a><br>
 
             <div id="canvas-area" style="display: none;"></div>
 
