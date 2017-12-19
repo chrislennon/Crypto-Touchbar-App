@@ -1,10 +1,13 @@
 # Info
 This application is published to GitHub pages at the following location: https://chrislennon.github.io/Crypto-Touchbar-App/
 
-This repository provides a web application to allow users to build crypto currency touchbar elements compatible for import to [BetterTouchTool](https://www.boastr.net/). 
-
-Currently scripts within BTT require [jq](https://stedolan.github.io/jq/) to parse the response from the API. The location of the jq binary is hardcoded to `/usr/local/bin/jq`. Future work will be done to parse this with OS native tools.
-
+## Instructions
+- Download and install [Better Touch Tool](https://www.boastr.net/).
+- Install jq using Homebrew with command `brew install jq`. It needs to be installed into `/usr/local/bin/jq` .
+- Use the [Web App][https://chrislennon.github.io/Crypto-Touchbar-App/] to create your toolbar.
+- Open the BetterTouchTool application.
+- In the bottom left corner go to "Manage Presets".
+- Click the "Import" button and select the downloaded script.
 
 ## Acknowledgements
 The prices are received from [CryptoCompare's](https://www.cryptocompare.com/) API - documentation available [here](https://www.cryptocompare.com/api/#)
@@ -13,7 +16,7 @@ Icons used within this tool are the work of [AllienWorks](https://github.com/all
 
 This application was originally inspired by another project by [Ryan-Gordon](https://github.com/Ryan-Gordon/Crypto-Touchbar) - I used it for a while but got tired of manually configuring each element, I seen benefit in providing an application to offload this work.
 
-Currently handles the top 40 currencies taken from [coinmarketcap](https://www.cryptocompare.com/coins/#/usd) on 18/12/2017.
+Currently handles the top 40ish currencies taken from [cryptocompare](https://www.cryptocompare.com/coins/#/usd) on 18/12/2017.
 
 ## Local Development
 
