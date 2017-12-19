@@ -20,7 +20,7 @@ const coinJSON = [
 		"Icon": "XRP"
 	},
 	{
-		"Name": "Digital Cash",
+		"Name": "Dash",
 		"Ticker": "DASH",
 		"Icon": "DASH"
 	},

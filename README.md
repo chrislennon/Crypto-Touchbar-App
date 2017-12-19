@@ -15,7 +15,7 @@ This application was originally inspired by another project by [Ryan-Gordon](htt
 
 Currently handles the top 40 currencies taken from [coinmarketcap](https://www.cryptocompare.com/coins/#/usd) on 18/12/2017.
 
-# Contribution & Development
+## Local Development
 
 This is a standalone web application which is published already via [GitHub Pages](https://chrislennon.github.io/Crypto-Touchbar-App/).
 
@@ -30,3 +30,24 @@ Other notes:
 - SVG (crypto icons) are pulled in via an [npm package](https://www.npmjs.com/package/cryptocoins-icons) and consumed from `node_modules/cryptocoins-icons/` directory.
 - Currency fonts are currently hardcoded png (base64) for output to BTT.
 - You can publish to your own fork's `gh-pages` branch by running `npm run deploy`
+
+## Suggestions & Donations
+
+Please raise an issue in the [GitHub Issues](https://github.com/chrislennon/Crypto-Touchbar-App/issues) page.
+
+If you found this useful and wish to donate below are some address (if you wish to donate in another coin just raise an issue):
+
+- Bitcoin
+`1wSxFJYM9CiCvSjdvpBnL13MUGyYE5bL9`
+- Bitcoin Cash
+`1Q1SzrPWhtRrQqnS4nb9CzZnXsDPz9fNU7`
+- Dash
+`XtSDfocv9iUWhsoKF4BD96JRwBq54EVMja`
+- Dogecoin
+`D6aHYUfVhieAw284pGTJ1QroVcYp7YKwsL`
+- Etherum
+`0x43bC875ABF4330f032206C54A055CD24A1Ec13de`
+- Litecoin
+`LZQs2itSYtMSUfh8GZayABEtGbYZEB1Dsx`
+- Monero
+`48zkMS1RkNe9Z4bkGCH2eZND2s5MMmiotThMLkYfhskbashPXtYLb1J9JsqEVffEA6K1AtnVhaxJTHb1pPgms66nB9NzxyT`
