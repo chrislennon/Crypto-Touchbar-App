@@ -1,215 +1,228 @@
-function getSelectedChbox(frm) {
-  var selchbox = [];
-  var inpfields = frm.getElementsByTagName('input');
+function getSelectedCheckbox(form) {
+    const inputFields = form.getElementsByTagName('input');
 
-  for(var i=0; i<inpfields.length; i++) {
-    if(inpfields[i].type == 'checkbox' && inpfields[i].checked == true) selchbox.push(inpfields[i].value);
-  }
-  return selchbox;
+    let selectedCheckboxes = [];
+
+    // Since cryptoElements returns a HTMLCollection, do this hack to get the Array elements.
+    [].forEach.call(inputFields, (inputField) => {
+        if (inputField.type === 'checkbox' && inputField.checked === true) {
+            selectedCheckboxes.push(inputField.value);
+        }
+    });
+    return selectedCheckboxes;
 }
 
 function updatePreviewColour(elm) {
-  var cryptoId = elm.styleElement.id;
-  var cryptoColour = document.getElementById(cryptoId);
-  var cryptoTouch = document.getElementById(cryptoId.replace("-colour", "-touch"));
-  if (cryptoTouch) cryptoTouch.style.backgroundColor = cryptoColour.style.backgroundColor;
+    const id = elm.styleElement.id,
+        cryptoColour = document.getElementById(id),
+        cryptoTouch = document.getElementById(id.replace('-colour', '-touch'));
+
+    if (cryptoTouch) {
+        cryptoTouch.style.backgroundColor = cryptoColour.style.backgroundColor;
+    }
 }
 
-function updatePreviewFiat(elm) {
-  var selectedValue = elm.options[elm.selectedIndex].value;
-  var selectedFiat = fiat.filter(function( obj ) {
-    return obj.ticker == selectedValue;
-  });
-  var selectedFiatObj = selectedFiat[0];
-  var previewCryptos = document.getElementsByClassName("crypto");
-  for(var l=0; l<previewCryptos.length; l++) {
-    var touchText = previewCryptos[l].getElementsByTagName('span')[0].innerHTML;
-    touchText = selectedFiatObj.symbol + " " + touchText.substring(touchText.indexOf(" ") + 1);
-    previewCryptos[l].getElementsByTagName('span')[0].innerHTML = touchText;
-  }
+function updatePreviewFiat() {
+    const selectedFiatObj = getSelectedFiatValueObject(),
+        cryptoElements = document.getElementsByClassName('crypto');
+
+    // Since cryptoElements returns a HTMLCollection, do this hack to get the Array elements.
+    [].forEach.call(cryptoElements, (crypto) => {
+        let touchText = crypto.getElementsByTagName('span')[0].innerHTML;
+        touchText = selectedFiatObj.symbol + ' ' + touchText.substring(touchText.indexOf(' ') + 1);
+
+        crypto.getElementsByTagName('span')[0].innerHTML = touchText;
+    });
 }
 
-function addCrypto(elm)
-{
-  if (elm.checked) 
-  {
-    var selectedCrypto = coinJSON.filter(function( obj ) {
-      return obj.Ticker == elm.value;
+function getSelectedFiatOption() {
+    const fiat = document.getElementById('fiat');
+
+    return fiat.options[fiat.selectedIndex].value;
+}
+
+function getSelectedFiatValueObject() {
+    const selectedOp = getSelectedFiatOption();
+
+    return getSelectedValue(fiat, 'ticker', selectedOp)[0];
+}
+
+function getSelectedValue(array, key, value) {
+    return array.filter((obj) => {
+        return obj[key] === value;
     });
-    var selectedCryptoObj = selectedCrypto[0];
+}
 
-    var e = document.getElementById("fiat");
-    var selectedOp = e.options[e.selectedIndex].value;
-    var selectedFiat = fiat.filter(function( obj ) {
-      return obj.ticker == selectedOp;
-    });
-    var selectedFiatObj = selectedFiat[0];
+function addCrypto(event) {
+    const target = event.target,
+        targetValue = target.value;
 
-    var touchArea = document.getElementById('crypto-touchbar-area');
-    var cryptoTouch = document.createElement("div");
-    cryptoTouch.setAttribute("id", elm.value + "-touch");
-    cryptoTouch.className = "touchbar-element crypto";
+    if (target.checked) {
+        const selectedCrypto = getSelectedValue(coinJSON, 'Ticker', targetValue),
+            selectedCryptoObj = selectedCrypto[0],
+            selectedFiatObj = getSelectedFiatValueObject(),
+            touchArea = document.getElementById('crypto-touchbar-area');
 
-    let elmColour = document.getElementById(elm.value + '-colour');
-    cryptoTouch.style.backgroundColor = elmColour.style.backgroundColor;
-    touchArea.appendChild(cryptoTouch);
+        let cryptoTouch = document.createElement('div'),
+            targetColour = document.getElementById(targetValue + '-colour'),
+            imgTouch = document.createElement('img'),
+            text = document.createElement('span');
 
-    var imgTouch = document.createElement("img");
-    imgTouch.className = "touchbar-crypto-icon";
-    imgTouch.setAttribute("id", elm.value + "-touch-icon");
-    imgTouch.setAttribute("src", "node_modules/cryptocoins-icons/SVG/" + selectedCryptoObj.Icon + ".svg");
-    imgTouch.width = '22';
-    imgTouch.height = '22';
-    cryptoTouch.appendChild(imgTouch);
+        cryptoTouch.setAttribute('id', targetValue + '-touch');
+        cryptoTouch.className = 'touchbar-element crypto';
 
-    var text = document.createElement("span");
-    text.innerHTML = selectedFiatObj.symbol + " 000.00";
-    cryptoTouch.appendChild(text);
+        cryptoTouch.style.backgroundColor = targetColour.style.backgroundColor;
+        touchArea.appendChild(cryptoTouch);
 
-  } else {
-      var cryptoTouch = document.getElementById(elm.value + "-touch");
-      cryptoTouch.parentNode.removeChild(cryptoTouch);
-  }
+        imgTouch.className = 'touchbar-crypto-icon';
+        imgTouch.setAttribute('id', targetValue + '-touch-icon');
+        imgTouch.setAttribute('src', 'node_modules/cryptocoins-icons/SVG/' + selectedCryptoObj.Icon + '.svg');
+        imgTouch.style.width = '22';
+        imgTouch.style.height = '22';
+        cryptoTouch.appendChild(imgTouch);
+
+        text.innerHTML = selectedFiatObj.symbol + ' 000.00';
+        cryptoTouch.appendChild(text);
+    } else {
+        const cryptoTouch = document.getElementById(targetValue + '-touch');
+
+        cryptoTouch.parentNode.removeChild(cryptoTouch);
+    }
 }
 
 function generateJSON(el) {
+    const selectedFiatObj = getSelectedFiatValueObject(),
 
-  // Get selected FIAT
+        // Get selected cryptos
+        selection = getSelectedCheckbox(document.getElementById('form')),
 
-  var e = document.getElementById("fiat");
-  var selectedOp = e.options[e.selectedIndex].value;
-  var selectedFiat = fiat.filter(function( obj ) {
-    return obj.ticker == selectedOp;
-  });
-  var selectedFiatObj = selectedFiat[0];
+        // Get script refresh interval
+        refreshTimer = document.getElementById('refreshInterval').innerHTML,
 
-  // Get selected cryptos
-  var selection = getSelectedChbox(document.getElementById('form'));
+        // Get value of group toggle box
+        groupBool = document.getElementById('groupcheckbox').checked;
 
-  // Get script refresh interval
-  var refreshTimer = document.getElementById("refreshInterval").innerHTML;
+    let output = mainStruct,
+        coinArray = [];
 
-  // Get value of group toggle box
-  var groupBool = document.getElementById("groupcheckbox").checked;
-  
-  var output = mainStruct;
-  var coinArray = [];
+    selection.forEach((item, i) => {
 
-  for (var i = 0; i < selection.length; i++) {
+        // Duplicate the cryptoElement and assign it to the coin
+        let coin = Object.assign({}, cryptoElement);
 
-      // Duplicate the cryptoElement and assign it to the coin
-      let coin = Object.assign({}, cryptoElement);
-      
-      coin.BTTTriggerConfig = Object.assign({}, cryptoElement.BTTTriggerConfig);
+        // Duplicate the BTTTriggerConfig and assign it to a new Object.
+        coin.BTTTriggerConfig = Object.assign({}, cryptoElement.BTTTriggerConfig);
 
-      coin.BTTWidgetName = selection[i];
+        coin.BTTWidgetName = item;
 
-      coin.BTTOrder = i;
+        coin.BTTOrder = i;
 
-      // Get and set element colour
-      let coinColour = document.getElementById(selection[i] + '-colour').style.backgroundColor;
-      let rgbVals = coinColour.match(/\d+/g);
+        // Get and set element colour
+        let coinColour = document.getElementById(item + '-colour').style.backgroundColor;
+        let rgbVals = coinColour.match(/\d+/g);
 
-      let cryptoRGBA = '';
-      for(var k=0; k<rgbVals.length; k++) {
-        cryptoRGBA = cryptoRGBA + rgbVals[k] + ', ';
-      }
-      cryptoRGBA = cryptoRGBA + '255';
-      coin.BTTTriggerConfig.BTTTouchBarButtonColor = cryptoRGBA;
+        coin.BTTTriggerConfig.BTTTouchBarButtonColor = rgbVals.join(', ') + ', 255';
 
-      // get canvas svg and convert it to png base64 for output to BTT
-      let base64PNG = document.getElementById(selection[i]).toDataURL('image/png');      
-      base64PNG = base64PNG.replace("data:image/png;base64,", "");
+        // get canvas svg and convert it to png base64 for output to BTT
+        let base64PNG = document.getElementById(item).toDataURL('image/png');
+        base64PNG = base64PNG.replace('data:image/png;base64,', '');
 
-      coin.BTTIconData = base64PNG;
+        coin.BTTIconData = base64PNG;
 
-      coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
-      .replace("**CRYPTO**", coin.BTTWidgetName).replace("**FIAT**", selectedFiatObj.ticker).replace("**FIATSYMB**", selectedFiatObj.symbol);
+        coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
+            .replace('**CRYPTO**', coin.BTTWidgetName)
+            .replace('**FIAT**', selectedFiatObj.ticker)
+            .replace('**FIATSYMB**', selectedFiatObj.symbol);
 
-      coin.BTTTriggerConfig.BTTTouchBarScriptUpdateInterval = parseInt(refreshTimer);
+        coin.BTTTriggerConfig.BTTTouchBarScriptUpdateInterval = parseInt(refreshTimer);
 
-      coinArray.push(coin);
-  }
+        coinArray.push(coin);
+    });
 
-  // add the closing group element
-  closeGroupElement.BTTOrder = selection.length;
+    // add the closing group element
+    closeGroupElement.BTTOrder = selection.length;
 
-  if (groupBool) {
-    coinArray.push(closeGroupElement);
-    output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
-    output.BTTPresetContent[0].BTTTriggers[0].BTTIconData = selectedFiatObj.icon;
-  }
-  else {
-    output.BTTPresetContent[0].BTTTriggers = coinArray;
-  }
-  // trigger download of end result object
-  var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(output));
-  el.setAttribute("href", "data:"+data);
-  el.setAttribute("download", "data.json");
+    if (groupBool) {
+        coinArray.push(closeGroupElement);
+        output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
+        output.BTTPresetContent[0].BTTTriggers[0].BTTIconData = selectedFiatObj.icon;
+    }
+    else {
+        output.BTTPresetContent[0].BTTTriggers = coinArray;
+    }
+    // trigger download of end result object
+    const data = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(output));
+
+    el.setAttribute('href', 'data:' + data);
+    el.setAttribute('download', 'data.json');
 }
 
-function loadData(){
+function loadData() {
+    const dropdown = document.getElementById('fiat'),
+        slider = document.getElementById('refreshSlider'),
+        output = document.getElementById('refreshInterval');
 
-  for(var i=0; i<coinJSON.length; i++) {
+    coinJSON.forEach((coin) => {
+        const cryptoSelector = document.createElement('div'),
+            element = document.createElement('input'),
+            text = document.createElement('label'),
+            colour = document.createElement('button'),
+            icon = document.createElement('img'),
+            iconCanv = document.createElement('canvas');
 
-    var cryptoSelector = document.createElement("div");
-    var element = document.createElement("input");
-    element.type = "checkbox";
-    element.value = coinJSON[i].Ticker;
-    element.setAttribute("onChange", "addCrypto(this);");
+        element.type = 'checkbox';
+        element.value = coin.Ticker;
+        element.addEventListener('change', addCrypto);
 
-    var text = document.createElement("label");
-    text.setAttribute("for", coinJSON[i].Name);
-    text.innerHTML = coinJSON[i].Name;
+        text.setAttribute('for', coin.Name);
+        text.innerHTML = coin.Name;
 
-    var colour = document.createElement("button");
-    colour.className = "jscolor {onFineChange:'updatePreviewColour(this)',valueElement:null,value:'f38208'}";
-    colour.style = "height: 20px; width: 20px;";
-    colour.id = coinJSON[i].Ticker + "-colour";
+        colour.className = "jscolor {onFineChange:'updatePreviewColour(this)',valueElement:null,value:'f38208'}";
+        colour.style.width = '20';
+        colour.style.height = '20';
+        colour.id = coin.Ticker + '-colour';
 
-    var icon = document.createElement("img");
-    icon.setAttribute("src", "node_modules/cryptocoins-icons/SVG/" + coinJSON[i].Icon + ".svg");
-    icon.width = '22';
-    icon.height = '22';
-    
-    cryptoSelector.appendChild(element)
-    cryptoSelector.appendChild(icon)
-    cryptoSelector.appendChild(text);
-    cryptoSelector.appendChild(colour);
-    document.getElementById('coins').appendChild(cryptoSelector);
+        icon.className = 'touchbar-crypto-icon';
+        icon.setAttribute('src', 'node_modules/cryptocoins-icons/SVG/' + coin.Icon + '.svg');
+        icon.style.width = '22';
+        icon.style.height = '22';
 
-    // add svgs to hidden canvas so they can be exported to base64 png for BTT
-    var iconCanv = document.createElement("canvas");
-    canvg(iconCanv, "node_modules/cryptocoins-icons/SVG/" + coinJSON[i].Icon + ".svg", { ignoreMouse: true, ignoreAnimation: true});
-    iconCanv.id = coinJSON[i].Ticker;
-    document.getElementById('canvas-area').appendChild(iconCanv);
+        cryptoSelector.appendChild(element);
+        cryptoSelector.appendChild(icon);
+        cryptoSelector.appendChild(text);
+        cryptoSelector.appendChild(colour);
+        document.getElementById('coins').appendChild(cryptoSelector);
 
-  }
+        // add svgs to hidden canvas so they can be exported to base64 png for BTT
+        canvg(iconCanv, 'node_modules/cryptocoins-icons/SVG/' + coin.Icon + '.svg', {
+            ignoreMouse: true,
+            ignoreAnimation: true
+        });
+        iconCanv.id = coin.Ticker;
+        document.getElementById('canvas-area').appendChild(iconCanv);
 
-  var dropdown = document.getElementById('fiat');
-  dropdown.setAttribute("onChange", "updatePreviewFiat(this);");
+    });
+    dropdown.addEventListener('change', updatePreviewFiat);
 
-  for(var j=0; j<fiat.length; j++) {
-    var option = document.createElement("option");
-    option.value = fiat[j].ticker;
-    option.innerHTML = fiat[j].name;
-    dropdown.appendChild(option);
-  }
+    fiat.forEach((currency) => {
+        let option = document.createElement('option');
 
-  // enable colour picker on dynamically generated inputs
-  jscolor.installByClassName("jscolor");
+        option.value = currency.ticker;
+        option.innerHTML = currency.name;
+        dropdown.appendChild(option);
+    });
 
+    // enable colour picker on dynamically generated inputs
+    jscolor.installByClassName('jscolor');
 
-  // set up slider for refresh value
-  var slider = document.getElementById("refreshSlider");
-  var output = document.getElementById("refreshInterval");
-  output.innerHTML = slider.value;
-  
-  slider.oninput = function() {
-      output.innerHTML = this.value;
-  }
+    // set up slider for refresh value
+    output.innerHTML = slider.value;
 
-  // Hide loading text
-  document.getElementById("loading").style.display = "none";
+    slider.addEventListener('input', () => {
+        output.innerHTML = this.value;
+    });
+
+    // Hide loading text
+    document.getElementById('loading').style.display = 'none';
 
 }
