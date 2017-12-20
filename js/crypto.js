@@ -218,8 +218,8 @@ function loadData() {
     // set up slider for refresh value
     output.innerHTML = slider.value;
 
-    slider.addEventListener('input', () => {
-        output.innerHTML = this.value;
+    slider.addEventListener('input', (inputEvent) => {
+        output.innerHTML = event.target.value;
     });
 
     // Hide loading text
