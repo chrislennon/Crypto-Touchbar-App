@@ -1,7 +1,7 @@
 # Info
 This application is published to GitHub pages at the following location: https://chrislennon.github.io/Crypto-Touchbar-App/
 
-![USD Demo](https://imgur.com/gallery/KAbyZ)
+![](https://i.imgur.com/T9kSoMT.png)
 
 ## Instructions
 - Download and install [Better Touch Tool](https://www.boastr.net/).
