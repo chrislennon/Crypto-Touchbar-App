@@ -1,6 +1,8 @@
 # Info
 This application is published to GitHub pages at the following location: https://chrislennon.github.io/Crypto-Touchbar-App/
 
+![USD Demo](https://imgur.com/gallery/KAbyZ)
+
 ## Instructions
 - Download and install [Better Touch Tool](https://www.boastr.net/).
 - Install jq using Homebrew with command `brew install jq`. It needs to be installed into `/usr/local/bin/jq` .
