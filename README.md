@@ -5,7 +5,6 @@ This application is published to GitHub pages at the following location: https:/
 
 ## Instructions
 - Download and install [Better Touch Tool](https://www.boastr.net/).
-- Install jq using Homebrew with command `brew install jq`. It needs to be installed into `/usr/local/bin/jq` .
 - Use the [Web App](https://chrislennon.github.io/Crypto-Touchbar-App/) to create your toolbar.
 - Open the BetterTouchTool application.
 - In the bottom left corner go to "Manage Presets".
@@ -35,6 +34,7 @@ Other notes:
 - SVG (crypto icons) are pulled in via an [npm package](https://www.npmjs.com/package/cryptocoins-icons) and consumed from `node_modules/cryptocoins-icons/` directory.
 - Currency fonts are currently hardcoded png (base64) for output to BTT.
 - You can publish to your own fork's `gh-pages` branch by running `npm run deploy`
+- Requirement for `jq` was removed, now relying on OS installed `python` 
 
 ## Suggestions & Donations
 
