@@ -44,7 +44,7 @@ function getSelectedFiatOption() {
 function getSelectedFiatValueObject() {
     const selectedOp = getSelectedFiatOption();
 
-    return getSelectedValue(fiat, 'ticker', selectedOp)[0];
+    return getSelectedValue(new fiatJSON(), 'ticker', selectedOp)[0];
 }
 
 function getSelectedValue(array, key, value) {
@@ -100,21 +100,17 @@ function generateJSON(el) {
         refreshTimer = document.getElementById('refreshInterval').innerHTML,
 
         // Get value of group toggle box
-        groupBool = document.getElementById('groupcheckbox').checked;
+        groupBool = document.getElementById('groupcheckbox').checked,
 
-    let output = mainStruct,
+        closeGroup = new closeGroupElement();
+
+    let output = new mainStruct(),
         coinArray = [];
 
     selection.forEach((item, i) => {
-
-        // Duplicate the cryptoElement and assign it to the coin
-        let coin = Object.assign({}, cryptoElement);
-
-        // Duplicate the BTTTriggerConfig and assign it to a new Object.
-        coin.BTTTriggerConfig = Object.assign({}, cryptoElement.BTTTriggerConfig);
+        let coin = new cryptoElement();
 
         coin.BTTWidgetName = item;
-
         coin.BTTOrder = i;
 
         // Get and set element colour
@@ -140,10 +136,10 @@ function generateJSON(el) {
     });
 
     // add the closing group element
-    closeGroupElement.BTTOrder = selection.length;
+    closeGroup.BTTOrder = selection.length;
 
     if (groupBool) {
-        coinArray.push(closeGroupElement);
+        coinArray.push(closeGroup);
         output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
         output.BTTPresetContent[0].BTTTriggers[0].BTTIconData = selectedFiatObj.icon;
     }
@@ -204,7 +200,7 @@ function loadData() {
     });
     dropdown.addEventListener('change', updatePreviewFiat);
 
-    fiat.forEach((currency) => {
+    new fiatJSON().forEach((currency) => {
         let option = document.createElement('option');
 
         option.value = currency.ticker;
