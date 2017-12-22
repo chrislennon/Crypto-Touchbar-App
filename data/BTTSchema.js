@@ -54,7 +54,7 @@ const cryptoElement = function() {
             "BTTTouchBarFreeSpaceAfterButton": "5.000000",
             "BTTTouchBarButtonColor": "243.776725, 130.266312, 8.181293, 255.000000",
             "BTTTouchBarAlwaysShowButton": "0",
-            "BTTTouchBarAppleScriptString": "set value to do shell script \"curl 'https:\/\/min-api.cryptocompare.com\/data\/pricemultifull?fsyms=**CRYPTO**&tsyms=**FIAT**' | \/usr\/local\/bin\/jq -r '.RAW[][].PRICE, .RAW[][].OPEN24HOUR'\"\rset valueArray to words of value\rset trend to \"null\"\rset current to item 1 of valueArray\rset opening to item 2 of valueArray\rif current > opening then\r\tset trend to \"▲\"\relse\r\tset trend to \"▼\"\rend if\r\rreturn \"**FIATSYMB**\" & current & \" \" & trend",
+            "BTTTouchBarAppleScriptString": "set value to do shell script \"curl 'https:\/\/min-api.cryptocompare.com\/data\/pricemultifull?fsyms=**CRYPTO**&tsyms=**FIAT**' | python -c 'import json,sys;obj=json.load(sys.stdin);print obj[\\\"RAW\\\"][\\\"BTC\\\"][\\\"USD\\\"][\\\"PRICE\\\"];print obj[\\\"RAW\\\"][\\\"**CRYPTO**\\\"][\\\"**FIAT**\\\"][\\\"OPEN24HOUR\\\"];'\"\rset valueArray to words of value\rset trend to \"null\"\rset current to item 1 of valueArray\rset opening to item 2 of valueArray\rif current > opening then\r\tset trend to \"▲\"\relse\r\tset trend to \"▼\"\rend if\r\rreturn \"**FIATSYMB**\" & current & \" \" & trend",
             "BTTTouchBarAlternateBackgroundColor": "109.650002, 109.650002, 109.650002, 255.000000",
             "BTTTouchBarScriptUpdateInterval": 60
         }
