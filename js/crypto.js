@@ -176,7 +176,7 @@ function loadData() {
         text.setAttribute('for', coin.Name);
         text.innerHTML = coin.Name;
 
-        colour.className = "jscolor {onFineChange:'updatePreviewColour(this)',valueElement:null,value:'f38208'}";
+        colour.className = "jscolor {onFineChange:'updatePreviewColour(this)',valueElement:null,value:'"+ coin.Colour +"'}";
         colour.style.width = '20';
         colour.style.height = '20';
         colour.id = coin.Ticker + '-colour';
