@@ -146,11 +146,14 @@ function generateJSON(el) {
     else {
         output.BTTPresetContent[0].BTTTriggers = coinArray;
     }
+
+    output.BTTPresetName = output.BTTPresetName + "-" +selectedFiatObj.ticker;
+
     // trigger download of end result object
     const data = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(output));
 
     el.setAttribute('href', 'data:' + data);
-    el.setAttribute('download', 'data.json');
+    el.setAttribute('download', 'Crypto-Touchbar-App-' + selectedFiatObj.ticker + '.json');
 }
 
 function loadData() {
