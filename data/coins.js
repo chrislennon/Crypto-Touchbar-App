@@ -244,5 +244,11 @@ const coinJSON = [
 		"Ticker": "WAVES",
 		"Icon": "WAVES-alt",
 		"Colour": "5AAFD1"
+	},
+	{
+		"Name": "Request Network",
+		"Ticker": "REQ",
+		"Icon": "../../../img/TODO",
+		"Colour": "97F7D0"
 	}
 ]
