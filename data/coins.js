@@ -250,5 +250,11 @@ const coinJSON = [
 		"Ticker": "REQ",
 		"Icon": "../../../img/TODO",
 		"Colour": "97F7D0"
+	},
+	{
+		"Name": "Aion",
+		"Ticker": "AION",
+		"Icon": "../../../img/TODO",
+		"Colour": "1B4751"
 	}
 ]
