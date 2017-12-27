@@ -202,6 +202,13 @@ function generateJSON(el) {
 
     el.setAttribute('href', 'data:' + data);
     el.setAttribute('download', 'Crypto-Touchbar-App-' + selectedFiatObj.ticker + '.json');
+
+    // Purge all Canvas SVGs after Export
+    var myNode = document.getElementById("canvas-area");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+
 }
 
 function addCoin(coinData) {
