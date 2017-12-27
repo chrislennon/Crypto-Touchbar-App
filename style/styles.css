@@ -97,11 +97,13 @@ div.touchbar-element-right .siri .icon {
     background: url('../img/siri.png') no-repeat center;
 }
 
-img.touchbar-crypto-icon {
+svg.touchbar-crypto-icon {
     display: inline-block;
     margin-top: -3px;
     margin-right: 5px;
     vertical-align: middle;
+    height: 22px;
+    width: 22px
 }
 
 #coins {
