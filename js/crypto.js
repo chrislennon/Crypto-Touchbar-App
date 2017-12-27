@@ -172,7 +172,7 @@ function addCustomCoin(customCoin) {
 
     element.type = 'checkbox';
     element.value = customCoin.value;
-    element.addEventListener('change', addCrypto, false);
+    element.addEventListener('change', addCrypto);
     element.hasIcon = false;
 
     text.setAttribute('for', customCoin.label);
@@ -208,7 +208,6 @@ function addCustomCoin(customCoin) {
 }
 
 function removeCustomCoin(event) {
-    console.log(event);
     const targetValue = event.value,
         cryptoTouch = document.getElementById(targetValue + '-touch'),
         cryptoSelect = document.getElementById(targetValue + '-colour');
@@ -283,7 +282,7 @@ function loadData() {
 
         element.type = 'checkbox';
         element.value = coin.Ticker;
-        element.addEventListener('change', addCrypto, false);
+        element.addEventListener('change', addCrypto);
         element.hasIcon = true;
 
         text.setAttribute('for', coin.Name);
@@ -340,11 +339,12 @@ function loadData() {
 
     // events for on change of searchbox input
 
-    document.getElementById('dynamic-coinlist').addEventListener('addItem', function(event) {
+    var dynamicCoinList = document.getElementById('dynamic-coinlist');
+    dynamicCoinList.addEventListener('addItem', function(event) {
         addCustomCoin(event.detail);
-      }, false);
+    });
     
-    document.getElementById('dynamic-coinlist').addEventListener('removeItem', function(event) {
+    dynamicCoinList.addEventListener('removeItem', function(event) {
         removeCustomCoin(event.detail);
-      }, false);
+    });
 }
