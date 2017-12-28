@@ -22,6 +22,15 @@ function updatePreviewColour(elm) {
     }
 }
 
+function updatePreviewSVGColour(elm) {
+    const id = elm.styleElement.id,
+        cryptoColour = document.getElementById(id),
+        cryptoTouch = document.getElementById(id.replace('-svg-colour', '-touch-icon'));
+
+    if (cryptoTouch) {
+        cryptoTouch.style.fill = cryptoColour.style.backgroundColor;
+    }
+}
 function updatePreviewFiat() {
     const selectedFiatObj = getSelectedFiatValueObject(),
         cryptoElements = document.getElementsByClassName('crypto');
@@ -70,7 +79,7 @@ function addCrypto(event) {
         cryptoTouch.style.backgroundColor = targetColour.style.backgroundColor;
         touchArea.appendChild(cryptoTouch);
 
-        imgTouch.className = 'touchbar-crypto-icon';
+        imgTouch.className = 'svg touchbar-crypto-icon';
         imgTouch.setAttribute('id', target.dataset.ticker + '-touch-icon');
         imgTouch.setAttribute('src', target.dataset.icon);
         imgTouch.style.width = '22';
@@ -79,6 +88,39 @@ function addCrypto(event) {
 
         text.innerHTML = selectedFiatObj.symbol + ' 000.00';
         cryptoTouch.appendChild(text);
+
+        // replace img.svg with inline svgs
+        document.querySelectorAll('img.svg').forEach(function(element) {
+            var imgID = element.getAttribute('id');
+            var imgClass = element.getAttribute('class');
+            var imgURL = element.getAttribute('src');
+
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    var svg = xhr.responseXML.getElementsByTagName('svg')[0];
+
+                    if(imgID != null) {
+                         svg.setAttribute('id', imgID);
+                    }
+
+                    if(imgClass != null) {
+                         svg.setAttribute('class', imgClass + ' replaced-svg');
+                    }
+
+                    svg.removeAttribute('xmlns:a');
+
+                    if(!svg.hasAttribute('viewBox') && svg.hasAttribute('height') && svg.hasAttribute('width')) {
+                        svg.setAttribute('viewBox', '0 0 ' + svg.getAttribute('height') + ' ' + svg.getAttribute('width'));
+                    }
+                    element.parentElement.replaceChild(svg, element);
+                }
+            }
+            xhr.open('GET', imgURL, true);
+            xhr.send(null);
+        });
+
+
     } else {
         const cryptoTouch = document.getElementById(target.dataset.ticker + '-touch');
 
@@ -104,7 +146,17 @@ function generateJSON(el) {
         coinArray = [];
 
     selection.forEach((item, i) => {
-        let coin = new cryptoElement();
+        let coin = new cryptoElement(),
+        iconCanv = document.createElement('canvas'),
+        iconSVG = document.getElementById(item+'-touch-icon').outerHTML;
+
+        // add svgs to hidden canvas so they can be exported to base64 png for BTT
+        canvg(iconCanv, iconSVG, {
+            ignoreMouse: true,
+            ignoreAnimation: true
+        });
+        iconCanv.id = item;
+        document.getElementById('canvas-area').appendChild(iconCanv);
 
         coin.BTTWidgetName = item;
         coin.BTTOrder = i;
@@ -150,6 +202,13 @@ function generateJSON(el) {
 
     el.setAttribute('href', 'data:' + data);
     el.setAttribute('download', 'Crypto-Touchbar-App-' + selectedFiatObj.ticker + '.json');
+
+    // Purge all Canvas SVGs after Export
+    var myNode = document.getElementById("canvas-area");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+
 }
 
 function addCoin(coinData) {
@@ -158,7 +217,7 @@ function addCoin(coinData) {
     text = document.createElement('label'),
     colour = document.createElement('button'),
     icon = document.createElement('img'),
-    iconCanv = document.createElement('canvas');
+    colourSVG = document.createElement('button');
 
     element.type = 'checkbox';
 
@@ -176,6 +235,11 @@ function addCoin(coinData) {
     colour.style.height = '20';
     colour.id = coinData.Ticker + '-colour';
 
+    colourSVG.className = "jscolor {onFineChange:'updatePreviewSVGColour(this)',valueElement:null,value:'000000'}";
+    colourSVG.style.width = '20';
+    colourSVG.style.height = '20';
+    colourSVG.id = coinData.Ticker + '-svg-colour';
+
     icon.className = 'touchbar-crypto-icon';
     icon.setAttribute('src', coinData.Icon);
     icon.style.width = '22';
@@ -185,15 +249,8 @@ function addCoin(coinData) {
     cryptoSelector.appendChild(icon);
     cryptoSelector.appendChild(text);
     cryptoSelector.appendChild(colour);
+    cryptoSelector.appendChild(colourSVG);
     document.getElementById('coins').appendChild(cryptoSelector);
-
-    // add svgs to hidden canvas so they can be exported to base64 png for BTT
-    canvg(iconCanv, coinData.Icon, {
-        ignoreMouse: true,
-        ignoreAnimation: true
-    });
-    iconCanv.id = coinData.Ticker;
-    document.getElementById('canvas-area').appendChild(iconCanv);
 
     // Initialise jscolor on new element
     jscolor.installByClassName('jscolor');
