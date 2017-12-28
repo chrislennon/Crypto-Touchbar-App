@@ -21,6 +21,13 @@
     <script type="text/javascript" src="js/thirdparty/StackBlur.js"></script>
     <script type="text/javascript" src="js/thirdparty/canvg.js"></script>
 
+    <!-- Include base Choices CSS -->
+    <!-- <link rel="stylesheet" href="node_modules/choices.js/assets/styles/css/base.min.css"> -->
+    <!-- Include Choices CSS -->
+    <link rel="stylesheet" href="node_modules/choices.js/assets/styles/css/choices.min.css">
+    <!-- Include Choices JavaScript -->
+    <script src="node_modules/choices.js/assets/scripts/dist/choices.min.js"></script>
+
     <title>Crypto-Touchbar-App</title>
 </head>
 
@@ -59,18 +66,24 @@
 
             
             <form id="form">
-                FIAT Currency
+                <span>FIAT Currency</span>
                 <select id="fiat">
                 </select>
 
                 <br>
                 <br>
 
-                Crypto Currencies<br>
+                <span>Crypto Currencies</span><span style="font-size: 10px">(with icon)</span>
+                <br>
                 <div id="coins">
 
                 </div>
                 <div id="loading">Loading coins...</div>
+
+                <br>
+                <span>Add Other Coins</span><span style="font-size: 10px">(no icon)</span>
+                <select class="form-control" multiple name="currency-choices" id="dynamic-coinlist">
+                </select>
 
             </form>
 
