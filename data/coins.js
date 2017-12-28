@@ -126,36 +126,6 @@ const coinJSON = [
 		"Colour": "3D8EB7"
 	},
 	{
-		"Name": "Metaverse",
-		"Ticker": "ETP",
-		"Icon": "../../../img/TODO",
-		"Colour": "5ECCC7"
-	},
-	{
-		"Name": "Quoine Liquid",
-		"Ticker": "QASH",
-		"Icon": "../../../img/TODO",
-		"Colour": "59ABEA"
-	},
-	{
-		"Name": "Streamr DATAcoin",
-		"Ticker": "DATA",
-		"Icon": "../../../img/TODO",
-		"Colour": "D85F2C"
-	},
-	{
-		"Name": "Santiment",
-		"Ticker": "SAN",
-		"Icon": "../../../img/TODO",
-		"Colour": "F3F3F3"
-	},
-	{
-		"Name": "Eido",
-		"Ticker": "EDO",
-		"Icon": "../../../img/TODO",
-		"Colour": "4B9CD3"
-	},
-	{
 		"Name": "Tether",
 		"Ticker": "USDT",
 		"Icon": "USDT-alt",
@@ -174,64 +144,16 @@ const coinJSON = [
 		"Colour": "B4A146"
 	},
 	{
-		"Name": "AventCoin",
-		"Ticker": "AVT",
-		"Icon": "../../../img/TODO",
-		"Colour": "434975"
-	},
-	{
-		"Name": "DigitalNote",
-		"Ticker": "XDN",
-		"Icon": "../../../img/TODO",
-		"Colour": "54779B"
-	},
-	{
 		"Name": "ByteCoin",
 		"Ticker": "BCN",
 		"Icon": "BCN",
 		"Colour": "000000"
 	},
 	{
-		"Name": "Tronix",
-		"Ticker": "TRX",
-		"Icon": "../../../img/TODO",
-		"Colour": "34164A"
-	},
-	{
 		"Name": "Stratis",
 		"Ticker": "STRAT",
 		"Icon": "STRAT-alt",
 		"Colour": "4CA6BF"
-	},
-	{
-		"Name": "Viberate",
-		"Ticker": "VIB",
-		"Icon": "../../../img/TODO",
-		"Colour": "EB3D4A"
-	},
-	{
-		"Name": "Stox",
-		"Ticker": "STX",
-		"Icon": "../../../img/TODO",
-		"Colour": "5C3AC0"
-	},
-	{
-		"Name": "Tezos",
-		"Ticker": "XTZ",
-		"Icon": "../../../img/TODO",
-		"Colour": "B2DD46"
-	},
-	{
-		"Name": "Verge",
-		"Ticker": "XVG",
-		"Icon": "../../../img/TODO",
-		"Colour": "8ED1D2"
-	},
-	{
-		"Name": "SkullBuzz",
-		"Ticker": "SKB",
-		"Icon": "../../../img/TODO",
-		"Colour": "FBE75F"
 	},
 	{
 		"Name": "Vechain",
@@ -244,17 +166,5 @@ const coinJSON = [
 		"Ticker": "WAVES",
 		"Icon": "WAVES-alt",
 		"Colour": "5AAFD1"
-	},
-	{
-		"Name": "Request Network",
-		"Ticker": "REQ",
-		"Icon": "../../../img/TODO",
-		"Colour": "97F7D0"
-	},
-	{
-		"Name": "Aion",
-		"Ticker": "AION",
-		"Icon": "../../../img/TODO",
-		"Colour": "1B4751"
 	}
 ]

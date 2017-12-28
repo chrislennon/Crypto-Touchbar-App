@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/chrislennon/Crypto-Touchbar-App#readme",
   "dependencies": {
+    "choices.js": "^3.0.2",
     "cryptocoins-icons": "^2.7.0",
     "font-awesome-svg-png": "^1.2.2",
     "watch-http-server": "^0.7.6"
