@@ -29,6 +29,11 @@
     <!-- Include Choices JavaScript -->
     <script src="node_modules/choices.js/assets/scripts/dist/choices.min.js"></script>
 
+    <!-- Include flatpickr datetime selector -->
+
+    <link rel="stylesheet" href="node_modules/flatpickr/dist/flatpickr.min.css">
+    <script src="node_modules/flatpickr/dist/flatpickr.min.js"></script>
+
     <title>Crypto-Touchbar-App</title>
 </head>
 
@@ -91,14 +96,19 @@
             <br>
 
             <div id="useroptions">
-                
-                <input id="live-price" type="radio" name="api-type" data-apiType="live" checked>
-                <label for="live-price">Live Price</label>
-                <input id="historical-price" type="radio" name="api-type" data-apiType="historical" >
-                <label for="historical-price">Historical Price</label>
+                <div id="apiselection">
+                    <input id="live-price" type="radio" name="api-type" data-apiType="live" checked>
+                    <label for="live-price">Live Price</label>
+                    <input id="historical-price" type="radio" name="api-type" data-apiType="historical" >
+                    <label for="historical-price">Historical Price</label>
 
-                <br>
-                
+                    <input id="flatpickr" type="text" placeholder="Select Date.." readonly="readonly">
+                    <input id="flatpicker-output" type="text" readonly="readonly" style="display: none;">
+                    <input id="flatpicker-output-string" type="text" readonly="readonly" style="display: none;">
+                    <br>
+                    <br>
+                </div>
+
                 <div id="slidercontainer">
                     <input type="range" min="1" max="120" value="60" class="slider" id="refreshSlider">
                     <span>Refresh Interval:</span>

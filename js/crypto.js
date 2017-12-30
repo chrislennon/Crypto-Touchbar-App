@@ -141,7 +141,9 @@ function generateJSON(el) {
         groupBool = document.getElementById('groupcheckbox').checked,
 
         closeGroup = new closeGroupElement(),
-        apiSelector = document.querySelector('input[name="api-type"]:checked');
+        apiSelector = document.querySelector('input[name="api-type"]:checked'),
+        dateTimeSelector = document.getElementById('flatpicker-output'),
+        dateTimeSelectorString = document.getElementById('flatpicker-output-string');
 
     let output = new mainStruct(),
         coinArray = [];
@@ -181,9 +183,7 @@ function generateJSON(el) {
             apiRes = apiCall[apiSelector.dataset.apitype].response;
 
         if (apiSelector.dataset.apitype == 'historical'){
-            console.log('populating extra options');
-            // Hardcoded values for testing
-            extraOptions = 'limit=1&aggregate=1&toTs=1452680400';
+            extraOptions = 'limit=1&aggregate=1&toTs=' + dateTimeSelector.value;
         }
 
         apiReq = apiReq
@@ -208,10 +208,16 @@ function generateJSON(el) {
     // add the closing group element
     closeGroup.BTTOrder = selection.length;
 
-    if (groupBool) {
+    if (groupBool && apiSelector.dataset.apitype == 'live') {
         coinArray.push(closeGroup);
         output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
         output.BTTPresetContent[0].BTTTriggers[0].BTTIconData = selectedFiatObj.icon;
+    }
+    else if (groupBool && apiSelector.dataset.apitype == 'historical') {
+        coinArray.push(closeGroup);
+        output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
+        output.BTTPresetContent[0].BTTTriggers[0].BTTIconData = selectedFiatObj.icon;
+        output.BTTPresetContent[0].BTTTriggers[0].BTTTouchBarButtonName = dateTimeSelectorString.value;
     }
     else {
         output.BTTPresetContent[0].BTTTriggers = coinArray;
@@ -343,7 +349,6 @@ function loadData() {
 
 
     // Populate popular coins from coins.js
-
     coinJSON.forEach((coin) => {
         coin.Icon = 'node_modules/cryptocoins-icons/SVG/' + coin.Icon + '.svg';
         addCoin(coin);
@@ -352,7 +357,6 @@ function loadData() {
 
     new fiatJSON().forEach((currency) => {
         let option = document.createElement('option');
-
         option.value = currency.ticker;
         option.innerHTML = currency.name;
         dropdown.appendChild(option);
@@ -361,9 +365,24 @@ function loadData() {
     // enable colour picker on dynamically generated inputs
     jscolor.installByClassName('jscolor');
 
+    // enable flatpickr
+    let flatpickrOutput = document.getElementById('flatpicker-output'),
+    flatpickerOutputString = document.getElementById('flatpicker-output-string');
+    
+    flatpickr("#flatpickr", {
+        enableTime: true,
+        onChange: dates => {
+            flatpickrOutput.value = dates[0].getTime()/1000;
+            flatpickerOutputString.value = dates[0];
+        }
+    });
+    let minutePicker = document.getElementsByClassName('flatpickr-minute')[0];
+    minutePicker.setAttribute('step', '0');
+    minutePicker.setAttribute('max', '0');
+    minutePicker.setAttribute('min', '0');
+    
     // set up slider for refresh value
     output.innerHTML = slider.value;
-
     slider.addEventListener('input', (inputEvent) => {
         output.innerHTML = event.target.value;
     });
@@ -371,9 +390,7 @@ function loadData() {
     // Hide loading text
     document.getElementById('loading').style.display = 'none';
 
-
     // events for on change of searchbox input
-
     var dynamicCoinList = document.getElementById('dynamic-coinlist');
     dynamicCoinList.addEventListener('addItem', function(event) {
         let customCoin = {
@@ -388,4 +405,19 @@ function loadData() {
     dynamicCoinList.addEventListener('removeItem', function(event) {
         removeCustomCoin(event.detail);
     });
+
+    // event for historical price selection - force enable group
+    var groupSelect = document.getElementById('groupcheckbox');
+    var historicalRadio = document.getElementById('historical-price');
+    var liveRadio = document.getElementById('live-price');
+
+    historicalRadio.addEventListener('change', function(event) {
+        groupSelect.checked = true;
+        groupSelect.disabled = true;
+    });
+   
+    liveRadio.addEventListener('change', function(event) {
+        groupSelect.checked = false;
+        groupSelect.disabled = false;
+    });    
 }

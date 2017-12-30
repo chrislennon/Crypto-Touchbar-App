@@ -6,7 +6,7 @@ const APIPrice = function() {
         },
         "historical" : {
             "request" : "https:\/\/min-api.cryptocompare.com\/data\/histohour?fsym=**CRYPTO**&tsym=**FIAT**&**EXTRAOPTIONS**",
-            "response" : "import json,sys;obj=json.load(sys.stdin);print obj[\\\"Data\\\"][0][\\\"high\\\"];'\"\rset valueArray to words of value\rset current to item 1 of valueArray\rreturn \"**FIATSYMB**\" & current"
+            "response" : "import json,sys;obj=json.load(sys.stdin);print obj[\\\"Data\\\"][1][\\\"high\\\"];'\"\rset valueArray to words of value\rset current to item 1 of valueArray\rreturn \"**FIATSYMB**\" & current"
         }
     }
 };
