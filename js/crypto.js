@@ -140,7 +140,8 @@ function generateJSON(el) {
         // Get value of group toggle box
         groupBool = document.getElementById('groupcheckbox').checked,
 
-        closeGroup = new closeGroupElement();
+        closeGroup = new closeGroupElement(),
+        apiSelector = document.querySelector('input[name="api-type"]:checked');
 
     let output = new mainStruct(),
         coinArray = [];
@@ -173,10 +174,31 @@ function generateJSON(el) {
 
         coin.BTTIconData = base64PNG;
 
-        coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
+        let apiCall = new APIPrice(),
+            extraOptions = '';
+
+        let apiReq = apiCall[apiSelector.dataset.apitype].request,
+            apiRes = apiCall[apiSelector.dataset.apitype].response;
+
+        if (apiSelector.dataset.apitype == 'historical'){
+            console.log('populating extra options');
+            // Hardcoded values for testing
+            extraOptions = 'limit=1&aggregate=1&toTs=1452680400';
+        }
+
+        apiReq = apiReq
+            .replace(/\*\*CRYPTO\*\*/g, coin.BTTWidgetName)
+            .replace(/\*\*FIAT\*\*/g, selectedFiatObj.ticker)
+            .replace(/\*\*EXTRAOPTIONS\*\*/g, extraOptions);
+
+        apiRes = apiRes
             .replace(/\*\*CRYPTO\*\*/g, coin.BTTWidgetName)
             .replace(/\*\*FIAT\*\*/g, selectedFiatObj.ticker)
             .replace(/\*\*FIATSYMB\*\*/g, selectedFiatObj.symbol);
+        
+        coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
+            .replace(/\*\*REQUEST\*\*/g, apiReq)
+            .replace(/\*\*RESPONSE\*\*/g, apiRes);
 
         coin.BTTTriggerConfig.BTTTouchBarScriptUpdateInterval = parseInt(refreshTimer);
 

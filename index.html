@@ -15,6 +15,7 @@
     <script src="data/fiat.js"></script>
     <script src="data/BTTSchema.js"></script>
     <script src="js/crypto.js"></script>
+    <script src="data/apiSchema.js"></script>
 
     <script type="text/javascript" src="js/thirdparty/jscolor.min.js"></script>
     <script type="text/javascript" src="js/thirdparty/rgbcolor.js"></script>
@@ -89,18 +90,29 @@
 
             <br>
 
-            <div id="slidercontainer">
-                <input type="range" min="1" max="120" value="60" class="slider" id="refreshSlider">
-                <span>Refresh Interval:</span>
-                <span id="refreshInterval"></span>
-                <span> Seconds</span>
-            </div>
+            <div id="useroptions">
+                
+                <input id="live-price" type="radio" name="api-type" data-apiType="live" checked>
+                <label for="live-price">Live Price</label>
+                <input id="historical-price" type="radio" name="api-type" data-apiType="historical" >
+                <label for="historical-price">Historical Price</label>
 
-            <br>
-            
-            <div id="grouptoggle">
-                <input id="groupcheckbox" type="checkbox">
-                <label for="groupcheckbox">Group crypto elements under one button</label>
+                <br>
+                
+                <div id="slidercontainer">
+                    <input type="range" min="1" max="120" value="60" class="slider" id="refreshSlider">
+                    <span>Refresh Interval:</span>
+                    <span id="refreshInterval"></span>
+                    <span> Seconds</span>
+                </div>
+    
+                <br>
+                
+                <div id="grouptoggle">
+                    <input id="groupcheckbox" type="checkbox">
+                    <label for="groupcheckbox">Group crypto elements under one button</label>
+                </div>
+
             </div>
 
             <br>
