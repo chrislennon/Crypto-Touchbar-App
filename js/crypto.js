@@ -152,6 +152,23 @@ function generateJSON(el) {
         throw new Error("No coins selected!");
     }
 
+     // build formatting options for output
+     let outputFormat = '';
+
+     var commaFormat = document.getElementById('comma-separate');
+     var decimalFormat = document.querySelector('input[name="decimal-count"]:checked');
+
+     if (commaFormat.checked){
+         outputFormat += ",";
+     }
+     if (decimalFormat.dataset.count != '∞') {
+        outputFormat += "." + decimalFormat.dataset.count + "f";
+     }
+
+     if (outputFormat != '') {
+        outputFormat = ":0" + outputFormat;
+     }
+
     selection.forEach((item, i) => {
         let coin = new cryptoElement(),
         iconCanv = document.createElement('canvas'),
@@ -194,6 +211,7 @@ function generateJSON(el) {
             extraOptions = 'limit=1&aggregate=1&toTs=' + dateTimeSelector.value;
         }
 
+
         apiReq = apiReq
             .replace(/\*\*CRYPTO\*\*/g, coin.BTTWidgetName)
             .replace(/\*\*FIAT\*\*/g, selectedFiatObj.ticker)
@@ -202,7 +220,8 @@ function generateJSON(el) {
         apiRes = apiRes
             .replace(/\*\*CRYPTO\*\*/g, coin.BTTWidgetName)
             .replace(/\*\*FIAT\*\*/g, selectedFiatObj.ticker)
-            .replace(/\*\*FIATSYMB\*\*/g, selectedFiatObj.symbol);
+            .replace(/\*\*FIATSYMB\*\*/g, selectedFiatObj.symbol)
+            .replace(/\*\*FORMAT\*\*/g, outputFormat);
         
         coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
             .replace(/\*\*REQUEST\*\*/g, apiReq)
