@@ -26,6 +26,7 @@
   "dependencies": {
     "choices.js": "^3.0.2",
     "cryptocoins-icons": "^2.7.0",
+    "flatpickr": "^4.1.4",
     "font-awesome-svg-png": "^1.2.2",
     "watch-http-server": "^0.7.6"
   },

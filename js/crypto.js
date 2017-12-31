@@ -139,10 +139,18 @@ function generateJSON(el) {
         // Get value of group toggle box
         groupBool = document.getElementById('groupcheckbox').checked,
 
-        closeGroup = new closeGroupElement();
+        closeGroup = new closeGroupElement(),
+        apiSelector = document.querySelector('input[name="api-type"]:checked'),
+        dateTimeSelector = document.getElementById('flatpicker-output'),
+        dateTimeSelectorString = document.getElementById('flatpicker-output-string');
 
     let output = new mainStruct(),
         coinArray = [];
+
+    if (selection.length == 0){
+        alert('No coins selected');
+        throw new Error("No coins selected!");
+    }
 
     selection.forEach((item, i) => {
         let coin = new cryptoElement(),
@@ -172,10 +180,33 @@ function generateJSON(el) {
 
         coin.BTTIconData = base64PNG;
 
-        coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
+        let apiCall = new APIPrice(),
+            extraOptions = '';
+
+        let apiReq = apiCall[apiSelector.dataset.apitype].request,
+            apiRes = apiCall[apiSelector.dataset.apitype].response;
+
+        if (apiSelector.dataset.apitype == 'historical'){
+            if (!dateTimeSelector.value) {
+                alert('No date/time selected!');
+                throw new Error("No date/time selected!");
+            }
+            extraOptions = 'limit=1&aggregate=1&toTs=' + dateTimeSelector.value;
+        }
+
+        apiReq = apiReq
+            .replace(/\*\*CRYPTO\*\*/g, coin.BTTWidgetName)
+            .replace(/\*\*FIAT\*\*/g, selectedFiatObj.ticker)
+            .replace(/\*\*EXTRAOPTIONS\*\*/g, extraOptions);
+
+        apiRes = apiRes
             .replace(/\*\*CRYPTO\*\*/g, coin.BTTWidgetName)
             .replace(/\*\*FIAT\*\*/g, selectedFiatObj.ticker)
             .replace(/\*\*FIATSYMB\*\*/g, selectedFiatObj.symbol);
+        
+        coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
+            .replace(/\*\*REQUEST\*\*/g, apiReq)
+            .replace(/\*\*RESPONSE\*\*/g, apiRes);
 
         coin.BTTTriggerConfig.BTTTouchBarScriptUpdateInterval = parseInt(refreshTimer);
 
@@ -185,10 +216,16 @@ function generateJSON(el) {
     // add the closing group element
     closeGroup.BTTOrder = selection.length;
 
-    if (groupBool) {
+    if (groupBool && apiSelector.dataset.apitype == 'live') {
         coinArray.push(closeGroup);
         output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
         output.BTTPresetContent[0].BTTTriggers[0].BTTIconData = selectedFiatObj.icon;
+    }
+    else if (groupBool && apiSelector.dataset.apitype == 'historical') {
+        coinArray.push(closeGroup);
+        output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;
+        output.BTTPresetContent[0].BTTTriggers[0].BTTIconData = selectedFiatObj.icon;
+        output.BTTPresetContent[0].BTTTriggers[0].BTTTouchBarButtonName = dateTimeSelectorString.value;
     }
     else {
         output.BTTPresetContent[0].BTTTriggers = coinArray;
@@ -320,7 +357,6 @@ function loadData() {
 
 
     // Populate popular coins from coins.js
-
     coinJSON.forEach((coin) => {
         coin.Icon = 'node_modules/cryptocoins-icons/SVG/' + coin.Icon + '.svg';
         addCoin(coin);
@@ -329,7 +365,6 @@ function loadData() {
 
     new fiatJSON().forEach((currency) => {
         let option = document.createElement('option');
-
         option.value = currency.ticker;
         option.innerHTML = currency.name;
         dropdown.appendChild(option);
@@ -338,9 +373,25 @@ function loadData() {
     // enable colour picker on dynamically generated inputs
     jscolor.installByClassName('jscolor');
 
+    // enable flatpickr
+    let flatpickrOutput = document.getElementById('flatpicker-output'),
+    flatpickerOutputString = document.getElementById('flatpicker-output-string');
+    
+    let datetimepicker = flatpickr("#flatpickr", {
+        enableTime: true,
+        dateFormat: 'm/d/Y at h:i K',
+        onChange: dates => {
+            flatpickrOutput.value = dates[0].getTime()/1000;
+            flatpickerOutputString.value = datetimepicker.formatDate(dates[0], 'm/d/Y at h:i K');
+        }
+    });
+    let minutePicker = document.getElementsByClassName('flatpickr-minute')[0];
+    minutePicker.setAttribute('step', '0');
+    minutePicker.setAttribute('max', '0');
+    minutePicker.setAttribute('min', '0');
+    
     // set up slider for refresh value
     output.innerHTML = slider.value;
-
     slider.addEventListener('input', (inputEvent) => {
         output.innerHTML = event.target.value;
     });
@@ -348,9 +399,7 @@ function loadData() {
     // Hide loading text
     document.getElementById('loading').style.display = 'none';
 
-
     // events for on change of searchbox input
-
     var dynamicCoinList = document.getElementById('dynamic-coinlist');
     dynamicCoinList.addEventListener('addItem', function(event) {
         let customCoin = {
@@ -365,4 +414,22 @@ function loadData() {
     dynamicCoinList.addEventListener('removeItem', function(event) {
         removeCustomCoin(event.detail);
     });
+
+    // event for historical price selection - force enable group
+    var groupSelect = document.getElementById('groupcheckbox');
+    var datePicker = document.getElementById('flatpickr');
+    var historicalRadio = document.getElementById('historical-price');
+    var liveRadio = document.getElementById('live-price');
+
+    historicalRadio.addEventListener('change', function(event) {
+        groupSelect.checked = true;
+        groupSelect.disabled = true;
+        datePicker.style.display = 'block';
+    });
+   
+    liveRadio.addEventListener('change', function(event) {
+        groupSelect.checked = false;
+        groupSelect.disabled = false;
+        datePicker.style.display = 'none';
+    });    
 }
