@@ -1,15 +1,13 @@
-function getSelectedCheckbox(form) {
-    const inputFields = form.getElementsByTagName('input');
+function getSelectedFromPreview() {
+    const cryptoPreview = document.getElementsByClassName('touchbar-element crypto');
 
-    let selectedCheckboxes = [];
+    let selectedCryptos = [];
 
     // Since cryptoElements returns a HTMLCollection, do this hack to get the Array elements.
-    [].forEach.call(inputFields, (inputField) => {
-        if (inputField.type === 'checkbox' && inputField.checked === true) {
-            selectedCheckboxes.push(inputField.dataset.ticker);
-        }
+    [].forEach.call(cryptoPreview, (cryptoItem) => {
+        selectedCryptos.push(cryptoItem.dataset.ticker);
     });
-    return selectedCheckboxes;
+    return selectedCryptos;
 }
 
 function updatePreviewColour(elm) {
@@ -75,6 +73,7 @@ function addCrypto(event) {
 
         cryptoTouch.setAttribute('id', target.dataset.ticker + '-touch');
         cryptoTouch.className = 'touchbar-element crypto';
+        cryptoTouch.dataset.ticker = target.dataset.ticker;
 
         cryptoTouch.style.backgroundColor = targetColour.style.backgroundColor;
         touchArea.appendChild(cryptoTouch);
@@ -132,7 +131,7 @@ function generateJSON(el) {
     const selectedFiatObj = getSelectedFiatValueObject(),
 
         // Get selected cryptos
-        selection = getSelectedCheckbox(document.getElementById('form')),
+        selection = getSelectedFromPreview(),
 
         // Get script refresh interval
         refreshTimer = document.getElementById('refreshInterval').innerHTML,
