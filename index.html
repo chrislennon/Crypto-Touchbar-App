@@ -95,14 +95,17 @@
 
             <br>
 
-            <div id="useroptions">
+            <form id="useroptions">
+                <h3>Additional Options</h3>
+                <br>
                 <div id="apiselection">
                     <input id="live-price" type="radio" name="api-type" data-apiType="live" checked>
                     <label for="live-price">Live Price</label>
+                    <br>
                     <input id="historical-price" type="radio" name="api-type" data-apiType="historical" >
                     <label for="historical-price">Historical Price</label>
 
-                    <input id="flatpickr" type="text" placeholder="Select Date.." readonly="readonly">
+                    <input id="flatpickr" type="text" placeholder="Select Date/Time.." readonly="readonly" style="width: 200px; display: none;">
                     <input id="flatpicker-output" type="text" readonly="readonly" style="display: none;">
                     <input id="flatpicker-output-string" type="text" readonly="readonly" style="display: none;">
                     <br>
@@ -123,7 +126,7 @@
                     <label for="groupcheckbox">Group crypto elements under one button</label>
                 </div>
 
-            </div>
+            </form>
 
             <br>
             <a id="exportJSON" onclick="generateJSON(this);" class="button"><i class="icon-download"></i> export BTT json</a><br>

@@ -148,6 +148,11 @@ function generateJSON(el) {
     let output = new mainStruct(),
         coinArray = [];
 
+    if (selection.length == 0){
+        alert('No coins selected');
+        throw new Error("No coins selected!");
+    }
+
     selection.forEach((item, i) => {
         let coin = new cryptoElement(),
         iconCanv = document.createElement('canvas'),
@@ -183,6 +188,10 @@ function generateJSON(el) {
             apiRes = apiCall[apiSelector.dataset.apitype].response;
 
         if (apiSelector.dataset.apitype == 'historical'){
+            if (!dateTimeSelector.value) {
+                alert('No date/time selected!');
+                throw new Error("No date/time selected!");
+            }
             extraOptions = 'limit=1&aggregate=1&toTs=' + dateTimeSelector.value;
         }
 
@@ -369,11 +378,12 @@ function loadData() {
     let flatpickrOutput = document.getElementById('flatpicker-output'),
     flatpickerOutputString = document.getElementById('flatpicker-output-string');
     
-    flatpickr("#flatpickr", {
+    let datetimepicker = flatpickr("#flatpickr", {
         enableTime: true,
+        dateFormat: 'm/d/Y at h:i K',
         onChange: dates => {
             flatpickrOutput.value = dates[0].getTime()/1000;
-            flatpickerOutputString.value = dates[0];
+            flatpickerOutputString.value = datetimepicker.formatDate(dates[0], 'm/d/Y at h:i K');
         }
     });
     let minutePicker = document.getElementsByClassName('flatpickr-minute')[0];
@@ -408,16 +418,19 @@ function loadData() {
 
     // event for historical price selection - force enable group
     var groupSelect = document.getElementById('groupcheckbox');
+    var datePicker = document.getElementById('flatpickr');
     var historicalRadio = document.getElementById('historical-price');
     var liveRadio = document.getElementById('live-price');
 
     historicalRadio.addEventListener('change', function(event) {
         groupSelect.checked = true;
         groupSelect.disabled = true;
+        datePicker.style.display = 'block';
     });
    
     liveRadio.addEventListener('change', function(event) {
         groupSelect.checked = false;
         groupSelect.disabled = false;
+        datePicker.style.display = 'none';
     });    
 }
