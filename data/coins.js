@@ -91,7 +91,7 @@ const coinJSON = [
 	},
 	{
 		"Name": "Bitconnect",
-		"Ticker": "BCC",
+		"Ticker": "BCCOIN",
 		"Icon": "../../../img/temp/bcc",
 		"Colour": "EC8C37"
 	},
