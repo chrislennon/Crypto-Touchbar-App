@@ -141,6 +141,7 @@ function generateJSON(el) {
 
         closeGroup = new closeGroupElement(),
         apiSelector = document.querySelector('input[name="api-type"]:checked'),
+        formatSelector = document.querySelector('input[name="variance-type"]:checked'),
         dateTimeSelector = document.getElementById('flatpicker-output'),
         dateTimeSelectorString = document.getElementById('flatpicker-output-string');
 
@@ -201,7 +202,8 @@ function generateJSON(el) {
             extraOptions = '';
 
         let apiReq = apiCall[apiSelector.dataset.apitype].request,
-            apiRes = apiCall[apiSelector.dataset.apitype].response;
+            apiRes = apiCall[apiSelector.dataset.apitype].response,
+            apiOut = apiCall[apiSelector.dataset.apitype][formatSelector.dataset.variance + '-output'];
 
         if (apiSelector.dataset.apitype == 'historical'){
             if (!dateTimeSelector.value) {
@@ -220,12 +222,23 @@ function generateJSON(el) {
         apiRes = apiRes
             .replace(/\*\*CRYPTO\*\*/g, coin.BTTWidgetName)
             .replace(/\*\*FIAT\*\*/g, selectedFiatObj.ticker)
-            .replace(/\*\*FIATSYMB\*\*/g, selectedFiatObj.symbol)
             .replace(/\*\*FORMAT\*\*/g, outputFormat);
         
+        apiOut = apiOut
+            .replace(/\*\*FIATSYMB\*\*/g, selectedFiatObj.symbol);
+
+
+        if (formatSelector.dataset.variance == 'user-percentage'){
+            var userPercent = document.getElementById('user-percentage').value;
+            userPercent = userPercent / 100;
+            apiOut = apiOut.replace(/\*\*PERCENT\*\*/g, userPercent);
+        }
+
+
         coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
             .replace(/\*\*REQUEST\*\*/g, apiReq)
-            .replace(/\*\*RESPONSE\*\*/g, apiRes);
+            .replace(/\*\*RESPONSE\*\*/g, apiRes)
+            .replace(/\*\*OUTPUT\*\*/g, apiOut);
 
         coin.BTTTriggerConfig.BTTTouchBarScriptUpdateInterval = parseInt(refreshTimer);
 
@@ -444,11 +457,24 @@ function loadData() {
         groupSelect.checked = true;
         groupSelect.disabled = true;
         datePicker.style.display = 'block';
+        
+        var ele = document.getElementsByName("variance-type");
+        for(var i=0;i<ele.length;i++) {
+           ele[i].checked = false;
+           ele[i].disabled = true;
+        }
+        document.getElementById('no-trend').checked = true;
+
     });
    
     liveRadio.addEventListener('change', function(event) {
         groupSelect.checked = false;
         groupSelect.disabled = false;
         datePicker.style.display = 'none';
+
+        var ele = document.getElementsByName("variance-type");
+        for(var i=0;i<ele.length;i++) {
+           ele[i].disabled = false;
+        }
     });    
 }
