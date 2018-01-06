@@ -135,6 +135,32 @@
                     <br>
                 </div>
 
+                <div id="varianceoptions">
+                        <input id="no-trend" type="radio" name="variance-type" data-variance="no" checked>
+                        <label for="no-trend">No Trend</label>
+                        <br>
+                        <input id="simple-trend" type="radio" name="variance-type" data-variance="simple">
+                        <label for="simple-trend">Simple indicator based on opening ( ▲/▼ )</label>
+                        <br>
+                        <input id="absolute-trend" type="radio" name="variance-type" data-variance="absolute">
+                        <label for="absolute-trend">Absolute $ Range (Low: $000 / High: $000)</label>
+                        <br>
+                        <input id="relative-trend" type="radio" name="variance-type" data-variance="relative">
+                        <label for="relative-trend">Relative $ Range (-$000 / +$000)</label>
+                        <br>
+                        <input id="current-percentage-trend" type="radio" name="variance-type" data-variance="current-percentage">
+                        <label for="current-percentage-trend">Change % based on opening (+10%)</label>
+                        <br>
+                        <input id="range-percentage-trend" type="radio" name="variance-type" data-variance="range-percentage">
+                        <label for="range-percentage-trend">Relative % Range (-8% / +10%)</label>
+                        <br>
+                        <input id="user-percentage-trend" type="radio" name="variance-type" data-variance="user-percentage">
+                        <label for="user-percentage-trend">Relative $ Range based on user percentage (-$000 / +$000)</label>
+                        <input id="user-percentage" type="text" value="0">
+                        <br>
+                        <br>
+                    </div>
+
                 <div id="slidercontainer">
                     <input type="range" min="1" max="120" value="60" class="slider" id="refreshSlider">
                     <span>Refresh Interval:</span>

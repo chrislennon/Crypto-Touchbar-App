@@ -3,6 +3,9 @@ This application is published to GitHub pages at the following location: https:/
 
 ![](https://i.imgur.com/T9kSoMT.png)
 
+## Updates & Fixes
+For a listing of new features & fixes please check out the [releases](https://github.com/chrislennon/Crypto-Touchbar-App/releases) page. All features & bugs should also have a record in the issues page.
+
 ## Instructions
 - Download and install [Better Touch Tool](https://www.boastr.net/).
 - Use the [Web App](https://chrislennon.github.io/Crypto-Touchbar-App/) to create your toolbar.
