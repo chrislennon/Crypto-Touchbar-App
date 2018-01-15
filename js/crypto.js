@@ -201,8 +201,7 @@ function generateJSON(el) {
         let apiCall = new APIPrice(),
             extraOptions = '';
 
-        let apiReq = apiCall[apiSelector.dataset.apitype].request,
-            apiRes = apiCall[apiSelector.dataset.apitype].response,
+        let apiRes = apiCall[apiSelector.dataset.apitype].response,
             apiOut = apiCall[apiSelector.dataset.apitype][formatSelector.dataset.variance + '-output'];
 
         if (apiSelector.dataset.apitype == 'historical'){
@@ -214,15 +213,11 @@ function generateJSON(el) {
         }
 
 
-        apiReq = apiReq
-            .replace(/\*\*CRYPTO\*\*/g, coin.BTTWidgetName)
-            .replace(/\*\*FIAT\*\*/g, selectedFiatObj.ticker)
-            .replace(/\*\*EXTRAOPTIONS\*\*/g, extraOptions);
-
         apiRes = apiRes
             .replace(/\*\*CRYPTO\*\*/g, coin.BTTWidgetName)
             .replace(/\*\*FIAT\*\*/g, selectedFiatObj.ticker)
-            .replace(/\*\*FORMAT\*\*/g, outputFormat);
+            .replace(/\*\*FORMAT\*\*/g, outputFormat)
+            .replace(/\*\*EXTRAOPTIONS\*\*/g, extraOptions);
         
         apiOut = apiOut
             .replace(/\*\*FIATSYMB\*\*/g, selectedFiatObj.symbol);
@@ -236,7 +231,6 @@ function generateJSON(el) {
 
 
         coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
-            .replace(/\*\*REQUEST\*\*/g, apiReq)
             .replace(/\*\*RESPONSE\*\*/g, apiRes)
             .replace(/\*\*OUTPUT\*\*/g, apiOut);
 
