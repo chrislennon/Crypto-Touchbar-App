@@ -127,7 +127,7 @@ function addCrypto(event) {
     }
 }
 
-function generateJSON(el) {
+function generateJSON() {
     const selectedFiatObj = getSelectedFiatValueObject(),
 
         // Get selected cryptos
@@ -259,18 +259,35 @@ function generateJSON(el) {
 
     output.BTTPresetName = output.BTTPresetName + "-" +selectedFiatObj.ticker;
 
-    // trigger download of end result object
-    const data = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(output));
-
-    el.setAttribute('href', 'data:' + data);
-    el.setAttribute('download', 'Crypto-Touchbar-App-' + selectedFiatObj.ticker + '.json');
-
     // Purge all Canvas SVGs after Export
     var myNode = document.getElementById("canvas-area");
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
 
+    return output;
+}
+
+function outputJson(el){
+
+    var output = generateJSON(),
+        selectedFiatObj = getSelectedFiatValueObject(); 
+    // trigger download of end result object
+    const data = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(output));
+
+    el.setAttribute('href', 'data:' + data);
+    el.setAttribute('download', 'Crypto-Touchbar-App-' + selectedFiatObj.ticker + '.json');
+}
+
+function outputDirect(el){
+
+    var output = generateJSON(),
+        selectedFiatObj = getSelectedFiatValueObject(); 
+    // trigger import of end result object
+    const data = btoa(unescape(encodeURIComponent(JSON.stringify(output))));
+    console.log(data);
+
+    el.setAttribute('href', 'btt://jsonimport/' + data);
 }
 
 function addCoin(coinData) {
