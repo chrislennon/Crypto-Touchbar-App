@@ -7,7 +7,7 @@ This application is published to GitHub pages at the following location: https:/
 For a listing of new features & fixes please check out the [releases](https://github.com/chrislennon/Crypto-Touchbar-App/releases) page. All features & bugs should also have a record in the issues page.
 
 ## Instructions
-- Download and install [Better Touch Tool](https://www.boastr.net/).
+- Download and install [Better Touch Tool](https://www.boastr.net/). (requires version > v2.331)
 - Use the [Web App](https://chrislennon.github.io/Crypto-Touchbar-App/) to create your toolbar.
 - Open the BetterTouchTool application.
 - In the bottom left corner go to "Manage Presets".
