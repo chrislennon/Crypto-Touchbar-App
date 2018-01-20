@@ -285,7 +285,6 @@ function outputDirect(el){
         selectedFiatObj = getSelectedFiatValueObject(); 
     // trigger import of end result object
     const data = btoa(unescape(encodeURIComponent(JSON.stringify(output))));
-    console.log(data);
 
     el.setAttribute('href', 'btt://jsonimport/' + data);
 }
