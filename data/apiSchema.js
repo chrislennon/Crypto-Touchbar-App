@@ -1,20 +1,18 @@
 const APIPrice = function() {
     return {
         "live" : {
-            "request" : "https:\/\/min-api.cryptocompare.com\/data\/pricemultifull?fsyms=**CRYPTO**&tsyms=**FIAT**",
-            "response" : "'import json,sys;obj=json.load(sys.stdin);print \\\"{**FORMAT**}\\\".format(obj[\\\"RAW\\\"][\\\"**CRYPTO**\\\"][\\\"**FIAT**\\\"][\\\"PRICE\\\"]);print obj[\\\"RAW\\\"][\\\"**CRYPTO**\\\"][\\\"**FIAT**\\\"][\\\"OPEN24HOUR\\\"];print \\\"{**FORMAT**}\\\".format(obj[\\\"RAW\\\"][\\\"**CRYPTO**\\\"][\\\"**FIAT**\\\"][\\\"HIGHDAY\\\"]);print \\\"{**FORMAT**}\\\".format(obj[\\\"RAW\\\"][\\\"**CRYPTO**\\\"][\\\"**FIAT**\\\"][\\\"LOWDAY\\\"]);print obj[\\\"RAW\\\"][\\\"**CRYPTO**\\\"][\\\"**FIAT**\\\"][\\\"PRICE\\\"];print obj[\\\"RAW\\\"][\\\"**CRYPTO**\\\"][\\\"**FIAT**\\\"][\\\"HIGHDAY\\\"];print obj[\\\"RAW\\\"][\\\"**CRYPTO**\\\"][\\\"**FIAT**\\\"][\\\"LOWDAY\\\"];'\"\rset valueArray to words of value\rset trend to \"null\"\rset current to item 1 of valueArray\rset opening to (item 2 of valueArray as integer)\rset high to item 3 of valueArray\rset low to item 4 of valueArray\rset raw_current to (item 5 of valueArray as integer)\rset raw_high to (item 6 of valueArray as integer)\rset raw_low to (item 7 of valueArray as integer)",
-            "no-output" : "\rreturn \"**FIATSYMB**\" & current",
-            "simple-output" : "\rif raw_current > opening then\r\tset trend to \"▲\"\relse\r\tset trend to \"▼\"\rend if\r\rreturn \"**FIATSYMB**\" & current & \" \" & trend",
-            "absolute-output" : "\rreturn \"**FIATSYMB**\" & current & \" (L: **FIATSYMB**\" & low & \" H: **FIATSYMB**\" & high & \")\"",
-            "relative-output" : "\rreturn \"**FIATSYMB**\" & current & \" (L: -**FIATSYMB**\" & (raw_current - raw_low) & \" H: +**FIATSYMB**\" & (raw_high - raw_current) & \")\"",
-            "current-percentage-output" : "\rreturn \"**FIATSYMB**\" & current & \" (\" & (round(((raw_current - opening) / raw_current)*100)) & \"%)\"",
-            "range-percentage-output" : "\rreturn \"**FIATSYMB**\" & current & \" (L: -\" & (round(((raw_current - raw_low) / raw_current)*100)) & \"% H: +\" & (round(((raw_high - raw_current) / raw_current)*100)) & \"%)\"",
-            "user-percentage-output" : "\rreturn \"**FIATSYMB**\" & current & \" (L: **FIATSYMB**\" & ((raw_current - (raw_current* **PERCENT**)) as integer) & \" H: **FIATSYMB**\" & ((raw_current + (raw_current* **PERCENT**)) as integer) & \")\""
+            "response" : "import urllib2,json,sys\n\ndata = urllib2.urlopen(\"https:\/\/min-api.cryptocompare.com\/data\/pricemultifull?fsyms=**CRYPTO**&tsyms=**FIAT**\")\nobj=json.load(data)\ncurrent = \"{**FORMAT**}\".format(obj[\"RAW\"][\"**CRYPTO**\"][\"**FIAT**\"][\"PRICE\"])\nopening = obj[\"RAW\"][\"**CRYPTO**\"][\"**FIAT**\"][\"OPEN24HOUR\"]\nhigh = \"{**FORMAT**}\".format(obj[\"RAW\"][\"**CRYPTO**\"][\"**FIAT**\"][\"HIGHDAY\"])\nlow = \"{**FORMAT**}\".format(obj[\"RAW\"][\"**CRYPTO**\"][\"**FIAT**\"][\"LOWDAY\"])\nraw_current = obj[\"RAW\"][\"**CRYPTO**\"][\"**FIAT**\"][\"PRICE\"]\nraw_high = obj[\"RAW\"][\"**CRYPTO**\"][\"**FIAT**\"][\"HIGHDAY\"]\nraw_low = obj[\"RAW\"][\"**CRYPTO**\"][\"**FIAT**\"][\"LOWDAY\"]\n\n",
+            "no-output" : "print(\"**FIATSYMB**\" + current)",
+            "simple-output" : "if (raw_current > opening):\n\ttrend = \"▲\"\nelse:\n\ttrend = \"▼\"\n\nprint(\"**FIATSYMB**\" + current + \" \" + trend)",
+            "absolute-output" : "print (\"**FIATSYMB**\" + current + \" (L: **FIATSYMB**\" + low + \" H: **FIATSYMB**\" + high + \")\")",
+            "relative-output" : "print(\"**FIATSYMB**\" + current + \" (L: -**FIATSYMB**\" + str(raw_current - raw_low) + \" H: +**FIATSYMB**\" + str(raw_high - raw_current) + \")\")",
+            "current-percentage-output" : "print (\"**FIATSYMB**\" + current + \" (\" + str(round (((raw_current - opening) \/ raw_current) * 100)) + \"%)\")",
+            "range-percentage-output" : "print(\"**FIATSYMB**\" + current + \" (L: -\" + str(round (((raw_current - raw_low) \/ raw_current) * 100)) + \"% H: +\" + str(round (((raw_high - raw_current) \/ raw_current) * 100)) + \"%)\")",
+            "user-percentage-output" : "print(\"**FIATSYMB**\" + current + \" (L: **FIATSYMB**\" + str(raw_current - (raw_current * **PERCENT**)) + \" H: **FIATSYMB**\" + str(raw_current + (raw_current * **PERCENT**)) + \")\")"
         },
         "historical" : {
-            "request" : "https:\/\/min-api.cryptocompare.com\/data\/histohour?fsym=**CRYPTO**&tsym=**FIAT**&**EXTRAOPTIONS**",
-            "response" : "'import json,sys;obj=json.load(sys.stdin);print \\\"{**FORMAT**}\\\".format(obj[\\\"Data\\\"][1][\\\"high\\\"]);print \\\"{**FORMAT**}\\\".format(obj[\\\"Data\\\"][1][\\\"low\\\"]);print obj[\\\"Data\\\"][1][\\\"high\\\"];print obj[\\\"Data\\\"][1][\\\"low\\\"];'\"\rset valueArray to words of value\rset high to item 1 of valueArray\rset low to item 2 of valueArray\rset raw_high to item 3 of valueArray\rset raw_low to item 4 of valueArray",
-            "no-output" : "\rreturn \"**FIATSYMB**\" & high"
+            "response" : "#!\/usr\/bin\/env python\n# -*- coding: utf-8 -*-\nimport urllib2,json,sys\n\ndata = urllib2.urlopen(\"https:\/\/min-api.cryptocompare.com\/data\/histohour?fsym=**CRYPTO**&tsym=**FIAT**&**EXTRAOPTIONS**\")\nobj=json.load(data)\nhigh = \"{}\".format(obj[\"Data\"][1][\"high\"])\nlow = \"{}\".format(obj[\"Data\"][1][\"low\"])\nraw_high = obj[\"Data\"][1][\"high\"]\nraw_low =obj[\"Data\"][1][\"low\"]\n\n",
+            "no-output" : "print(\"**FIATSYMB**\" + high)"
         }
     }
 };
