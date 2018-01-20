@@ -127,7 +127,7 @@ function addCrypto(event) {
     }
 }
 
-function generateJSON(el) {
+function generateJSON() {
     const selectedFiatObj = getSelectedFiatValueObject(),
 
         // Get selected cryptos
@@ -201,8 +201,7 @@ function generateJSON(el) {
         let apiCall = new APIPrice(),
             extraOptions = '';
 
-        let apiReq = apiCall[apiSelector.dataset.apitype].request,
-            apiRes = apiCall[apiSelector.dataset.apitype].response,
+        let apiRes = apiCall[apiSelector.dataset.apitype].response,
             apiOut = apiCall[apiSelector.dataset.apitype][formatSelector.dataset.variance + '-output'];
 
         if (apiSelector.dataset.apitype == 'historical'){
@@ -214,15 +213,11 @@ function generateJSON(el) {
         }
 
 
-        apiReq = apiReq
-            .replace(/\*\*CRYPTO\*\*/g, coin.BTTWidgetName)
-            .replace(/\*\*FIAT\*\*/g, selectedFiatObj.ticker)
-            .replace(/\*\*EXTRAOPTIONS\*\*/g, extraOptions);
-
         apiRes = apiRes
             .replace(/\*\*CRYPTO\*\*/g, coin.BTTWidgetName)
             .replace(/\*\*FIAT\*\*/g, selectedFiatObj.ticker)
-            .replace(/\*\*FORMAT\*\*/g, outputFormat);
+            .replace(/\*\*FORMAT\*\*/g, outputFormat)
+            .replace(/\*\*EXTRAOPTIONS\*\*/g, extraOptions);
         
         apiOut = apiOut
             .replace(/\*\*FIATSYMB\*\*/g, selectedFiatObj.symbol);
@@ -236,7 +231,6 @@ function generateJSON(el) {
 
 
         coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
-            .replace(/\*\*REQUEST\*\*/g, apiReq)
             .replace(/\*\*RESPONSE\*\*/g, apiRes)
             .replace(/\*\*OUTPUT\*\*/g, apiOut);
 
@@ -265,18 +259,35 @@ function generateJSON(el) {
 
     output.BTTPresetName = output.BTTPresetName + "-" +selectedFiatObj.ticker;
 
-    // trigger download of end result object
-    const data = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(output));
-
-    el.setAttribute('href', 'data:' + data);
-    el.setAttribute('download', 'Crypto-Touchbar-App-' + selectedFiatObj.ticker + '.json');
-
     // Purge all Canvas SVGs after Export
     var myNode = document.getElementById("canvas-area");
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
 
+    return output;
+}
+
+function outputJson(el){
+
+    var output = generateJSON(),
+        selectedFiatObj = getSelectedFiatValueObject(); 
+    // trigger download of end result object
+    const data = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(output));
+
+    el.setAttribute('href', 'data:' + data);
+    el.setAttribute('download', 'Crypto-Touchbar-App-' + selectedFiatObj.ticker + '.json');
+}
+
+function outputDirect(el){
+
+    var output = generateJSON(),
+        selectedFiatObj = getSelectedFiatValueObject(); 
+    // trigger import of end result object
+    const data = btoa(unescape(encodeURIComponent(JSON.stringify(output))));
+    console.log(data);
+
+    el.setAttribute('href', 'btt://jsonimport/' + data);
 }
 
 function addCoin(coinData) {

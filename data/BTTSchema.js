@@ -38,8 +38,8 @@ const mainStruct = function() {
 const cryptoElement = function() {
     return {
         "BTTWidgetName": "",
-        "BTTTriggerType": 639,
-        "BTTTriggerTypeDescription": "Apple Script Widget",
+        "BTTTriggerType": 642,
+        "BTTTriggerTypeDescription": "Shell Script \/ Task Widget",
         "BTTTriggerClass": "BTTTriggerTypeTouchBar",
         "BTTPredefinedActionType": -1,
         "BTTPredefinedActionName": "No Action",
@@ -47,6 +47,7 @@ const cryptoElement = function() {
         "BTTEnabled": 1,
         "BTTOrder": 0,
         "BTTIconData": "**WILL-BE-REPLACED**",
+        "BTTShellScriptWidgetGestureConfig" : "\/usr\/bin\/python:::-c",
         "BTTTriggerConfig": {
             "BTTTouchBarItemIconHeight": 22,
             "BTTTouchBarItemIconWidth": 22,
@@ -54,7 +55,7 @@ const cryptoElement = function() {
             "BTTTouchBarFreeSpaceAfterButton": "5.000000",
             "BTTTouchBarButtonColor": "243.776725, 130.266312, 8.181293, 255.000000",
             "BTTTouchBarAlwaysShowButton": "0",
-            "BTTTouchBarAppleScriptString": "set value to do shell script \"curl '**REQUEST**' | python -c **RESPONSE** **OUTPUT**",
+            "BTTTouchBarAppleScriptString": "**RESPONSE****OUTPUT**",
             "BTTTouchBarAlternateBackgroundColor": "109.650002, 109.650002, 109.650002, 255.000000",
             "BTTTouchBarScriptUpdateInterval": 60
         }
