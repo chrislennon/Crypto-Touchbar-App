@@ -360,8 +360,8 @@ function loadData() {
         var count = 0;
         var input = jsonData.Data;
 
-        for ( property in  input)
-        {
+        for ( property in  input) {
+            if(input.hasOwnProperty(property)) {
             var customProperties = {
                 "icon": 'img/TODO.svg',
                 "color": '6CAAE5'
@@ -369,25 +369,19 @@ function loadData() {
             var showTopX = false;
             var customData = getSelectedValue(new coinJSON(), 'Ticker', input[property].Symbol)[0];
             if (customData) {
-                console.log("have data for " + input[property].Symbol);
+                if (customData.ShowDefault) showTopX = true;
                 customProperties = {
                     "icon": 'node_modules/cryptocoins-icons/SVG/' + customData.Icon + '.svg',
                     "color": customData.Colour
                 }
-                if (customData.ShowDefault){
-                    showTopX = true;
-                }
-                console.log(customData);
             }
-
-            if(input.hasOwnProperty(property)) {
-                dynCoinArr.push({
-                    "value" : input[property].Symbol,
-                    "label" : input[property].CoinName,
-                    "customProperties" : customProperties,
-                    "selected" : showTopX
-                });
-                count++;
+            dynCoinArr.push({
+                "value" : input[property].Symbol,
+                "label" : input[property].CoinName,
+                "customProperties" : customProperties,
+                "selected" : showTopX
+            });
+            count++;
            }
         }
 
@@ -451,13 +445,9 @@ function loadData() {
         output.innerHTML = event.target.value;
     });
 
-    // Hide loading text
-    document.getElementById('loading').style.display = 'none';
-
     // events for on change of searchbox input
     var dynamicCoinList = document.getElementById('dynamic-coinlist');
     dynamicCoinList.addEventListener('addItem', function(event) {
-        console.log(event);
         let customCoin = {
             "Colour" : event.detail.customProperties.color,
             "Name" : event.detail.label,
