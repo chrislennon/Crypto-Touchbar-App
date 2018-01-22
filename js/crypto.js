@@ -362,12 +362,30 @@ function loadData() {
 
         for ( property in  input)
         {
-           if(input.hasOwnProperty(property))
-           {
+            var customProperties = {
+                "icon": 'img/TODO.svg',
+                "color": '6CAAE5'
+            };
+            var showTopX = false;
+            var customData = getSelectedValue(new coinJSON(), 'Ticker', input[property].Symbol)[0];
+            if (customData) {
+                console.log("have data for " + input[property].Symbol);
+                customProperties = {
+                    "icon": 'node_modules/cryptocoins-icons/SVG/' + customData.Icon + '.svg',
+                    "color": customData.Colour
+                }
+                if (customData.ShowDefault){
+                    showTopX = true;
+                }
+                console.log(customData);
+            }
+
+            if(input.hasOwnProperty(property)) {
                 dynCoinArr.push({
-                    value : input[property].Symbol,
-                    label : input[property].CoinName,
-                    selected : false
+                    "value" : input[property].Symbol,
+                    "label" : input[property].CoinName,
+                    "customProperties" : customProperties,
+                    "selected" : showTopX
                 });
                 count++;
            }
@@ -376,6 +394,7 @@ function loadData() {
         var genericExamples = new Choices('#dynamic-coinlist', {
             placeholderValue: 'Search for a CryptoCurrency ('+count+') supported',
             searchPlaceholderValue: 'Search for a CryptoCurrency ('+count+') supported',
+            noResultsText: 'Search returned no results',
             choices: dynCoinArr,
             searchResultLimit: 15,
             shouldSort: true,
@@ -397,12 +416,6 @@ function loadData() {
         slider = document.getElementById('refreshSlider'),
         output = document.getElementById('refreshInterval');
 
-
-    // Populate popular coins from coins.js
-    coinJSON.forEach((coin) => {
-        coin.Icon = 'node_modules/cryptocoins-icons/SVG/' + coin.Icon + '.svg';
-        addCoin(coin);
-    });
     dropdown.addEventListener('change', updatePreviewFiat);
 
     new fiatJSON().forEach((currency) => {
@@ -444,11 +457,12 @@ function loadData() {
     // events for on change of searchbox input
     var dynamicCoinList = document.getElementById('dynamic-coinlist');
     dynamicCoinList.addEventListener('addItem', function(event) {
+        console.log(event);
         let customCoin = {
-            "Colour" : '6CAAE5',
+            "Colour" : event.detail.customProperties.color,
             "Name" : event.detail.label,
             "Ticker" : event.detail.value,
-            "Icon" : 'img/TODO.svg'
+            "Icon" : event.detail.customProperties.icon
         };
         addCoin(customCoin);
     });
