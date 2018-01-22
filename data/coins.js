@@ -5,7 +5,8 @@ const coinJSON = function() {
 			"Name": "Cardano",
 			"Ticker": "ADA",
 			"Icon": "ADA-alt",
-			"Colour": "386FCC"
+			"Colour": "386FCC",
+			"ShowDefault": true
 		},
 		{
 			"Name": "AudioCoin",
@@ -84,13 +85,15 @@ const coinJSON = function() {
 			"Name": "Bitcoin Cash",
 			"Ticker": "BCH",
 			"Icon": "BCH-alt",
-			"Colour": "719734"
+			"Colour": "719734",
+			"ShowDefault": true
 		},
 		{
 			"Name": "Bitcoin Gold",
 			"Ticker": "BTG",
 			"Icon": "../../../img/temp/btg",
-			"Colour": "D29C3D"
+			"Colour": "D29C3D",
+			"ShowDefault": true
 		},
 		{
 			"Name": "Bitconnect",
@@ -177,7 +180,8 @@ const coinJSON = function() {
 			"Name": "Dash",
 			"Ticker": "DASH",
 			"Icon": "DASH",
-			"Colour": "3875B7"
+			"Colour": "3875B7",
+			"ShowDefault": true
 		},
 		{
 			"Name": "DAO",
@@ -238,7 +242,8 @@ const coinJSON = function() {
 			"Name": "EOS",
 			"Ticker": "EOS",
 			"Icon": "EOS-alt",
-			"Colour": "828282"
+			"Colour": "828282",
+			"ShowDefault": true
 		},
 		{
 			"Name": "ERC",
@@ -250,7 +255,8 @@ const coinJSON = function() {
 			"Name": "Ethereum",
 			"Ticker": "ETH",
 			"Icon": "ETH",
-			"Colour": "8B92AF"
+			"Colour": "8B92AF",
+			"ShowDefault": true
 		},
 		{
 			"Name": "Ethereum Classic",
@@ -386,7 +392,8 @@ const coinJSON = function() {
 			"Name": "IOTA",
 			"Ticker": "IOT",
 			"Icon": "IOTA-alt",
-			"Colour": "647782"
+			"Colour": "647782",
+			"ShowDefault": true
 		},
 		// J - 1
 		{
@@ -437,7 +444,8 @@ const coinJSON = function() {
 			"Name": "Litecoin",
 			"Ticker": "LTC",
 			"Icon": "LTC",
-			"Colour": "BEBEBE"
+			"Colour": "BEBEBE",
+			"ShowDefault": true
 		},
 		// M - 8
 		{
@@ -499,7 +507,8 @@ const coinJSON = function() {
 			"Name": "NEO",
 			"Ticker": "NEO",
 			"Icon": "NEO-alt",
-			"Colour": "B6D746"
+			"Colour": "B6D746",
+			"ShowDefault": true
 		},
 		{
 			"Name": "NeosCoin",
@@ -616,7 +625,8 @@ const coinJSON = function() {
 			"Name": "QTUM",
 			"Ticker": "QTUM",
 			"Icon": "QTUM-alt",
-			"Colour": "558FB5"
+			"Colour": "558FB5",
+			"ShowDefault": true
 		},
 		// R - 7
 		{
@@ -732,7 +742,8 @@ const coinJSON = function() {
 			"Name": "Stellas Lumens",
 			"Ticker": "XLM",
 			"Icon": "STR",
-			"Colour": "FFFFFF"
+			"Colour": "FFFFFF",
+			"ShowDefault": true
 		},
 		{
 			"Name": "Stratis",
@@ -851,13 +862,15 @@ const coinJSON = function() {
 			"Name": "NEM",
 			"Ticker": "XEM",
 			"Icon": "XEM",
-			"Colour": "6DCB85"
+			"Colour": "6DCB85",
+			"ShowDefault": true
 		},
 		{
 			"Name": "Monero",
 			"Ticker": "XMR",
 			"Icon": "XMR",
-			"Colour": "ED6C2D"
+			"Colour": "ED6C2D",
+			"ShowDefault": true
 		},
 		{
 			"Name": "PrimeCoin",
@@ -869,7 +882,8 @@ const coinJSON = function() {
 			"Name": "Ripple",
 			"Ticker": "XRP",
 			"Icon": "XRP",
-			"Colour": "3E90C5"
+			"Colour": "3E90C5",
+			"ShowDefault": true
 		},
 		{
 			"Name": "Tezos",
