@@ -202,7 +202,8 @@ function generateJSON() {
             extraOptions = '';
 
         let apiRes = apiCall[apiSelector.dataset.apitype].response,
-            apiOut = apiCall[apiSelector.dataset.apitype][formatSelector.dataset.variance + '-output'];
+            apiOut = apiCall[apiSelector.dataset.apitype][formatSelector.dataset.variance + '-output'],
+            apiErr = apiCall[apiSelector.dataset.apitype].error;
 
         if (apiSelector.dataset.apitype == 'historical'){
             if (!dateTimeSelector.value) {
@@ -232,7 +233,8 @@ function generateJSON() {
 
         coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = coin.BTTTriggerConfig.BTTTouchBarAppleScriptString
             .replace(/\*\*RESPONSE\*\*/g, apiRes)
-            .replace(/\*\*OUTPUT\*\*/g, apiOut);
+            .replace(/\*\*OUTPUT\*\*/g, apiOut)
+            .replace(/\*\*ERROR\*\*/g, apiErr);
 
         coin.BTTTriggerConfig.BTTTouchBarScriptUpdateInterval = parseInt(refreshTimer);
 
