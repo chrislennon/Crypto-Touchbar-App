@@ -55,7 +55,7 @@ const cryptoElement = function() {
             "BTTTouchBarFreeSpaceAfterButton": "5.000000",
             "BTTTouchBarButtonColor": "243.776725, 130.266312, 8.181293, 255.000000",
             "BTTTouchBarAlwaysShowButton": "0",
-            "BTTTouchBarAppleScriptString": "**RESPONSE****OUTPUT**",
+            "BTTTouchBarAppleScriptString": "**RESPONSE****OUTPUT****ERROR**",
             "BTTTouchBarAlternateBackgroundColor": "109.650002, 109.650002, 109.650002, 255.000000",
             "BTTTouchBarScriptUpdateInterval": 60
         }
