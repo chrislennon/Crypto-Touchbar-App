@@ -138,6 +138,12 @@ const coinJSON = function() {
 			"Colour": "3E45C4"
 		},
 		{
+			"Name": "Binance Coin",
+			"Ticker": "BNB",
+			"Icon": "../../../img/temp/bnb",
+			"Colour": "F3BA2D"
+		},
+		{
 			"Name": "Bitcoin",
 			"Ticker": "BTC",
 			"Icon": "BTC",
