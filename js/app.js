@@ -7,7 +7,8 @@ function exportTemplate(el, method){
     let selectedValues = Page.getSelectedValues(),
         selectedFiatObj = selectedValues.selectedFiatObj,
         selection = selectedValues.selectedCoins,
-        api_type = selectedValues.apiSelector.dataset.apitype;
+        api_type = selectedValues.apiSelector.dataset.apitype,
+        dateTimeSelector = selectedValues.dateTimeSelector;
 
     if (selection.length == 0){
         alert('No coins selected');
@@ -17,9 +18,8 @@ function exportTemplate(el, method){
     if (api_type == 'historical'){
         if (!dateTimeSelector.value) {
             alert('No date/time selected!');
-            throw new Error("No date/time selected!");
+            return;
         }
-        extraOptions = '&limit=1&aggregate=1&toTs=' + dateTimeSelector.value;
     }
 
     Generator.loadTemplate(function(output){
