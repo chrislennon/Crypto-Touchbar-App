@@ -17,7 +17,7 @@ function clearTempSVGs(){
 
 function loadTemplate(callback) {
     // Get external template with fetch
-    fetch('../templates/crypto_price.py')
+    fetch('/templates/crypto_price.py')
     .then(
         response => response.text()
     )
