@@ -36,7 +36,7 @@ To run this application locally:
 - run `npm start`
 - browse to `http://127.0.0.1:8080`
 
-As of XX/XX/2018 the [wiki] includes examples of common contributions such as adding a new output or a custom crypto icon.
+The [wiki](https://github.com/chrislennon/Crypto-Touchbar-App/wiki) includes examples of common contributions such as adding a new output or a custom crypto icon.
 
 ## Suggestions & Donations
 
