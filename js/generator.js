@@ -65,13 +65,20 @@ function generateJSON(template, cb) {
 
         coin.BTTIconData = base64PNG;
 
+        let extraOptions = 'False';
+        if (userData.apiSelector.dataset.apitype == 'historical') {
+            extraOptions = '&limit=1&aggregate=1&toTs=' + userData.dateTimeSelector.value;
+        }
+        
         let data = {
             coin_ticker: coin.BTTWidgetName,
             fiat_ticker: userData.selectedFiatObj.ticker,
             fiat_symbol: userData.selectedFiatObj.symbol,
             format: userData.outputFormat,
             percent: userData.userPercentageModifer,
-            output_type: userData.formatSelector
+            output_type: userData.formatSelector,
+            apiSelector: userData.apiSelector.dataset.apitype,
+            extraOptions: extraOptions
         };
 
         coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = Mustache.render(template, data);

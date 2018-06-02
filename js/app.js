@@ -4,17 +4,27 @@ import Page from './page.js';
 import Generator from './generator.js';
 
 function exportTemplate(el, method){
-    let selectedFiatObj = Page.getSelectedFiatValueObject();
-    let selection = Page.getSelectedFromPreview();
+    let selectedValues = Page.getSelectedValues(),
+        selectedFiatObj = selectedValues.selectedFiatObj,
+        selection = selectedValues.selectedCoins,
+        api_type = selectedValues.apiSelector.dataset.apitype;
 
     if (selection.length == 0){
         alert('No coins selected');
         return;
     }
 
+    if (api_type == 'historical'){
+        if (!dateTimeSelector.value) {
+            alert('No date/time selected!');
+            throw new Error("No date/time selected!");
+        }
+        extraOptions = '&limit=1&aggregate=1&toTs=' + dateTimeSelector.value;
+    }
+
     Generator.loadTemplate(function(output){
         let dataDownload = document.createElement('a');
-        
+
         if (method == 'json') {
             const data = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(output));
             dataDownload.setAttribute('href', 'data:' + data);
