@@ -36,6 +36,15 @@ export default class Store {
   }
 
   /**
+   * Get loading state from store
+   * @return {Boolean} Loading State
+   */
+  isLoading() {
+    const state = this.store.getState();
+    return state.general.loading;
+  }
+
+  /**
    * Get items from store
    * @return {Array} Item objects
    */

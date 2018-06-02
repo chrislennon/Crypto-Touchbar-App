@@ -78,3 +78,11 @@ export const clearAll = () => {
     type: 'CLEAR_ALL',
   };
 };
+
+export const setIsLoading = (isLoading) => {
+  return {
+    type: 'LOADING',
+    isLoading,
+  };
+};
+
