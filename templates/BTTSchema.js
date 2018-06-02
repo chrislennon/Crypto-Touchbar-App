@@ -1,4 +1,10 @@
-const mainStruct = function() {
+export default {
+    preset: preset,
+    widget: widget,
+    closeWidget: closeWidget
+}
+
+function preset() {
     return {
         "BTTPresetName": "Crypto-Touchbar-App",
         "BTTPresetUUID": "7214C346-BD91-41F6-9E46-C300E0959DC3",
@@ -35,7 +41,7 @@ const mainStruct = function() {
     }
 };
 
-const cryptoElement = function() {
+function widget() {
     return {
         "BTTWidgetName": "",
         "BTTTriggerType": 642,
@@ -62,8 +68,7 @@ const cryptoElement = function() {
     }
 };
 
-
-const closeGroupElement = function() {
+function closeWidget() {
     return {
         "BTTTouchBarButtonName": "Close Group",
         "BTTTriggerType": 629,
