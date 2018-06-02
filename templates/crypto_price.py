@@ -46,7 +46,7 @@ try:
         elif (output_type is "mktcap"):
             print(fiat_symbol + current + " (" + fiat_symbol + mktcap + ")")
         elif (output_type is "absolute"):
-            print(fiat_symbol + current + " (L: " + fiat_symbol + low + " H: fiat_symbol" + high + ")")
+            print(fiat_symbol + current + " (L: " + fiat_symbol + low + " H: " + fiat_symbol + high + ")")
         elif (output_type is "relative"):
             print(fiat_symbol + current + " (L: -" + fiat_symbol + str(raw_current - raw_low) + " H: +" + fiat_symbol + str(raw_high - raw_current) + ")")
         elif (output_type is "current-percentage"):
