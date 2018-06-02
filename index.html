@@ -10,13 +10,10 @@
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <script type="module" src="js/app.js"></script>
 
-    <script src="data/coins.js"></script>
-    <script src="data/fiat.js"></script>
-    <script src="data/BTTSchema.js"></script>
-    <script src="js/crypto.js"></script>
-    <script src="data/apiSchema.js"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js" ></script>
     <script type="text/javascript" src="js/thirdparty/jscolor.min.js"></script>
     <script type="text/javascript" src="js/thirdparty/rgbcolor.js"></script>
     <script type="text/javascript" src="js/thirdparty/StackBlur.js"></script>
@@ -35,7 +32,7 @@
     <title>Crypto-Touchbar-App</title>
 </head>
 
-<body onload="loadData()">
+<body>
 
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
@@ -139,6 +136,9 @@
                         <input id="simple-trend" type="radio" name="variance-type" data-variance="simple">
                         <label for="simple-trend">Simple indicator based on opening ( ▲/▼ )</label>
                         <br>
+                        <input id="mktcap-trend" type="radio" name="variance-type" data-variance="mktcap">
+                        <label for="mktcap-trend">Shows market cap ( $00,000 M )</label>
+                        <br>
                         <input id="absolute-trend" type="radio" name="variance-type" data-variance="absolute">
                         <label for="absolute-trend">Absolute $ Range (Low: $000 / High: $000)</label>
                         <br>
@@ -175,8 +175,8 @@
             </form>
 
             <br>
-            <a id="exportJSON" onclick="outputJson(this);" class="button"><i class="icon-download"></i> download BTT json</a><br>
-            <a id="directExportJSON" onclick="outputDirect(this);" class="button"><i class="icon-download"></i> direct import to BTT</a><br>
+            <a id="exportJSON" class="button"><i class="icon-download"></i> download BTT json</a><br>
+            <a id="directExportJSON" class="button"><i class="icon-download"></i> direct import to BTT</a><br>
 
             <div id="BTTinstructions">
                 <span>The exported json can be imported using the 'import' function, located in the 'Manage Presets' menu which can be found in the bottom left of the BetterTouchTool application. See <a href="https://github.com/chrislennon/Crypto-Touchbar-App#instructions">README</a> for more details.</span>

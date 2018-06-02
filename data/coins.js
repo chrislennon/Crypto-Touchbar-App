@@ -1,4 +1,8 @@
-const coinJSON = function() {
+export default {
+	data: data
+}
+
+function data() {
     return [
 		// A - 9
 		{

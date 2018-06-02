@@ -1,4 +1,8 @@
-const fiatJSON = function() {
+export default {
+	data: data
+}
+
+function data() {
     return [
     	{
 			"name": "US Dollar",

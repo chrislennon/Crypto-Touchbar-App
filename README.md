@@ -3,26 +3,30 @@ This application is published to GitHub pages at the following location: https:/
 
 ![](https://i.imgur.com/T9kSoMT.png)
 
-## Updates & Fixes
-For a listing of new features & fixes please check out the [releases](https://github.com/chrislennon/Crypto-Touchbar-App/releases) page. All features & bugs should also have a record in the issues page.
-
 ## Instructions
-- Download and install [Better Touch Tool](https://www.boastr.net/). (requires version > v2.331)
+- Download and install [Better Touch Tool](https://folivora.ai). (requires version > v2.331)
 - Use the [Web App](https://chrislennon.github.io/Crypto-Touchbar-App/) to create your toolbar.
-- Open the BetterTouchTool application.
-- In the bottom left corner go to "Manage Presets".
-- Click the "Import" button and select the downloaded script.
+- Click "Direct import to BTT" to export your selection to Better Touch Tool. (alternatively download & import the json file)
+
+## What does this do?
+- Allows selection of coins/colours.
+- Generates a python script for each selected coin.
+- Wraps each script in JSON appropriate for use within BTT.
+- Triggers an import to BTT.
+- BTT will then execute the python script with the parameters selected.
+
+## Updates & Fixes
+For a listing of new features & fixes please check out the [releases](https://github.com/chrislennon/Crypto-Touchbar-App/releases) page.
+All features & bugs should also have a record in the issues page.
 
 ## Acknowledgements
-The prices are received from [CryptoCompare's](https://www.cryptocompare.com/) API - documentation available [here](https://www.cryptocompare.com/api/#)
+Price and coin list are received from [CryptoCompare's API](https://www.cryptocompare.com/api/#).
 
-Icons used within this tool are the work of [AllienWorks](https://github.com/allienworks/cryptocoins).
+Icons are the work of [AllienWorks](https://github.com/allienworks/cryptocoins).
 
-This application was originally inspired by another project by [Ryan-Gordon](https://github.com/Ryan-Gordon/Crypto-Touchbar) - I used it for a while but got tired of manually configuring each element, I seen benefit in providing an application to offload this work.
+Implementation was made significantly easier by [Better Touch Tool](https://folivora.ai).
 
-Currently handles the top 40ish currencies taken from [cryptocompare](https://www.cryptocompare.com/coins/#/usd) on 18/12/2017.
-
-## Local Development
+## Local Development & Contribution
 
 This is a standalone web application which is published already via [GitHub Pages](https://chrislennon.github.io/Crypto-Touchbar-App/).
 
@@ -32,18 +36,13 @@ To run this application locally:
 - run `npm start`
 - browse to `http://127.0.0.1:8080`
 
-Other notes:
-
-- SVG (crypto icons) are pulled in via an [npm package](https://www.npmjs.com/package/cryptocoins-icons) and consumed from `node_modules/cryptocoins-icons/` directory.
-- Currency fonts are currently hardcoded png (base64) for output to BTT.
-- You can publish to your own fork's `gh-pages` branch by running `npm run deploy`
-- Requirement for `jq` was removed, now relying on OS installed `python` 
+As of XX/XX/2018 the [wiki] includes examples of common contributions such as adding a new output or a custom crypto icon.
 
 ## Suggestions & Donations
 
 Please raise an issue in the [GitHub Issues](https://github.com/chrislennon/Crypto-Touchbar-App/issues) page.
 
-If you found this useful and wish to donate below are some address (if you wish to donate in another coin just raise an issue):
+This is a hobby project which evolved over time, if you found this useful, or want to inspire development you can always donate to the addresses below:
 
 - Bitcoin
 `1wSxFJYM9CiCvSjdvpBnL13MUGyYE5bL9`
