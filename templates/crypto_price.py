@@ -10,9 +10,10 @@ mod_percent = float("{{percent}}") if "{{percent}}"[0] != "{" else float(0)
 output_type = "{{output_type}}" if "{{output_type}}"[0] != "{" else  "no"
 api_type = "{{apiSelector}}" if "{{apiSelector}}"[0] != "{" else  "live"
 extraOptions = "{{{extraOptions}}}" if "{{{extraOptions}}}"[0] != "{" else  "&limit=1&aggregate=1&toTs=1514376000"
+offline_cache = "{{offline_cache}}" if "{{offline_cache}}"[0] != "{" else "false"
 
 try:
-    if (api_type == 'live'):
+    if (api_type == "live"):
 
         url = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms={}&tsyms={}".format(coin_ticker, fiat_ticker)
 
@@ -40,23 +41,30 @@ try:
             trend = "▼"
 
         if (output_type is "no"):
-            print(fiat_symbol + current)
+            output = fiat_symbol + current
         elif (output_type is "simple"):
-            print(fiat_symbol + current + " " + trend)
+            output = fiat_symbol + current + " " + trend
         elif (output_type is "mktcap"):
-            print(fiat_symbol + current + " (" + fiat_symbol + mktcap + ")")
+            output = fiat_symbol + current + " (" + fiat_symbol + mktcap + ")"
         elif (output_type is "absolute"):
-            print(fiat_symbol + current + " (L: " + fiat_symbol + low + " H: " + fiat_symbol + high + ")")
+            output = fiat_symbol + current + " (L: " + fiat_symbol + low + " H: " + fiat_symbol + high + ")"
         elif (output_type is "relative"):
-            print(fiat_symbol + current + " (L: -" + fiat_symbol + str(raw_current - raw_low) + " H: +" + fiat_symbol + str(raw_high - raw_current) + ")")
+            output = fiat_symbol + current + " (L: -" + fiat_symbol + str(raw_current - raw_low) + " H: +" + fiat_symbol + str(raw_high - raw_current) + ")"
         elif (output_type is "current-percentage"):
-            print(fiat_symbol + current + " (" + str(round (((raw_current - raw_opening) / raw_current) * 100)) + "%)")
+            output = fiat_symbol + current + " (" + str(round (((raw_current - raw_opening) / raw_current) * 100)) + "%)"
         elif (output_type is "range-percentage"):
-            print(fiat_symbol + current + " (L: -" + str(round (((raw_current - raw_low) / raw_current) * 100)) + "% H: +" + str(round (((raw_high - raw_current) / raw_current) * 100)) + "%)")
+            output = fiat_symbol + current + " (L: -" + str(round (((raw_current - raw_low) / raw_current) * 100)) + "% H: +" + str(round (((raw_high - raw_current) / raw_current) * 100)) + "%)"
         elif (output_type is "user-percentage"):
-            print(fiat_symbol + current + " (L: " + fiat_symbol + str(raw_current - (raw_current * mod_percent)) + " H: " + fiat_symbol + str(raw_current + (raw_current * mod_percent)) + ")")
+            output = fiat_symbol + current + " (L: " + fiat_symbol + str(raw_current - (raw_current * mod_percent)) + " H: " + fiat_symbol + str(raw_current + (raw_current * mod_percent)) + ")"
 
-    elif (api_type == 'historical'):
+        if (offline_cache is "true"):
+            tmp_file = open("/tmp/"+coin_ticker+"-"+fiat_ticker+"-"+output_type+".txt", "w")
+            tmp_file.write(output)
+            tmp_file.close()
+
+        print(output)
+
+    elif (api_type == "historical"):
         url = "https://min-api.cryptocompare.com/data/histohour?fsym={}&tsym={}" + extraOptions
         url = url.format(coin_ticker, fiat_ticker)
 
@@ -66,10 +74,20 @@ try:
         raw_high = float(obj["Data"][1]["high"])
         high = num_format.format(raw_high)
 
-        print(fiat_symbol + high)
+        output = fiat_symbol + high
 
+        if (offline_cache is "true"):
+            tmp_file = open("/tmp/"+coin_ticker+"-"+fiat_ticker+"-"+output_type+".txt", "w")
+            tmp_file.write(output)
+            tmp_file.close() 
+
+        print(output)
 except urllib2.URLError, e:
-    print('Unable to get data from API: %s' % e)
+    try:
+        tmp_file = open("/tmp/"+coin_ticker+"-"+fiat_ticker+"-"+output_type+".txt", "r")
+        print 'CACHED ' + tmp_file.read() 
+    except IOError, e:
+        print('Unable to get data from API & no cache available')
 except ValueError, e:
     print('There was an error formatting the output: %s' % e)
 # Please submit any issues https://github.com/chrislennon/Crypto-Touchbar-App/issues with the above script
