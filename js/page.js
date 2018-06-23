@@ -22,7 +22,8 @@ function getSelectedValues() {
         formatSelector: document.querySelector('input[name="variance-type"]:checked').dataset.variance,
         dateTimeSelector: document.getElementById('flatpicker-output'),
         dateTimeSelectorString: document.getElementById('flatpicker-output-string'),
-        userPercentageModifer: parseFloat(document.getElementById('user-percentage').value / 100)
+        userPercentageModifer: parseFloat(document.getElementById('user-percentage').value / 100),
+        cacheBool: document.getElementById('cachecheckbox').checked
     }
 }
 
