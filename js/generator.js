@@ -78,7 +78,8 @@ function generateJSON(template, cb) {
             percent: userData.userPercentageModifer,
             output_type: userData.formatSelector,
             apiSelector: userData.apiSelector.dataset.apitype,
-            extraOptions: extraOptions
+            extraOptions: extraOptions,
+            offline_cache: userData.cacheBool
         };
 
         coin.BTTTriggerConfig.BTTTouchBarAppleScriptString = Mustache.render(template, data);
