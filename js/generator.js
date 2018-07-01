@@ -75,6 +75,8 @@ function generateJSON(template, cb) {
             fiat_ticker: userData.selectedFiatObj.ticker,
             fiat_symbol: userData.selectedFiatObj.symbol,
             format: userData.outputFormat,
+            literalRound: userData.literalRound,
+            percentageRound: userData.percentageRound,
             percent: userData.userPercentageModifer,
             output_type: userData.formatSelector,
             apiSelector: userData.apiSelector.dataset.apitype,
