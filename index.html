@@ -90,14 +90,14 @@
             <br>
 
             <form id="useroptions">
-                <h3>Additional Options</h3>
+                <h4>API selection: </h4>
                 <br>
                 <div id="apiselection">
                     <input id="live-price" type="radio" name="api-type" data-apiType="live" checked>
-                    <label for="live-price">Live Price</label>
+                    <label for="live-price">Live</label>
                     <br>
                     <input id="historical-price" type="radio" name="api-type" data-apiType="historical" >
-                    <label for="historical-price">Historical Price</label>
+                    <label for="historical-price">Historical</label>
 
                     <input id="flatpickr" type="text" placeholder="Select Date/Time.." readonly="readonly" style="width: 200px; display: none;">
                     <input id="flatpicker-output" type="text" readonly="readonly" style="display: none;">
@@ -107,37 +107,81 @@
                 </div>
 
                 <div id="formattoptions">
-                    <input id="comma-separate" type="checkbox">
-                    <label for="comma-separate">Separate thousands with commas</label>
+                    <h4>Options</h4>
                     <br>
-                    <span>Limit to given number of decimal places</span>
-                    <input id="zero-place" type="radio" name="decimal-count" data-count="0">
-                    <label for="zero-place">0</label>
-                    <input id="one-place" type="radio" name="decimal-count" data-count="1">
-                    <label for="one-place">1</label>
-                    <input id="two-place" type="radio" name="decimal-count" data-count="2">
-                    <label for="two-place">2</label>
-                    <input id="three-place" type="radio" name="decimal-count" data-count="3">
-                    <label for="three-place">3</label>
-                    <input id="four-place" type="radio" name="decimal-count" data-count="4">
-                    <label for="four-place">4</label>
-                    <input id="five-place" type="radio" name="decimal-count" data-count="5">
-                    <label for="five-place">5</label>
-                    <input id="infinite-place" type="radio" name="decimal-count" data-count="∞" checked>
-                    <label for="infinite-place">∞</label>
+                    <!-- <div id="slidercontainer">
+                        <input type="range" min="10" max="120" value="60" class="slider" id="refreshSlider">
+                        
+                        <span id="refreshInterval"></span>
+                        <span> Seconds</span>
+                    </div> -->
+                    <div>
+                        <span>Refresh Interval:</span>
+                        <select id="refreshInterval">
+                            <option value="10">10</option>
+                            <option value="30">30</option>
+                            <option value="60" selected>60</option>
+                            <option value="90">90</option>
+                            <option value="120">120</option>
+                        </select>
+                        <span>s</span>
+                    </div>
                     <br>
+                    <div id="grouptoggle">
+                        <input id="groupcheckbox" type="checkbox">
+                        <label for="groupcheckbox">Group crypto elements under one button</label>
+                    </div>
                     <br>
-                </div>
-
-                <div id="varianceoptions">
+                    <div id="cacheToggle">
+                        <input id="cachecheckbox" type="checkbox">
+                        <label for="cachecheckbox">Cache results for offline viewing</label>
+                    </div>
+                    <br>
+                    <div id="FormatOptions">
+                        <input id="comma-separate" type="checkbox">
+                        <label for="comma-separate">Separate thousands with commas</label>
+                        <br>
+                        <span>Limit to given number of decimal places</span>
+                        <input id="zero-place" type="radio" name="decimal-count" data-count="0">
+                        <label for="zero-place">0</label>
+                        <input id="one-place" type="radio" name="decimal-count" data-count="1">
+                        <label for="one-place">1</label>
+                        <input id="two-place" type="radio" name="decimal-count" data-count="2">
+                        <label for="two-place">2</label>
+                        <input id="three-place" type="radio" name="decimal-count" data-count="3">
+                        <label for="three-place">3</label>
+                        <input id="four-place" type="radio" name="decimal-count" data-count="4">
+                        <label for="four-place">4</label>
+                        <input id="five-place" type="radio" name="decimal-count" data-count="5">
+                        <label for="five-place">5</label>
+                        <input id="infinite-place" type="radio" name="decimal-count" data-count="∞" checked>
+                        <label for="infinite-place">∞</label>
+                    </div>
+                    <br>
+                    
+                    <div id="varianceoptions">
+                        <h4>Additional Indicators</h4>
+                        <h5>Simple</h5>
                         <input id="no-trend" type="radio" name="variance-type" data-variance="no" checked>
-                        <label for="no-trend">No Trend</label>
+                        <label for="no-trend">No indicator</label>
                         <br>
                         <input id="simple-trend" type="radio" name="variance-type" data-variance="simple">
-                        <label for="simple-trend">Simple indicator based on opening ( ▲/▼ )</label>
+                        <label for="simple-trend">Arrow indicator based on opening ( ▲/▼ )</label>
                         <br>
+                        <h5>Literal values</h5>
+                        <div>
+                            <span>Number of decimals</span>
+                            <input id="zero-place" type="radio" name="literal-round" data-count="0" checked>
+                            <label for="zero-place">0</label>
+                            <input id="one-place" type="radio" name="literal-round" data-count="1">
+                            <label for="one-place">1</label>
+                            <input id="two-place" type="radio" name="literal-round" data-count="2">
+                            <label for="two-place">2</label>
+                            <input id="three-place" type="radio" name="literal-round" data-count="3">
+                            <label for="three-place">3</label>
+                        </div>
                         <input id="mktcap-trend" type="radio" name="variance-type" data-variance="mktcap">
-                        <label for="mktcap-trend">Shows market cap ( $00,000 M )</label>
+                        <label for="mktcap-trend">Show market cap ( $00,000 M )</label>
                         <br>
                         <input id="absolute-trend" type="radio" name="variance-type" data-variance="absolute">
                         <label for="absolute-trend">Absolute $ Range (Low: $000 / High: $000)</label>
@@ -145,37 +189,36 @@
                         <input id="relative-trend" type="radio" name="variance-type" data-variance="relative">
                         <label for="relative-trend">Relative $ Range (-$000 / +$000)</label>
                         <br>
+                        <input id="user-percentage-trend" type="radio" name="variance-type" data-variance="user-percentage">
+                        <label for="user-percentage-trend">Relative $ Range based on user percentage (-$000 / +$000)</label>
+                        <input id="user-percentage" type="text" value="0" maxlength="4" size="4">%
+                        <br>
+                        <h5>Percentage values</h5>
+                        <div>
+                            <span>Number of decimals</span>
+                            <input id="zero-place" type="radio" name="percentage-round" data-count="0" checked>
+                            <label for="zero-place">0</label>
+                            <input id="one-place" type="radio" name="percentage-round" data-count="1">
+                            <label for="one-place">1</label>
+                            <input id="two-place" type="radio" name="percentage-round" data-count="2">
+                            <label for="two-place">2</label>
+                            <input id="three-place" type="radio" name="percentage-round" data-count="3">
+                            <label for="three-place">3</label>
+                        </div>
                         <input id="current-percentage-trend" type="radio" name="variance-type" data-variance="current-percentage">
                         <label for="current-percentage-trend">Change % based on opening (+10%)</label>
                         <br>
                         <input id="range-percentage-trend" type="radio" name="variance-type" data-variance="range-percentage">
                         <label for="range-percentage-trend">Relative % Range (-8% / +10%)</label>
                         <br>
-                        <input id="user-percentage-trend" type="radio" name="variance-type" data-variance="user-percentage">
-                        <label for="user-percentage-trend">Relative $ Range based on user percentage (-$000 / +$000)</label>
-                        <input id="user-percentage" type="text" value="0">
-                        <br>
-                        <br>
                     </div>
-
-                <div id="slidercontainer">
-                    <input type="range" min="10" max="120" value="60" class="slider" id="refreshSlider">
-                    <span>Refresh Interval:</span>
-                    <span id="refreshInterval"></span>
-                    <span> Seconds</span>
-                </div>
-    
-                <br>
-                
-                <div id="grouptoggle">
-                    <input id="groupcheckbox" type="checkbox">
-                    <label for="groupcheckbox">Group crypto elements under one button</label>
+                    
+                    <br>
                 </div>
 
-                <div id="cacheToggle">
-                    <input id="cachecheckbox" type="checkbox">
-                    <label for="cachecheckbox">Cache results for offline viewing</label>
-                </div>
+
+
+
 
             </form>
 
