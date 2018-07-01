@@ -16,7 +16,9 @@ function getSelectedValues() {
         selectedFiatObj: this.getSelectedFiatValueObject(),
         selectedCoins: this.getSelectedFromPreview(),
         outputFormat: buildStringFormat(),
-        refreshTimer: document.getElementById('refreshInterval').innerHTML,
+        literalRound: document.querySelector('input[name="literal-round"]:checked').dataset.count,
+        percentageRound: document.querySelector('input[name="percentage-round"]:checked').dataset.count,
+        refreshTimer: document.getElementById('refreshInterval').value,
         groupBool: document.getElementById('groupcheckbox').checked,
         apiSelector: document.querySelector('input[name="api-type"]:checked'),
         formatSelector: document.querySelector('input[name="variance-type"]:checked').dataset.variance,
@@ -279,9 +281,7 @@ function loadData() {
     };
     xhr.send();
 
-    const dropdown = document.getElementById('fiat'),
-        slider = document.getElementById('refreshSlider'),
-        output = document.getElementById('refreshInterval');
+    const dropdown = document.getElementById('fiat');
 
     dropdown.addEventListener('change', updatePreviewFiat);
 
@@ -314,12 +314,6 @@ function loadData() {
     minutePicker.setAttribute('step', '0');
     minutePicker.setAttribute('max', '0');
     minutePicker.setAttribute('min', '0');
-
-    // set up slider for refresh value
-    output.innerHTML = slider.value;
-    slider.addEventListener('input', (inputEvent) => {
-        output.innerHTML = event.target.value;
-    });
 
     // events for on change of searchbox input
     let dynamicCoinList = document.getElementById('dynamic-coinlist');
