@@ -114,7 +114,7 @@ function data() {
         },
         {
             "name": "Mexican Peso",
-            "ticker": "MEX",
+            "ticker": "MXN",
             "symbol": "$",
             "icon": "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAACOklEQVRIS7WVP2gVQRDGv5nZgJIIYhW0FMVnY6ONYKEg9oKg+BT8A7EQRGKEoEUkjfgHImphoURsHmqhVmKRxnTaqKAIgghpU1hF393MyJ5PiPfu3m3EbHXczny/25n5bgmJi5nHiOgkOb1m44dddD+kpFJKUIxh5rMEuh2fHT5pZldTclMBIXCYcvilKGpuL5i5w8qfM2TvAGgdrAmwLnCYdPgYgA01IosOnzazW1X7gwCjgcOcw1tNpSDQldzyqRUBiOglEx8oJS0RaMHhawBsiq2J+2S0J0c+vxJAS1g+lhLuqOkEgB+998Misg+OY2raBtBNBohIG45HyxPUdAuAL03lKu9X9qAKAGBWTc8A+LkSSF2TtwnLpwqhbw6fMbN4usUUUO0UCctjAIdqRDIAz9j4Wobs7SDQoDEdIaKnFZNU1rurpucBRGjfajIai8hxOC4D2DzgS++r6el/AfzJ4RDCXjc/CuAwgLVlMTHZ0UX3fdIUNTRvlIhmy6Vz+ISZ3fgfgKixXljiFBVOLtwMup5bfjEZEELYn+eF/ZcqTrRRWBYK3d5y+AUzu5kKkN4XGoDnIMwT0VfkyFy8RU7jDt9acvp2AH3eqZyiIQztNLY3KUbqxTxQ01PJU8TM4wTqa1gNsKOmJ5b9BP8Kq/PBMDO33f0gE+8GMFIS/25ucyJyL8/zV8UtWrOajBbT4qTEpsY7OPogtvaIqnZSSpgCKHQChxmHn1s9wG8ntx2+i4imVfVJygl+AW9vyxkjYKUJAAAAAElFTkSuQmCC"
         },
