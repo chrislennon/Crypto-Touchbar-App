@@ -5,8 +5,9 @@
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node node_modules/watch-http-server/bin/http-server",
-    "deploy": "node ./deploy.js"
+    "deploy": "node ./deploy.js",
+    "start": "webpack-cli --mode development --watch",
+    "build": "webpack-cli --mode production"
   },
   "repository": {
     "type": "git",
@@ -24,13 +25,23 @@
   },
   "homepage": "https://github.com/chrislennon/Crypto-Touchbar-App#readme",
   "dependencies": {
-    "choices.js": "^3.0.2",
     "cryptocoins-icons": "^2.7.0",
-    "flatpickr": "^4.1.4",
-    "font-awesome-svg-png": "^1.2.2",
-    "watch-http-server": "^0.7.6"
+    "flatpickr": "^4.5.2",
+    "font-awesome-svg-png": "^1.2.2"
   },
   "devDependencies": {
-    "gh-pages": "^1.1.0"
+    "@babel/core": "^7.0.1",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
+    "gh-pages": "^1.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.18.0",
+    "webpack-cli": "^3.1.0",
+    "webpack-log": "^2.0.0"
   }
 }

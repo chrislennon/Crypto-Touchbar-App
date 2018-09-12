@@ -751,7 +751,7 @@ function data() {
 		{
 			"Name": "Stellas Lumens",
 			"Ticker": "XLM",
-			"Icon": "STR",
+			"Icon": "XLM",
 			"Colour": "FFFFFF",
 			"ShowDefault": true
 		},

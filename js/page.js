@@ -1,52 +1,13 @@
 // Logic for the control and use of the web page
-
+import flatpickr from 'flatpickr';
+import utils from './utils.js';
 import fiatJSON from '../data/fiat.js';
 import coinJSON from '../data/coins.js';
 
 export default {
-    addCrypto: addCrypto,
     loadData: loadData,
     getSelectedFiatValueObject: getSelectedFiatValueObject,
-    getSelectedFromPreview: getSelectedFromPreview,
-    getSelectedValues: getSelectedValues
-}
-
-function getSelectedValues() {
-    return {
-        selectedFiatObj: this.getSelectedFiatValueObject(),
-        selectedCoins: this.getSelectedFromPreview(),
-        outputFormat: buildStringFormat(),
-        literalRound: document.querySelector('input[name="literal-round"]:checked').dataset.count,
-        percentageRound: document.querySelector('input[name="percentage-round"]:checked').dataset.count,
-        refreshTimer: document.getElementById('refreshInterval').value,
-        groupBool: document.getElementById('groupcheckbox').checked,
-        apiSelector: document.querySelector('input[name="api-type"]:checked'),
-        formatSelector: document.querySelector('input[name="variance-type"]:checked').dataset.variance,
-        dateTimeSelector: document.getElementById('flatpicker-output'),
-        dateTimeSelectorString: document.getElementById('flatpicker-output-string'),
-        userPercentageModifer: parseFloat(document.getElementById('user-percentage').value / 100),
-        cacheBool: document.getElementById('cachecheckbox').checked
-    }
-}
-
-function buildStringFormat() {
-    let outputFormat = '';
-    let commaFormat = document.getElementById('comma-separate'),
-        decimalFormat = document.querySelector('input[name="decimal-count"]:checked');
-
-    if (commaFormat.checked){
-        outputFormat += ",";
-    }
-    if (decimalFormat.dataset.count != '∞') {
-       outputFormat += "." + decimalFormat.dataset.count + "f";
-    }
-
-    if (outputFormat != '') {
-       outputFormat = ":0" + outputFormat;
-    }
-
-    outputFormat = "{" + outputFormat + "}";
-    return outputFormat;
+    getSelectedFromPreview: getSelectedFromPreview
 }
 
 function getSelectedFromPreview() {
@@ -61,6 +22,7 @@ function getSelectedFromPreview() {
     return selectedCryptos;
 }
 
+// TODO used in inline html call
 function updatePreviewColour(elm) {
     const id = elm.styleElement.id,
         cryptoColour = document.getElementById(id),
@@ -71,6 +33,7 @@ function updatePreviewColour(elm) {
     }
 }
 
+// TODO used in inline html call
 function updatePreviewSVGColour(elm) {
     const id = elm.styleElement.id,
         cryptoColour = document.getElementById(id),
@@ -92,20 +55,16 @@ function updatePreviewFiat() {
     });
 }
 
-function getSelectedFiatOption() {
-    const fiat = document.getElementById('fiat');
-    return fiat.options[fiat.selectedIndex].value;
-}
-
 function getSelectedFiatValueObject() {
-    const selectedOp = getSelectedFiatOption();
-    return getSelectedValue(new fiatJSON.data(), 'ticker', selectedOp)[0];
-}
-
-function getSelectedValue(array, key, value) {
-    return array.filter((obj) => {
-        return obj[key] === value;
-    });
+    const fiat = document.getElementById('fiat');
+    const selectedOp = fiat.options[fiat.selectedIndex];
+    let obj = {
+        name: selectedOp.innerHTML,
+        ticker: selectedOp.value,
+        symbol: selectedOp.dataset.symbol ,
+        icon: selectedOp.dataset.icon
+    }
+    return obj;
 }
 
 function addCrypto(event) {
@@ -242,11 +201,13 @@ function loadData() {
                 "color": '6CAAE5'
             };
             let showTopX = false;
-            let customData = getSelectedValue(new coinJSON.data(), 'Ticker', input[property].Symbol)[0];
+            // TODO - this loading of coinJSON is nasty
+            let customData = utils.filterForValue(new coinJSON.data(), 'Ticker', input[property].Symbol)[0];
+            
             if (customData) {
                 if (customData.ShowDefault) showTopX = true;
                 customProperties = {
-                    "icon": 'node_modules/cryptocoins-icons/SVG/' + customData.Icon + '.svg',
+                    "icon": 'cryptocoins-icons/SVG/' + customData.Icon + '.svg',
                     "color": customData.Colour
                 }
             }
@@ -289,14 +250,15 @@ function loadData() {
         let option = document.createElement('option');
         option.value = currency.ticker;
         option.innerHTML = currency.name;
+        // FIX - render all data once
+        option.dataset.symbol = currency.symbol;
+        option.dataset.icon = currency.icon;
         dropdown.appendChild(option);
     });
 
     // enable colour picker on dynamically generated inputs
     jscolor.installByClassName('jscolor');
 
-
-    // Flatpickr - https://github.com/flatpickr/flatpickr
     
     let flatpickrOutput = document.getElementById('flatpicker-output'),
     flatpickerOutputString = document.getElementById('flatpicker-output-string');
@@ -360,5 +322,6 @@ function loadData() {
         for(let i=0;i<ele.length;i++) {
            ele[i].disabled = false;
         }
-    });    
+    });
+    return
 }

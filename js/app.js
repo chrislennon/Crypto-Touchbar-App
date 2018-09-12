@@ -1,11 +1,21 @@
 // Control for ommunication between page and generator
-
+import Utils from './utils.js';
 import Page from './page.js';
 import Generator from './generator.js';
-
+require('flatpickr/dist/flatpickr.css');
 function exportTemplate(el, method){
-    let selectedValues = Page.getSelectedValues(),
-        selectedFiatObj = selectedValues.selectedFiatObj,
+
+    let cryptoPreview = document.getElementsByClassName('touchbar-element crypto');
+
+    let selectedCryptos = [];
+
+    // Since cryptoElements returns a HTMLCollection, do this hack to get the Array elements.
+    [].forEach.call(cryptoPreview, (cryptoItem) => {
+        selectedCryptos.push(cryptoItem.dataset.ticker);
+    });
+
+    let selectedValues = Utils.getSelectedValues(),
+        selectedFiatObj = selectedValues.selectedFiatObj[selectedValues.selectedFiatObj.selectedIndex],
         selection = selectedValues.selectedCoins,
         api_type = selectedValues.apiSelector.dataset.apitype,
         dateTimeSelector = selectedValues.dateTimeSelector;
@@ -28,7 +38,7 @@ function exportTemplate(el, method){
         if (method == 'json') {
             const data = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(output));
             dataDownload.setAttribute('href', 'data:' + data);
-            dataDownload.setAttribute('download', 'Crypto-Touchbar-App-' + selectedFiatObj.ticker + '.json');
+            dataDownload.setAttribute('download', 'Crypto-Touchbar-App-' + selectedFiatObj.value + '.json');
         }
         else if (method == 'direct'){
             const data = btoa(unescape(encodeURIComponent(JSON.stringify(output))));
@@ -40,8 +50,7 @@ function exportTemplate(el, method){
 
 
 // On Ready
-document.addEventListener('DOMContentLoaded', () => {
-
+document.addEventListener('DOMContentLoaded', (e) => {
     let exportJsonButton = document.getElementById("exportJSON");
     let directExportJsonButton = document.getElementById("directExportJSON");
     
@@ -54,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         exportTemplate(directExportJsonButton, 'direct');
     }, false);
-
     Page.loadData();
 });
 

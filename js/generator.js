@@ -1,6 +1,6 @@
 // Control and logic for the code to generate appropriate output
 
-import Page from './page.js';
+import Utils from './utils.js';
 import BTTSchema from '../templates/BTTSchema.js'
 
 export default {
@@ -32,7 +32,7 @@ function loadTemplate(callback) {
 
 function generateJSON(template, cb) {
     
-    const userData = Page.getSelectedValues();
+    const userData = Utils.getSelectedValues();
     
     let output = new BTTSchema.preset(),
         coinArray = [];

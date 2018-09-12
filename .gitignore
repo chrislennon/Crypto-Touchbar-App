@@ -1,3 +1,6 @@
+# Dist
+dist/
+
 # Mac
 .DS_Store
 
