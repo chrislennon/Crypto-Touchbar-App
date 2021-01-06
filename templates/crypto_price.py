@@ -40,10 +40,10 @@ try:
         low     = num_format.format(raw_low)
 
         if raw_mktcap > 1000000:
-            mktcap = str("{:,."+str(literalRound)+"f}").format(raw_mktcap / 1000000) + " M"
+            mktcap = "{0} M".format(round(raw_mktcap / 1000000, literalRound))
         else:
-            mktcap = str("{:,."+str(literalRound)+"f}").format(raw_mktcap)
-        
+            mktcap = str(round(raw_mktcap, literalRound))
+
         trend = "▲" if raw_current > raw_opening else  "▼"
         
         output = fiat_symbol + current
