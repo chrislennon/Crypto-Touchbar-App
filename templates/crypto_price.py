@@ -8,17 +8,31 @@ from json import load
 from urllib2 import urlopen
 from urllib2 import URLError
 
-coin_ticker     = "{{coin_ticker}}" if "{{coin_ticker}}"[0] != "{" else "BTC"
-fiat_ticker     = "{{fiat_ticker}}" if "{{fiat_ticker}}"[0] != "{" else "USD"
-fiat_symbol     = "{{fiat_symbol}}" if "{{fiat_symbol}}"[0] != "{" else "$"
-num_format      = "{{format}}" if "{{format}}"[2:8] != "format" else "{}"
-mod_percent     = float("{{percent}}") if "{{percent}}"[0] != "{" else 0.0
-output_type     = "{{output_type}}" if "{{output_type}}"[0] != "{" else "mktcap"
-api_type        = "{{apiSelector}}" if "{{apiSelector}}"[0] != "{" else "live"
+coin_ticker     = "{{coin_ticker}}"    if "{{coin_ticker}}"[0] != "{"    else "BTC"
+fiat_ticker     = "{{fiat_ticker}}"    if "{{fiat_ticker}}"[0] != "{"    else "USD"
+fiat_symbol     = "{{fiat_symbol}}"    if "{{fiat_symbol}}"[0] != "{"    else "$"
+num_format      = "{{format}}"         if "{{format}}"[2:8] != "format"  else "{}"
+output_type     = "{{output_type}}"    if "{{output_type}}"[0] != "{"    else "mktcap"
+api_type        = "{{apiSelector}}"    if "{{apiSelector}}"[0] != "{"    else "live"
 extraOptions    = "{{{extraOptions}}}" if "{{{extraOptions}}}"[0] != "{" else "&limit=1&aggregate=1&toTs=1514376000"
-offline_cache   = "{{offline_cache}}" if "{{offline_cache}}"[0] != "{" else "false"
-percentageRound = int("{{percentageRound}}") if "{{percentageRound}}"[0] != "{" else 0
+offline_cache   = "{{offline_cache}}"  if "{{offline_cache}}"[0] != "{"  else "false"
+
+# Are these cast really needed?
+mod_percent     = float("{{percent}}") if "{{percent}}"[0] != "{" else 0.0
 literalRound    = int("{{literalRound}}") if "{{literalRound}}"[0] != "{" else 0
+percentageRound = int("{{percentageRound}}") if "{{percentageRound}}"[0] != "{" else 0
+
+coin_ticker = "BTC" if "BTC"[0] != "{" else "BTC"
+fiat_ticker = "EUR" if "EUR"[0] != "{" else "USD"
+fiat_symbol = "€" if "€"[0] != "{" else  "$"
+num_format = "{:0,.2f}" if "{:0,.2f}"[2:8] != "format" else  "{}"
+mod_percent = float("0") if "0"[0] != "{" else float(0)
+output_type = "current-percentage" if "current-percentage"[0] != "{" else  "mktcap"
+api_type = "live" if "live"[0] != "{" else  "live"
+extraOptions = "False" if "False"[0] != "{" else  "&limit=1&aggregate=1&toTs=1514376000"
+offline_cache = "true" if "true"[0] != "{" else "false"
+percentageRound = int("1") if "1"[0] != "{" else int(0)
+literalRound = int("0") if "0"[0] != "{" else int(0)
 
 try:
     if api_type == "live":
