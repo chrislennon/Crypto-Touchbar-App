@@ -48,22 +48,23 @@ try:
         
         output = fiat_symbol + current
 
-        if (output_type is "simple"):
+        if (output_type == "simple"):
             output += trend
-        elif (output_type is "mktcap"):
+        elif (output_type == "mktcap"):
             output += " ({0}{1})".format(fiat_symbol, mktcap)
-        elif (output_type is "absolute"):
+        elif (output_type == "absolute"):
             output += " (L: {0}{1} H: {0}{2})".format(fiat_symbol, low, high)
-        elif (output_type is "relative"):
+        elif (output_type == "relative"):
             output += " (L: -{0}{1} H: +{0}{2})".format(fiat_symbol, str(round(raw_current - raw_low, literalRound)), str(round(raw_high - raw_current,literalRound)))
-        elif (output_type is "current-percentage"):
+        elif (output_type == "current-percentage"):
+            # Display both '-' and '+'? Like +5.7%, 0.0%, -3.3%
             output += " ({0}%)".format(str(round(((raw_current - raw_opening) / raw_current) * 100, percentageRound)))
-        elif (output_type is "range-percentage"):
+        elif (output_type == "range-percentage"):
             output += " (L: -{0}% H: +{1}%)".format(str(round (((raw_current - raw_low) / raw_current) * 100, percentageRound)), str(round (((raw_high - raw_current) / raw_current) * 100, percentageRound)))
-        elif (output_type is "user-percentage"):
+        elif (output_type == "user-percentage"):
             output += " (L: {0}{1} G: {0}{2}".format(fiat_symbol,str(round(raw_current - (raw_current * mod_percent), literalRound)), str(round(raw_current + (raw_current * mod_percent), literalRound)))
 
-        if offline_cache is "true":
+        if offline_cache == "true":
             with open("/tmp/{0}-{1}-{2}.txt".format(coin_ticker, fiat_ticker, output_type), 'w') as cf:
                 cf.write(output)
         
@@ -81,7 +82,7 @@ try:
 
         output = fiat_symbol + high
 
-        if offline_cache is "true":
+        if offline_cache == "true":
             with open("/tmp/{0}-{1}-{2}.txt".format(coin_ticker, fiat_ticker, output_type), 'w') as cf:
                 cf.write(output)
 
