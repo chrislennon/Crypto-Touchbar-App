@@ -11,14 +11,14 @@ from urllib2 import URLError
 coin_ticker     = "{{coin_ticker}}" if "{{coin_ticker}}"[0] != "{" else "BTC"
 fiat_ticker     = "{{fiat_ticker}}" if "{{fiat_ticker}}"[0] != "{" else "USD"
 fiat_symbol     = "{{fiat_symbol}}" if "{{fiat_symbol}}"[0] != "{" else "$"
-num_format      = "{{format}}" if "{{format}}"[2:8] != "format" else  "{}"
-mod_percent     = float("{{percent}}") if "{{percent}}"[0] != "{" else float(0)
-output_type     = "{{output_type}}" if "{{output_type}}"[0] != "{" else  "mktcap"
-api_type        = "{{apiSelector}}" if "{{apiSelector}}"[0] != "{" else  "live"
-extraOptions    = "{{{extraOptions}}}" if "{{{extraOptions}}}"[0] != "{" else  "&limit=1&aggregate=1&toTs=1514376000"
+num_format      = "{{format}}" if "{{format}}"[2:8] != "format" else "{}"
+mod_percent     = float("{{percent}}") if "{{percent}}"[0] != "{" else 0.0
+output_type     = "{{output_type}}" if "{{output_type}}"[0] != "{" else "mktcap"
+api_type        = "{{apiSelector}}" if "{{apiSelector}}"[0] != "{" else "live"
+extraOptions    = "{{{extraOptions}}}" if "{{{extraOptions}}}"[0] != "{" else "&limit=1&aggregate=1&toTs=1514376000"
 offline_cache   = "{{offline_cache}}" if "{{offline_cache}}"[0] != "{" else "false"
-percentageRound = int("{{percentageRound}}") if "{{percentageRound}}"[0] != "{" else int(0)
-literalRound    = int("{{literalRound}}") if "{{literalRound}}"[0] != "{" else int(0)
+percentageRound = int("{{percentageRound}}") if "{{percentageRound}}"[0] != "{" else 0
+literalRound    = int("{{literalRound}}") if "{{literalRound}}"[0] != "{" else 0
 
 try:
     if api_type == "live":
