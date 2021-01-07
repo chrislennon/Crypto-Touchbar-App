@@ -5,8 +5,14 @@
 # https://github.com/chrislennon/Crypto-Touchbar-App/issues 
 
 from json import load
-from urllib2 import urlopen
-from urllib2 import URLError
+try:
+    # Python3
+    from urllib.request import urlopen
+    from urllib.error import URLError
+except ImportError:
+    # Python2
+    from urllib2 import urlopen
+    from urllib2 import URLError
 
 coin_ticker     = "{{coin_ticker}}"    if "{{coin_ticker}}"    else "BTC"
 fiat_ticker     = "{{fiat_ticker}}"    if "{{fiat_ticker}}"    else "USD"
@@ -88,13 +94,13 @@ try:
 
         print(output)
 
-except URLError, e:
+except URLError as url_e:
 
     try:
         with open("/tmp/{0}-{1}-{2}.txt".format(coin_ticker, fiat_ticker, output_type), 'r') as cf:
             print("CACHED " + cf.read())
     except IOError:
-        print("Unable to get data from API & no cache available")
+        print("Unable to get data from API & no cache available\n{0}".format(url_e))
 
-except ValueError, e:
-    print("There was an error formatting the output: {0}".format(e))
+except ValueError as val_e:
+    print("There was an error formatting the output: {0}".format(val_e))
