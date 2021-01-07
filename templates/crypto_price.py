@@ -14,19 +14,18 @@ except ImportError:
     from urllib2 import urlopen
     from urllib2 import URLError
 
-coin_ticker     = "{{coin_ticker}}"    if "{{coin_ticker}}"    else "BTC"
-fiat_ticker     = "{{fiat_ticker}}"    if "{{fiat_ticker}}"    else "USD"
-fiat_symbol     = "{{fiat_symbol}}"    if "{{fiat_symbol}}"    else "$"
 num_format      = "{{format}}"         if "{{format}}"         else "{}"
-output_type     = "{{output_type}}"    if "{{output_type}}"    else "mktcap"
 api_type        = "{{apiSelector}}"    if "{{apiSelector}}"    else "live"
-extraOptions    = "{{{extraOptions}}}" if "{{{extraOptions}}}" else "&limit=1&aggregate=1&toTs=1514376000"
+coin_ticker     = "{{coin_ticker}}"    if "{{coin_ticker}}"    else "BTC"
+fiat_symbol     = "{{fiat_symbol}}"    if "{{fiat_symbol}}"    else "$"
+fiat_ticker     = "{{fiat_ticker}}"    if "{{fiat_ticker}}"    else "USD"
+output_type     = "{{output_type}}"    if "{{output_type}}"    else "mktcap"
 offline_cache   = "{{offline_cache}}"  if "{{offline_cache}}"  else "false"
+extra_options   = "{{{extraOptions}}}" if "{{{extraOptions}}}" else "&limit=1&aggregate=1&toTs=1514376000"
 
-# Are these cast really needed?
-mod_percent     = float("{{percent}}") if "{{percent}}"[0] != "{" else 0.0
-literalRound    = int("{{literalRound}}") if "{{literalRound}}"[0] != "{" else 0
-percentageRound = int("{{percentageRound}}") if "{{percentageRound}}"[0] != "{" else 0
+mod_percent      = float("{{percent}}")        if "{{percent}}"          else 0.0
+literal_round    = int("{{literal_round}}")    if "{{literal_round}}"    else 0
+percentage_round = int("{{percentage_round}}") if "{{percentage_round}}" else 0
 
 try:
     if api_type == "live":
@@ -46,11 +45,11 @@ try:
         low     = num_format.format(raw_low)
 
         if raw_mktcap > 1000000:
-            mktcap = "{0} M".format(round(raw_mktcap / 1000000, literalRound))
+            mktcap = "{0} M".format(round(raw_mktcap / 1000000, literal_round))
         else:
-            mktcap = str(round(raw_mktcap, literalRound))
+            mktcap = str(round(raw_mktcap, literal_round))
 
-        trend = "▲" if raw_current > raw_opening else  "▼"
+        trend = "▲" if raw_current > raw_opening else "▼"
         
         output = fiat_symbol + current
 
@@ -61,14 +60,14 @@ try:
         elif (output_type == "absolute"):
             output += " (L: {0}{1} H: {0}{2})".format(fiat_symbol, low, high)
         elif (output_type == "relative"):
-            output += " (L: -{0}{1} H: +{0}{2})".format(fiat_symbol, str(round(raw_current - raw_low, literalRound)), str(round(raw_high - raw_current,literalRound)))
+            output += " (L: -{0}{1} H: +{0}{2})".format(fiat_symbol, str(round(raw_current - raw_low, literal_round)), str(round(raw_high - raw_current,literal_round)))
         elif (output_type == "current-percentage"):
-            # Display both '-' and '+'? Like +5.7%, 0.0%, -3.3%
-            output += " ({0}%)".format(str(round(((raw_current - raw_opening) / raw_current) * 100, percentageRound)))
+            current_percentage = round(((raw_current - raw_opening) / raw_current) * 100, percentage_round)
+            output += " ({0}{1}%)".format("+" if current_percentage > 0 else "", str(current_percentage))
         elif (output_type == "range-percentage"):
-            output += " (L: -{0}% H: +{1}%)".format(str(round (((raw_current - raw_low) / raw_current) * 100, percentageRound)), str(round (((raw_high - raw_current) / raw_current) * 100, percentageRound)))
+            output += " (L: -{0}% H: +{1}%)".format(str(round (((raw_current - raw_low) / raw_current) * 100, percentage_round)), str(round (((raw_high - raw_current) / raw_current) * 100, percentage_round)))
         elif (output_type == "user-percentage"):
-            output += " (L: {0}{1} G: {0}{2}".format(fiat_symbol,str(round(raw_current - (raw_current * mod_percent), literalRound)), str(round(raw_current + (raw_current * mod_percent), literalRound)))
+            output += " (L: {0}{1} G: {0}{2}".format(fiat_symbol,str(round(raw_current - (raw_current * mod_percent), literal_round)), str(round(raw_current + (raw_current * mod_percent), literal_round)))
 
         if offline_cache == "true":
             with open("/tmp/{0}-{1}-{2}.txt".format(coin_ticker, fiat_ticker, output_type), 'w') as cf:
@@ -78,13 +77,13 @@ try:
 
     elif api_type == "historical":
         
-        url = "https://min-api.cryptocompare.com/data/histohour?fsym={}&tsym={}" + extraOptions
+        url = "https://min-api.cryptocompare.com/data/histohour?fsym={}&tsym={}" + extra_options
         url = url.format(coin_ticker, fiat_ticker)
 
         results = load(urlopen(url))
 
         raw_high = float(results["Data"][1]["high"])
-        high = num_format.format(raw_high)
+        high     = num_format.format(raw_high)
 
         output = fiat_symbol + high
 
