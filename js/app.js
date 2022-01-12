@@ -3,7 +3,8 @@
 import Page from './page.js';
 import Generator from './generator.js';
 
-function exportTemplate(el, method){
+
+function exportTemplate(el, triggerType, method){
     let selectedValues = Page.getSelectedValues(),
         selectedFiatObj = selectedValues.selectedFiatObj,
         selection = selectedValues.selectedCoins,
@@ -22,13 +23,13 @@ function exportTemplate(el, method){
         }
     }
 
-    Generator.loadTemplate(function(output){
+    Generator.loadTemplate(triggerType, function(output){
         let dataDownload = document.createElement('a');
 
         if (method == 'json') {
             const data = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(output));
             dataDownload.setAttribute('href', 'data:' + data);
-            dataDownload.setAttribute('download', 'Crypto-Touchbar-App-' + selectedFiatObj.ticker + '.json');
+            dataDownload.setAttribute('download', 'Crypto-Touchbar-App-' + selectedFiatObj.ticker + '.bttpreset');
         }
         else if (method == 'direct'){
             const data = btoa(unescape(encodeURIComponent(JSON.stringify(output))));
@@ -44,15 +45,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let exportJsonButton = document.getElementById("exportJSON");
     let directExportJsonButton = document.getElementById("directExportJSON");
-    
     exportJsonButton.addEventListener("click", function(e){
         e.preventDefault();
-        exportTemplate(exportJsonButton, 'json');
+        const selectedTriggerType = document.getElementById("triggerType").value;
+        exportTemplate(exportJsonButton, selectedTriggerType, 'json');
     }, false);
 
     directExportJsonButton.addEventListener("click", function(e){
         e.preventDefault();
-        exportTemplate(directExportJsonButton, 'direct');
+        const selectedTriggerType = document.getElementById("triggerType").value;
+        exportTemplate(directExportJsonButton, selectedTriggerType, 'direct');
     }, false);
 
     Page.loadData();

@@ -43,6 +43,10 @@ h1#project_title {
   text-transform: uppercase;
 }
 
+#project_title span {
+  font-size:14px;
+}
+
 h2 {
   font-size: 32px;
   line-height: 1.2;
@@ -74,7 +78,7 @@ h6 {
 }
 
 p {
-  font-family: "Roboto Slab",
+  font-family: "Roboto Slab";
   font-size: 18px;
   margin: 0px 0 15px 0;
 }
