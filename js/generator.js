@@ -1,11 +1,16 @@
 // Control and logic for the code to generate appropriate output
 
 import Page from './page.js';
-import BTTSchema from '../templates/BTTSchema.js'
+import BTTTouchBarSchema from '../templates/BTTTouchBarSchema.js'
+import BTTNotchBarSchema from '../templates/BTTNotchBarSchema.js'
 
 export default {
     loadTemplate: loadTemplate
 }
+
+const TriggerTypeNotchBar = 'BTTTriggerTypeHTMLBar';
+const TriggerTypeTouchBar = 'BTTTriggerTypeTouchBar';
+
 
 function clearTempSVGs(){
     // Purge all Canvas SVGs after Export
@@ -15,7 +20,7 @@ function clearTempSVGs(){
     }
 }
 
-function loadTemplate(callback) {
+function loadTemplate(triggerType, callback) {
     // Get external template with fetch
     fetch('templates/crypto_price.py')
     .then(
@@ -23,22 +28,23 @@ function loadTemplate(callback) {
     )
     .then(function(response) {
         Mustache.parse(response);
-        generateJSON(response, function(d){
+        generateJSON(response, triggerType, function(d){
             return callback(d);
         });
         
     });  
 }
 
-function generateJSON(template, cb) {
-    
+function generateJSON(template, triggerType, cb) {
+    let schemaToUse = triggerType === TriggerTypeNotchBar ? BTTNotchBarSchema : BTTTouchBarSchema;
+
     const userData = Page.getSelectedValues();
     
-    let output = new BTTSchema.preset(),
+    let output = new schemaToUse.preset(),
         coinArray = [];
 
     userData.selectedCoins.forEach((item, i) => {
-        let coin = new BTTSchema.widget(),
+        let coin = new schemaToUse.widget(),
         iconCanv = document.createElement('canvas'),
         iconSVG = document.getElementById(item+'-touch-icon').outerHTML;
 
@@ -92,7 +98,7 @@ function generateJSON(template, cb) {
     });
 
     if (userData.groupBool) {
-        const closeGroup = new BTTSchema.closeWidget();
+        const closeGroup = new schemaToUse.closeWidget();
         closeGroup.BTTOrder = userData.selectedCoins.length;
         coinArray.push(closeGroup);
         output.BTTPresetContent[0].BTTTriggers[0].BTTAdditionalActions = coinArray;

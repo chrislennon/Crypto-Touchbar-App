@@ -1,8 +1,9 @@
 import { Plugin } from "../types/options";
 export interface Config {
     input?: string | HTMLInputElement;
+    position?: "left";
 }
-declare global  {
+declare global {
     interface Window {
         rangePlugin: (config?: Config) => void;
     }

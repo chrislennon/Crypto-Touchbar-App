@@ -1,6 +1,6 @@
 import { Options } from "./options";
 import { Instance, FlatpickrFn } from "./instance";
-declare global  {
+declare global {
     interface HTMLElement {
         flatpickr: (config?: Options) => Instance;
         _flatpickr?: Instance;
