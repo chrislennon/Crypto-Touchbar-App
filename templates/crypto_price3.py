@@ -1,6 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
-import urllib2,json,sys
+import urllib.request,json,sys
 
 coin_ticker = "{{coin_ticker}}" if "{{coin_ticker}}"[0] != "{" else "BTC"
 fiat_ticker = "{{fiat_ticker}}" if "{{fiat_ticker}}"[0] != "{" else "USD"
@@ -19,7 +19,7 @@ try:
 
         url = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms={}&tsyms={}".format(coin_ticker, fiat_ticker)
 
-        data = urllib2.urlopen(url)
+        data = urllib.request.urlopen(url)
         obj=json.load(data)
 
         raw_current = float(obj["RAW"][coin_ticker][fiat_ticker]["PRICE"])
@@ -70,7 +70,7 @@ try:
         url = "https://min-api.cryptocompare.com/data/histohour?fsym={}&tsym={}" + extraOptions
         url = url.format(coin_ticker, fiat_ticker)
 
-        data = urllib2.urlopen(url)
+        data = urllib.request.urlopen(url)
         obj=json.load(data)
 
         raw_high = float(obj["Data"][1]["high"])
@@ -84,10 +84,10 @@ try:
             tmp_file.close() 
 
         print(output)
-except urllib2.URLError as e:
+except urllib.request.URLError as e:
     try:
         tmp_file = open("/tmp/"+coin_ticker+"-"+fiat_ticker+"-"+output_type+".txt", "r")
-        print('CACHED ' + tmp_file.read())
+        print('CACHED ' + tmp_file.read() )
     except IOError as e:
         print('Unable to get data from API & no cache available')
 except ValueError as e:
