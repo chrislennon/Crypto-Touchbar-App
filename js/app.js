@@ -4,7 +4,7 @@ import Page from './page.js';
 import Generator from './generator.js';
 
 
-function exportTemplate(el, triggerType, method){
+function exportTemplate(el, triggerType, method, templateType){
     let selectedValues = Page.getSelectedValues(),
         selectedFiatObj = selectedValues.selectedFiatObj,
         selection = selectedValues.selectedCoins,
@@ -23,7 +23,7 @@ function exportTemplate(el, triggerType, method){
         }
     }
 
-    Generator.loadTemplate(triggerType, function(output){
+    Generator.loadTemplate(triggerType, templateType, function(output){
         let dataDownload = document.createElement('a');
 
         if (method == 'json') {
@@ -48,13 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
     exportJsonButton.addEventListener("click", function(e){
         e.preventDefault();
         const selectedTriggerType = document.getElementById("triggerType").value;
-        exportTemplate(exportJsonButton, selectedTriggerType, 'json');
+        const selectedTemplateType = document.getElementById("templateType").value;
+        exportTemplate(exportJsonButton, selectedTriggerType, 'json', selectedTemplateType);
     }, false);
 
     directExportJsonButton.addEventListener("click", function(e){
         e.preventDefault();
         const selectedTriggerType = document.getElementById("triggerType").value;
-        exportTemplate(directExportJsonButton, selectedTriggerType, 'direct');
+        const selectedTemplateType = document.getElementById("templateType").value;
+        exportTemplate(directExportJsonButton, selectedTriggerType, 'direct', selectedTemplateType);
     }, false);
 
     Page.loadData();

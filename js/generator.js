@@ -20,9 +20,13 @@ function clearTempSVGs(){
     }
 }
 
-function loadTemplate(triggerType, callback) {
+function loadTemplate(triggerType, templateType, callback) {
+    let template = 'templates/crypto_price.py'
+    if (templateType == 'python3') {
+        template = 'templates/crypto_price3.py'
+    }
     // Get external template with fetch
-    fetch('templates/crypto_price.py')
+    fetch(template)
     .then(
         response => response.text()
     )
