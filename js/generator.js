@@ -32,14 +32,14 @@ function loadTemplate(triggerType, templateType, callback) {
     )
     .then(function(response) {
         Mustache.parse(response);
-        generateJSON(response, triggerType, function(d){
+        generateJSON(response, triggerType, templateType, function(d){
             return callback(d);
         });
         
     });  
 }
 
-function generateJSON(template, triggerType, cb) {
+function generateJSON(template, triggerType, templateType, cb) {
     let schemaToUse = triggerType === TriggerTypeNotchBar ? BTTNotchBarSchema : BTTTouchBarSchema;
 
     const userData = Page.getSelectedValues();
@@ -74,6 +74,10 @@ function generateJSON(template, triggerType, cb) {
         base64PNG = base64PNG.replace('data:image/png;base64,', '');
 
         coin.BTTIconData = base64PNG;
+
+        if (templateType == 'python3') {
+            coin.BTTShellScriptWidgetGestureConfig = "\/usr\/bin\/python3:::-c"
+        }
 
         let extraOptions = 'False';
         if (userData.apiSelector.dataset.apitype == 'historical') {
