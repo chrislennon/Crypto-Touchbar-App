@@ -64,7 +64,8 @@ function widget() {
             "BTTTouchBarAppleScriptString": "**RESPONSE****OUTPUT****ERROR**",
             "BTTTouchBarColorRegex" : "CACHED",
             "BTTTouchBarAlternateBackgroundColor": "109.650002, 109.650002, 109.650002, 255.000000",
-            "BTTTouchBarScriptUpdateInterval": 60
+            "BTTTouchBarScriptUpdateInterval": 60,
+            "BTTTouchBarAppleScriptStringRunOnInit" : 1
         }
     }
 };
