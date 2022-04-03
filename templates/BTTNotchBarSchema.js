@@ -73,6 +73,7 @@ function widget() {
       BTTTouchBarScriptUpdateInterval: 60,
       BTTNotchBarItemVisibleOnStandardScreen: 1,
       BTTNotchBarItemVisibleOnNotchScreen: true,
+      BTTTouchBarAppleScriptStringRunOnInit : 1,
     },
   };
 }
