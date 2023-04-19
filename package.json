@@ -31,6 +31,6 @@
     "watch-http-server": "^0.7.6"
   },
   "devDependencies": {
-    "gh-pages": "^1.1.0"
+    "gh-pages": "^5.0.0"
   }
 }
